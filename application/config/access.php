@@ -4,6 +4,8 @@
 			'register',
 			'login',
 			'index',
+			'page',
+			'main',
 		],
 		'admin' => [
 			'admin',

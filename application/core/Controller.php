@@ -17,6 +17,7 @@ abstract class Controller
 		// $_SESSION['admin'] = 1;
 		// debug($this->checkAcl());
 		if($this->checkAcl() == false){
+			echo 'Access Denied<br>';
 			View::errorCode(403);
 		}
 		$this->view = new View($route);
@@ -27,6 +28,7 @@ abstract class Controller
 
 	public function loadModel($name){
 		$path = 'application\models\\'.ucfirst($name);
+		// debug($path);
 		if(class_exists($path)){
 			return new $path;
 		}else{

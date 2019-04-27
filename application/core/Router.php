@@ -17,6 +17,7 @@ class Router{
 	}
 
 	public function add($route, $params){
+		$route = preg_replace('/{([a-z]+):([^\}]+)}/', '(?P<\1>\2)', $route);
 		$route = '#^'.$route.'$#';
 		$this->routes[$route] = $params;
 	}
@@ -24,11 +25,19 @@ class Router{
 	public function match(){
 		$url = str_replace('/ultraprom_mvc/', '', $_SERVER['REQUEST_URI']);
 		foreach ($this->routes as $route => $params) {
-			if(preg_match($route, $url, $matches)){
-				$this->params = $params;
-				return true;
+			if (preg_match($route, $url, $matches)) {
+					foreach ($matches as $key => $match) {
+							if (is_string($key)) {
+									if (is_numeric($match)) {
+											$match = (int) $match;
+									}
+									$params[$key] = $match;
+							}
+					}
+					$this->params = $params;
+					return true;
 			}
-		}
+	}
 		return false;
 	}
 
@@ -41,15 +50,15 @@ class Router{
 					$controller = new $path($this->params);
 					$controller->$action();
 				}else{
-					echo 'State 1';
+					echo 'State 1<br>';
 					View::errorCode(404);
 				}
 			}else{
-				echo 'State 2';
+				echo 'State 2<br>';
 				View::errorCode(404);
 			}
 		}else{
-			echo 'State 3';
+			echo 'State 3<br>';
 			View::errorCode(404);
 		}
 	}

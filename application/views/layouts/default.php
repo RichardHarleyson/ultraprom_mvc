@@ -8,15 +8,12 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Landing Page - Start Bootstrap Theme</title>
+  <title><?php echo $title; ?></title>
 
   <!-- Bootstrap core CSS -->
   <link href="/ultraprom_mvc/public/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom fonts for this template -->
-  <link href="/ultraprom_mvc/public/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
-  <!-- <link href="/ultraprom_mvc/public/vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css"> -->
-
   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
   <!-- Custom styles for this template -->
@@ -99,7 +96,7 @@
 	<div class='container d-none d-lg-block' id='header_container'>
 		<div class="row">
 			<div class="col-xl-1 col-md-1 align-self-center">
-				<img class="img-fluid" src="/ultraprom_mvc/public/media/img/logo_compressed.jpg">
+				<a href="/ultraprom_mvc/"><img class="img-fluid" src="/ultraprom_mvc/public/media/img/logo_compressed.jpg"></a>
 			</div>
 			<div class="col-4 align-self-center">
 				<div class="input-group">
@@ -131,7 +128,7 @@
 	<div class="container d-md-none header_mobile">
 		<div class="row">
 			<div class="col col-3 col-sm-2 align-self-center">
-				<img class="img-fluid" src="/ultraprom_mvc/public/media/img/logo_compressed.jpg">
+				<a href="/ultraprom_mvc/"><img class="img-fluid" src="/ultraprom_mvc/public/media/img/logo_compressed.jpg"></a>
 			</div>
 			<div class="col col-6 col-sm-5 align-self-center text-center">
 				<div class="row">
@@ -158,30 +155,30 @@
 	</div>
 
 	<!-- 2nd Menu -->
-	<div class='container-fluid bg-primary d-none d-md-block'>
+	<div class='container-fluid bg-primary d-none d-lg-block'>
 		<div class="container" id='main_menu'>
 			<nav class="nav bg-primary nav justify-content-center nav-pills">
 						<li class="nav-item dropdown border-left">
 							<a class="nav-link active dropdown-toggle active" data-toggle="dropdown" href="">Отопительная Техника</a>
 								<div class="dropdown-menu">
 									<div class="row">
-										<div class="col col-sm-3 border to_hover">
+										<div class="col col-sm-3 to_hover bg-primary">
 											<ul>
-												<li><a id="11" href="">Котлы Отопления</a></li>
-												<li><a id="12" href="">Радиаторы Отопления</a></li>
-												<li><a id="13" href="">Теплый Пол</a></li>
+												<li class="menu_link"><a class="text-light" id="11">Котлы Отопления</a></li>
+												<li class="menu_link"><a class="text-light" id="12">Радиаторы Отопления</a></li>
+												<li class="menu_link"><a class="text-light" id="13">Теплый Пол</a></li>
 											</ul>
 										</div>
-										<div class="col col-sm-9 border">
+										<div class="col col-sm-9">
 											<div class="menu_items_11 to_hide">
 												<div class="row">
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
 															<a href="">Настенные Газовые Котлы</a>
 														</div>
-														<div class="image col-sm-12">
+														<div class="image mx-auto d-block">
 															<a href="">
-																<img src="https://via.placeholder.com/100">
+																<img class="img-fluid" src="https://via.placeholder.com/100">
 															</a>
 														</div>
 													</div>
@@ -189,9 +186,9 @@
 														<div class="title">
 															<a href="">Напольные Газовые Котлы</a>
 														</div>
-														<div class="image col-sm-12">
+														<div class="image mx-auto d-block">
 															<a href="">
-																<img src="https://via.placeholder.com/100">
+																<img class="img-fluid" src="https://via.placeholder.com/100">
 															</a>
 														</div>
 													</div>
@@ -199,9 +196,9 @@
 														<div class="title">
 															<a href="">Конденсационные Газовые Котлы</a>
 														</div>
-														<div class="image col-sm-12">
+														<div class="image mx-auto d-block">
 															<a href="">
-																<img src="https://via.placeholder.com/100">
+																<img class="img-fluid" src="https://via.placeholder.com/100">
 															</a>
 														</div>
 													</div>
@@ -209,9 +206,9 @@
 														<div class="title">
 															<a href="">Электрические Котлы<br>&nbsp;</a>
 														</div>
-														<div class="image col-sm-12">
+														<div class="image mx-auto d-block">
 															<a href="">
-																<img src="https://via.placeholder.com/100">
+																<img class="img-fluid" src="https://via.placeholder.com/100">
 															</a>
 														</div>
 													</div>
@@ -223,9 +220,9 @@
 														<div class="title">
 															<a href="">Стальные Радиаторы<br>&nbsp;</a>
 														</div>
-														<div class="image col-sm-12">
+														<div class="image mx-auto d-block">
 															<a href="">
-																<img src="https://via.placeholder.com/100">
+																<img class="img-fluid" src="https://via.placeholder.com/100">
 															</a>
 														</div>
 													</div>
@@ -233,9 +230,9 @@
 														<div class="title">
 															<a href="">Алюминиевые Радиаторы</a>
 														</div>
-														<div class="image col-sm-12">
+														<div class="image mx-auto d-block">
 															<a href="">
-																<img src="https://via.placeholder.com/100">
+																<img class="img-fluid" src="https://via.placeholder.com/100">
 															</a>
 														</div>
 													</div>
@@ -243,9 +240,9 @@
 														<div class="title">
 															<a href="">Биметаллические Радиаторы</a>
 														</div>
-														<div class="image col-sm-12">
+														<div class="image mx-auto d-block">
 															<a href="">
-																<img src="https://via.placeholder.com/100">
+																<img class="img-fluid" src="https://via.placeholder.com/100">
 															</a>
 														</div>
 													</div>
@@ -253,9 +250,9 @@
 														<div class="title">
 															<a href="">Чугунные Радиаторы<br>&nbsp;</a>
 														</div>
-														<div class="image col-sm-12">
+														<div class="image mx-auto d-block">
 															<a href="">
-																<img src="https://via.placeholder.com/100">
+																<img class="img-fluid" src="https://via.placeholder.com/100">
 															</a>
 														</div>
 													</div>
@@ -263,9 +260,9 @@
 														<div class="title">
 															<a href="">Электрические Радиаторы</a>
 														</div>
-														<div class="image col-sm-12">
+														<div class="image mx-auto d-block">
 															<a href="">
-																<img src="https://via.placeholder.com/100">
+																<img class="img-fluid" src="https://via.placeholder.com/100">
 															</a>
 														</div>
 													</div>
@@ -273,9 +270,9 @@
 														<div class="title">
 															<a href="">Дизайнерские Радиаторы</a>
 														</div>
-														<div class="image col-sm-12">
+														<div class="image mx-auto d-block">
 															<a href="">
-																<img src="https://via.placeholder.com/100">
+																<img class="img-fluid" src="https://via.placeholder.com/100">
 															</a>
 														</div>
 													</div>
@@ -283,9 +280,9 @@
 														<div class="title">
 															<a href="">Комплектующие Для Радиаторов</a>
 														</div>
-														<div class="image col-sm-12">
+														<div class="image mx-auto d-block">
 															<a href="">
-																<img src="https://via.placeholder.com/100">
+																<img class="img-fluid" src="https://via.placeholder.com/100">
 															</a>
 														</div>
 													</div>
@@ -297,9 +294,9 @@
 														<div class="title">
 															<a href="">Электрический Теплый Пол</a>
 														</div>
-														<div class="image col-sm-12">
+														<div class="image mx-auto d-block">
 															<a href="">
-																<img src="https://via.placeholder.com/100">
+																<img class="img-fluid" src="https://via.placeholder.com/100">
 															</a>
 														</div>
 													</div>
@@ -307,9 +304,9 @@
 														<div class="title">
 															<a href="">Труба Для Теплого Пола</a>
 														</div>
-														<div class="image col-sm-12">
+														<div class="image mx-auto d-block">
 															<a href="">
-																<img src="https://via.placeholder.com/100">
+																<img class="img-fluid" src="https://via.placeholder.com/100">
 															</a>
 														</div>
 													</div>
@@ -317,9 +314,9 @@
 														<div class="title">
 															<a href="">Инфракрасный Теплый Пол</a>
 														</div>
-														<div class="image col-sm-12">
+														<div class="image mx-auto d-block">
 															<a href="">
-																<img src="https://via.placeholder.com/100">
+																<img class="img-fluid" src="https://via.placeholder.com/100">
 															</a>
 														</div>
 													</div>
@@ -327,9 +324,9 @@
 														<div class="title">
 															<a href="">Водяной Теплый Пол<br>&nbsp;</a>
 														</div>
-														<div class="image col-sm-12">
+														<div class="image mx-auto d-block">
 															<a href="">
-																<img src="https://via.placeholder.com/100">
+																<img class="img-fluid" src="https://via.placeholder.com/100">
 															</a>
 														</div>
 													</div>
@@ -337,9 +334,9 @@
 														<div class="title">
 															<a href="">Коллекторные Шкафы<br>&nbsp;</a>
 														</div>
-														<div class="image col-sm-12">
+														<div class="image mx-auto d-block">
 															<a href="">
-																<img src="https://via.placeholder.com/100">
+																<img class="img-fluid" src="https://via.placeholder.com/100">
 															</a>
 														</div>
 													</div>
@@ -354,86 +351,86 @@
 							<a class="nav-link active dropdown-toggle active" data-toggle="dropdown" href="">Водоснабжение</a>
 								<div class="dropdown-menu">
 									<div class="row">
-										<div class="col col-sm-3 border to_hover">
+										<div class="col col-sm-3 to_hover bg-primary">
 											<ul>
-												<li><a id="21" href="">Водопровод</a></li>
-												<li><a id="22" href="">Канализация</a></li>
+												<li class="menu_link"><a class="text-light" id="21">Водопровод</a></li>
+												<li class="menu_link"><a class="text-light" id="22">Канализация</a></li>
 											</ul>
 										</div>
-										<div class="col col-sm-9 border">
+										<div class="col col-sm-9">
 											<div class="menu_items_21 to_hide">
 												<div class="row">
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">ППР трубы и фитинги</a>
+															<a href="">ППР Трубы и Фитинги</a>
 														</div>
-														<div class="image col-sm-12">
+														<div class="image mx-auto d-block">
 															<a href="">
-																<img src="https://via.placeholder.com/100">
+																<img class="img-fluid" src="https://via.placeholder.com/100">
 															</a>
 														</div>
 													</div>
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Обжимные фитинги</a>
+															<a href="">Обжимные Фитинги</a>
 														</div>
-														<div class="image col-sm-12">
+														<div class="image mx-auto d-block">
 															<a href="">
-																<img src="https://via.placeholder.com/100">
+																<img class="img-fluid" src="https://via.placeholder.com/100">
 															</a>
 														</div>
 													</div>
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Изоляция для труб</a>
+															<a href="">Изоляция для Труб</a>
 														</div>
-														<div class="image col-sm-12">
+														<div class="image mx-auto d-block">
 															<a href="">
-																<img src="https://via.placeholder.com/100">
+																<img class="img-fluid" src="https://via.placeholder.com/100">
 															</a>
 														</div>
 													</div>
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Металлопластиковые трубы</a>
+															<a href="">Металопластиковые Трубы</a>
 														</div>
-														<div class="image col-sm-12">
+														<div class="image mx-auto d-block">
 															<a href="">
-																<img src="https://via.placeholder.com/100">
+																<img class="img-fluid" src="https://via.placeholder.com/100">
 															</a>
 														</div>
 													</div>
-											</div>
+												</div>
 											</div>
 											<div class="menu_items_22 to_hide">
 												<div class="row">
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Внутренняя канализация</a>
+															<a href="">Внутрення Канализация</a>
 														</div>
-														<div class="image col-sm-12">
+														<div class="image mx-auto d-block">
 															<a href="">
-																<img src="https://via.placeholder.com/100">
+																<img class="img-fluid" src="https://via.placeholder.com/100">
 															</a>
 														</div>
 													</div>
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Наружная канализация</a>
+															<a href="">Наружная Канализация</a>
 														</div>
-														<div class="image col-sm-12">
+														<div class="image mx-auto d-block">
 															<a href="">
-																<img src="https://via.placeholder.com/100">
+																<img class="img-fluid" src="https://via.placeholder.com/100">
 															</a>
 														</div>
 													</div>
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Бесшумная канализация</a>
+															<a href="">Бесшумная Канализация</a>
 														</div>
-														<div class="image col-sm-12">
+														<div class="image mx-auto d-block">
 															<a href="">
-																<img src="https://via.placeholder.com/100">
+																<img class="img-fluid" src="https://via.placeholder.com/100">
 															</a>
 														</div>
 													</div>
@@ -442,128 +439,69 @@
 										</div>
 									</div>
 								</div>
-
 						</li>
 						<li class="nav-item dropdown border-left">
-							<a class="nav-link active dropdown-toggle active" data-toggle="dropdown" href="">Водоснабжение</a>
+							<a class="nav-link active dropdown-toggle active" data-toggle="dropdown" href="">Климатическая Техника</a>
 								<div class="dropdown-menu">
 									<div class="row">
-										<div class="col col-sm-3 border to_hover">
+										<div class="col col-sm-3 to_hover bg-primary">
 											<ul>
-												<li><a id="11" href="">1</a></li>
-												<li><a id="12" href="">2</a></li>
-												<li><a id="13" href="">3</a></li>
+												<li class="menu_link"><a class="text-light" id="31">Кандиционеры</a></li>
+												<li class="menu_link"><a class="text-light" id="32">Увлажнители Воздуха</a></li>
 											</ul>
 										</div>
-										<div class="col col-sm-9 border">
-											<div class="menu_items_1 to_hide">
+										<div class="col col-sm-9">
+											<div class="menu_items_31 to_hide">
 												<div class="row">
-													<div class="col col-sm-4 text-center">
+													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Title 1</a>
+															<a href="">Кандиционеры Настенного Типа</a>
 														</div>
-														<div class="image col-sm-12">
+														<div class="image mx-auto d-block">
 															<a href="">
-																<img src="https://via.placeholder.com/100">
+																<img class="img-fluid" src="https://via.placeholder.com/100">
 															</a>
 														</div>
 													</div>
-													<div class="col col-sm-4 text-center">
+													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Title 2</a>
+															<a href="">Мобильные Кондиционеры</a>
 														</div>
-														<div class="image col-sm-12">
+														<div class="image mx-auto d-block">
 															<a href="">
-																<img src="https://via.placeholder.com/100">
+																<img class="img-fluid" src="https://via.placeholder.com/100">
 															</a>
 														</div>
 													</div>
-												</div>
 											</div>
-											<div class="menu_items_2 to_hide">
+											<div class="menu_items_32 to_hide">
 												<div class="row">
-													<div class="col col-sm-4 text-center">
-														<div class="title">
-															<a href="">Title 3</a>
-														</div>
-														<div class="image col-sm-12">
-															<a href="">
-																<img src="https://via.placeholder.com/100">
-															</a>
-														</div>
-													</div>
-													<div class="col col-sm-4 text-center">
-														<div class="title">
-															<a href="">Title 4</a>
-														</div>
-														<div class="image col-sm-12">
-															<a href="">
-																<img src="https://via.placeholder.com/100">
-															</a>
-														</div>
-													</div>
+													<!--  -->
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-
 						</li>
 						<li class="nav-item dropdown border-left">
-							<a class="nav-link active dropdown-toggle active" data-toggle="dropdown" href="">Водоснабжение</a>
-								<div class="dropdown-menu dropdown-menu-right">
+							<a class="nav-link active dropdown-toggle active" data-toggle="dropdown" href="">Насосное Оборудование</a>
+								<div class="dropdown-menu">
 									<div class="row">
-										<div class="col col-sm-3 border to_hover">
+										<div class="col col-sm-3 to_hover bg-primary">
 											<ul>
-												<li><a id="11" href="">1</a></li>
-												<li><a id="12" href="">2</a></li>
-												<li><a id="13" href="">3</a></li>
+												<li class="menu_link"><a class="text-light" id="41">Насосы для Отопленя</a></li>
 											</ul>
 										</div>
-										<div class="col col-sm-9 border">
-											<div class="menu_items_1 to_hide">
+										<div class="col col-sm-9">
+											<div class="menu_items_41 to_hide">
 												<div class="row">
-													<div class="col col-sm-4 text-center">
+													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Title 1</a>
+															<a href="">Циркулярные Насосы</a>
 														</div>
-														<div class="image col-sm-12">
+														<div class="image mx-auto d-block">
 															<a href="">
-																<img src="https://via.placeholder.com/100">
-															</a>
-														</div>
-													</div>
-													<div class="col col-sm-4 text-center">
-														<div class="title">
-															<a href="">Title 2</a>
-														</div>
-														<div class="image col-sm-12">
-															<a href="">
-																<img src="https://via.placeholder.com/100">
-															</a>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="menu_items_2 to_hide">
-												<div class="row">
-													<div class="col col-sm-4 text-center">
-														<div class="title">
-															<a href="">Title 3</a>
-														</div>
-														<div class="image col-sm-12">
-															<a href="">
-																<img src="https://via.placeholder.com/100">
-															</a>
-														</div>
-													</div>
-													<div class="col col-sm-4 text-center">
-														<div class="title">
-															<a href="">Title 4</a>
-														</div>
-														<div class="image col-sm-12">
-															<a href="">
-																<img src="https://via.placeholder.com/100">
+																<img class="img-fluid" src="https://via.placeholder.com/100">
 															</a>
 														</div>
 													</div>
@@ -572,63 +510,51 @@
 										</div>
 									</div>
 								</div>
-
 						</li>
 						<li class="nav-item dropdown border-left">
-							<a class="nav-link active dropdown-toggle active" data-toggle="dropdown" href="">Водоснабжение</a>
-								<div class="dropdown-menu dropdown-menu-right">
+							<a class="nav-link active dropdown-toggle active" data-toggle="dropdown" href="">Водонагреватели</a>
+								<div class="dropdown-menu dropdown-menu-left">
 									<div class="row">
-										<div class="col col-sm-3 border to_hover">
+										<div class="col col-sm-3 to_hover bg-primary text-center">
 											<ul>
-												<li><a id="11" href="">1</a></li>
-												<li><a id="12" href="">2</a></li>
-												<li><a id="13" href="">3</a></li>
+												<li class="menu_link"><a class="text-light" id="51">Электрические Водонагреватели</a></li>
+												<li class="menu_link"><a class="text-light" id="52">Газовые Водонагреватели</a></li>
 											</ul>
 										</div>
-										<div class="col col-sm-9 border">
-											<div class="menu_items_1 to_hide">
+										<div class="col col-sm-9">
+											<div class="menu_items_51 to_hide">
 												<div class="row">
-													<div class="col col-sm-4 text-center">
+													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Title 1</a>
+															<a href="">Бойлеры Электрические<br>&nbsp;</a>
 														</div>
-														<div class="image col-sm-12">
+														<div class="image mx-auto d-block">
 															<a href="">
-																<img src="https://via.placeholder.com/100">
+																<img class="img-fluid" src="https://via.placeholder.com/100">
 															</a>
 														</div>
 													</div>
-													<div class="col col-sm-4 text-center">
+													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Title 2</a>
+															<a href="">Проточные Электрические Водонагреватели</a>
 														</div>
-														<div class="image col-sm-12">
+														<div class="image mx-auto d-block">
 															<a href="">
-																<img src="https://via.placeholder.com/100">
+																<img class="img-fluid" src="https://via.placeholder.com/100">
 															</a>
 														</div>
 													</div>
 												</div>
 											</div>
-											<div class="menu_items_2 to_hide">
+											<div class="menu_items_52 to_hide">
 												<div class="row">
-													<div class="col col-sm-4 text-center">
+													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Title 3</a>
+															<a href="">Газовые Колонки</a>
 														</div>
-														<div class="image col-sm-12">
+														<div class="image mx-auto d-block">
 															<a href="">
-																<img src="https://via.placeholder.com/100">
-															</a>
-														</div>
-													</div>
-													<div class="col col-sm-4 text-center">
-														<div class="title">
-															<a href="">Title 4</a>
-														</div>
-														<div class="image col-sm-12">
-															<a href="">
-																<img src="https://via.placeholder.com/100">
+																<img class="img-fluid" src="https://via.placeholder.com/100">
 															</a>
 														</div>
 													</div>
@@ -637,81 +563,29 @@
 										</div>
 									</div>
 								</div>
-
 						</li>
 						<li class="nav-item dropdown border-left border-right">
-							<a class="nav-link active dropdown-toggle active" data-toggle="dropdown" href="">Водоснабжение</a>
-								<div class="dropdown-menu dropdown-menu-right">
+							<a class="nav-link active dropdown-toggle active" data-toggle="dropdown" href="">Автоматика</a>
+								<div class="dropdown-menu dropdown-menu-left">
 									<div class="row">
-										<div class="col col-sm-3 border to_hover">
+										<div class="col col-sm-3 to_hover bg-primary text-center">
 											<ul>
-												<li><a id="11" href="">1</a></li>
-												<li><a id="12" href="">2</a></li>
-												<li><a id="13" href="">3</a></li>
+												<li class="menu_link"><a class="text-light" id="61" href="">Программаторы</a></li>
+												<li class="menu_link"><a class="text-light" id="62" href="">Стабилизаторы Напряжения</a></li>
 											</ul>
 										</div>
-										<div class="col col-sm-9 border">
-											<div class="menu_items_1 to_hide">
-												<div class="row">
-													<div class="col col-sm-4 text-center">
-														<div class="title">
-															<a href="">Title 1</a>
-														</div>
-														<div class="image col-sm-12">
-															<a href="">
-																<img src="https://via.placeholder.com/100">
-															</a>
-														</div>
-													</div>
-													<div class="col col-sm-4 text-center">
-														<div class="title">
-															<a href="">Title 2</a>
-														</div>
-														<div class="image col-sm-12">
-															<a href="">
-																<img src="https://via.placeholder.com/100">
-															</a>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="menu_items_2 to_hide">
-												<div class="row">
-													<div class="col col-sm-4 text-center">
-														<div class="title">
-															<a href="">Title 3</a>
-														</div>
-														<div class="image col-sm-12">
-															<a href="">
-																<img src="https://via.placeholder.com/100">
-															</a>
-														</div>
-													</div>
-													<div class="col col-sm-4 text-center">
-														<div class="title">
-															<a href="">Title 4</a>
-														</div>
-														<div class="image col-sm-12">
-															<a href="">
-																<img src="https://via.placeholder.com/100">
-															</a>
-														</div>
-													</div>
-												</div>
-											</div>
+										<div class="col col-sm-9">
 										</div>
 									</div>
 								</div>
-
 						</li>
-
 
 			</nav>
 		</div>
 	</div>
 	<!-- 2nd Menu mobile -->
-	<div class="container-fluid d-md-none" id="second_menu_mobile">
-		<div class="navbar navbar-expand-md navbar-dark bg-primary">
+	<div class="container-fluid d-lg-none" id="second_menu_mobile">
+		<div class="navbar navbar-expand-lg navbar-dark bg-primary">
 			<!-- <a class="navbar-brand " style="font-size: 22px;">Категории</a> -->
 			<button class="navbar-toggler ml-auto mr-1" data-toggle="collapse" data-target="#second_menu">
 				<span class="text-light">
@@ -910,36 +784,16 @@
 		</div>
 	</div>
 
-	<div class='gapper'></div>
-
-	<div class='container'>
-
-	<div id="HCarousel" class="carousel slide border d-none d-md-block" data-ride="carousel">
-		<ul class="carousel-indicators">
-		<li data-target="#HCarousel" data-slide-to="0" class="active"></li>
-		<li data-target="#HCarousel" data-slide-to="1"></li>
-	</ul>
-	  <div class="carousel-inner">
-	    <div class="carousel-item active">
-	      <img src="/ultraprom_mvc/public/media/img/ultraprom_teplo.jpg" class="d-block w-100" alt="slide1">
-	    </div>
-	    <div class="carousel-item">
-	      <img src="/ultraprom_mvc/public/media/img/montag.jpg" class="d-block w-100" alt="slide2">
-	    </div>
-	  </div>
-	</div>
-	</div>
-
-<div class="bg-danger">
-	Hello
-</div>
 
 
+<?php echo $content; ?>
 
 	<!-- Bootstrap core JavaScript -->
 	<script src="/ultraprom_mvc/public/vendor/jquery/jquery.min.js"></script>
 	<script src="/ultraprom_mvc/public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="/ultraprom_mvc/public/js/script.js"></script>
+	<!-- fontawesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
 	<script>
 

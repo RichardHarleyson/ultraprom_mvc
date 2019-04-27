@@ -19,6 +19,15 @@ return [
 	'news/show' => [
 		'controller' => 'news',
 		'action' => 'show',
-	]
+	],
+	'product/{id:\d+}' => [
+		'controller' => 'product',
+		'action' => 'page',
+	],
+	'catalog' => [
+		'controller' => 'catalog',
+		'action' => 'main',
+	],
+
 ];
- ?>
+?>
