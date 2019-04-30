@@ -1,24 +1,9 @@
 <?php
 return [
+	// MAIN
 	'' => [
 		'controller' => 'main',
 		'action' => 'index',
-	],
-	// 'contact' => [
-	// 	'controller' => 'main',
-	// 	'action' => 'contact',
-	// ],
-	'account/login' => [
-		'controller' => 'account',
-		'action' => 'login',
-	],
-	'account/register' => [
-		'controller' => 'account',
-		'action' => 'register',
-	],
-	'news/show' => [
-		'controller' => 'news',
-		'action' => 'show',
 	],
 	'product/{id:\d+}' => [
 		'controller' => 'product',
@@ -27,6 +12,23 @@ return [
 	'catalog' => [
 		'controller' => 'catalog',
 		'action' => 'main',
+	],
+	// CART
+	'cart' => [
+		'controller' => 'cart',
+		'action' => 'main',
+	],
+	'cart/add_item' => [
+		'controller' => 'cart',
+		'action' => 'add_item',
+	],
+	'cart/empty_cart' => [
+		'controller' => 'cart',
+		'action' => 'empty_cart',
+	],
+	'cart/delete_item' => [
+		'controller' => 'cart',
+		'action' => 'delete_item',
 	],
 
 ];

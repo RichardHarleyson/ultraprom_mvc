@@ -56,7 +56,7 @@
 		</div>
 	</div>
 	<!-- 1st Menu mobile -->
-	<div class="container-fluid d-md-none" id="first_menu_mobile">
+	<div class="container-fluid d-md-none w-100" id="first_menu_mobile">
 		<div class="navbar navbar-expand-md navbar-dark bg-primary">
 			<button class="navbar-toggler ml-auto mr-1" data-toggle="collapse" data-target="#first_menu">
 				<span class="text-light">
@@ -120,7 +120,7 @@
 				<button class="btn btn-danger">Обратный Звонок</button>
 			</div>
 			<div class="col-xl-1 col-md-auto align-self-center">
-				<button class="btn"><i class="text-danger fas fa-cart-arrow-down"></i></button>
+				<a class="btn" href="/ultraprom_mvc/cart"><i class="text-danger fas fa-cart-arrow-down"></i></a>
 			</div>
 		</div>
 	</div>
@@ -141,7 +141,7 @@
 				</div>
 			</div>
 			<div class="col col-3 col-sm-4 align-self-center">
-				<button class="btn"><i class="text-danger fas fa-cart-arrow-down"></i></button>
+				<a class="btn" href="/ultraprom_mvc/cart"><i class="text-danger fas fa-cart-arrow-down"></i></a>
 			</div>
 		</div>
 		<div class="container">
@@ -786,7 +786,48 @@
 
 
 
-<?php echo $content; ?>
+<div class="wrapper" style="min-height:65%;">
+	<?php echo $content; ?>
+</div>
+
+<div class="gapper"></div>
+
+<div class="container-fluid bg-primary d-none d-lg-block">
+	<div class="container">
+		<div class="row bg-white py-3">
+			<div class="col-lg-2 col-xl-2">
+				<a href="/ultraprom_mvc/"><img class="img-fluid" src="/ultraprom_mvc/public/media/img/logo.jpg" alt=""></a>
+			</div>
+			<div class="col-lg-5 col-xl-5">
+				<div class="row">
+					<div class="col-6">
+						<span><h5>Покупателю</h5></span>
+						<span><a href="">О Нас<br></a></span>
+						<span><a href="">Услуги<br></a></span>
+						<span><a href="">Доставка<br></a></span>
+						<span><a href="">Контакты<br></a></span>
+					</div>
+					<div class="col-6">
+						<span><h5>Асортимент</h5></span>
+						<span><a href="">Бренды<br></a></span>
+						<span><a href="">Акции<br></a></span>
+						<span><a href="">Популярное<br></a></span>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-2 col-xl-2">
+				<span><h5>График работы</h5></span>
+				<span>Пн-Сб: 8:00-18:00<br></span>
+				<span>Вс: Выходной<br></span>
+			</div>
+			<div class="col-lg-3 col-xl-3">
+				<span><h5>Телефоны</h5></span>
+				<img src="/ultraprom_mvc/public/media/img/kyivstar.png"><span>+38(098) 037-77-11</span><br>
+					<img src="/ultraprom_mvc/public/media/img/mts.png"><span>+38(050) 881-04-49</span>
+			</div>
+		</div>
+	</div>
+</div>
 
 	<!-- Bootstrap core JavaScript -->
 	<script src="/ultraprom_mvc/public/vendor/jquery/jquery.min.js"></script>

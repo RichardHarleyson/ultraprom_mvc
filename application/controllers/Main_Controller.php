@@ -27,7 +27,7 @@ class Main_Controller extends Controller{
 		$vars =[
 			'result' => $result,
 		];
-		$this->view->render('Main page', $vars);
+		$this->view->render('Автономное Отопление Днепр - "Ултрапром"', $vars);
 	}
 
 

@@ -13,7 +13,7 @@ class Catalog_Controller extends Controller{
 		$vars = [
 			'result' => $result,
 		];
-		$this->view->render('Catalog', $vars);
+		$this->view->render('Каталог', $vars);
 	}
 }
 

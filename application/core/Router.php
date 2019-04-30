@@ -44,8 +44,10 @@ class Router{
 	public function run(){
 		if($this->match()){
 			$path = 'application\controllers\\'.ucfirst($this->params['controller']).'_Controller';
+			// debug($path);
 			if(class_exists($path)){
 				$action = $this->params['action'].'Action';
+				// debug($action);
 				if(method_exists($path, $action)){
 					$controller = new $path($this->params);
 					$controller->$action();

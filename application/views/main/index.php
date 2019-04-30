@@ -44,20 +44,13 @@
 									<img src="https://via.placeholder.com/250" class="img-fluid" alt="Product Thumbnail">
 									<div class="card-body">
 										<a href="/ultraprom_mvc/product/<?php echo $product['id']; ?>" class="card-title"><span class="font-title"><?php echo $product['title']; ?></span></a>
-										<p class="card-text border-top text-warning" style="font-size: 20px;">
-											<i class="fas fa-star"></i>
-											<i class="fas fa-star"></i>
-											<i class="fas fa-star"></i>
-											<i class="fas fa-star"></i>
-											<i class="far fa-star"></i>
-										</p>
+										<p class="card-text border-top text-warning rating" rating="<?php echo $product['rate']; ?>" style="font-size: 20px;"></p>
 										<div class="row card-buttons">
 											<div class="col col-9">
-												<p class="border rounded price_tablet"><b>18000 uah</b></p>
+												<p class="border rounded price_tablet"><b><?php echo $product['price']; ?> грн</b></p>
 											</div>
 											<div class="col col-3">
-												<button class="btn btn-danger"><i  class="fa fa-shopping-cart"></i></button>
-												<!-- <p class="border rounded">Cart</p> -->
+												<button class="btn btn-danger" type="submit" onclick="add_item(this)" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Добавлено в Корзину" data-id="<?php echo $product['id']; ?>" data-title="<?php echo $product['title']; ?>" data-price="<?php echo $product['price']; ?>"><i  class="fa fa-shopping-cart"></i></button>
 											</div>
 										</div>
 									</div>
@@ -98,20 +91,13 @@
 								<img src="https://via.placeholder.com/250" class="img-fluid" alt="Product Thumbnail">
 								<div class="card-body">
 									<a href="/ultraprom_mvc/product/<?php echo $product['id']; ?>" class="card-title"><span class="font-title"><?php echo $product['title']; ?></span></a>
-									<p class="card-text border-top text-warning" style="font-size: 20px;">
-										<i class="fas fa-star"></i>
-										<i class="fas fa-star"></i>
-										<i class="fas fa-star"></i>
-										<i class="fas fa-star"></i>
-										<i class="far fa-star"></i>
-									</p>
+									<p class="card-text border-top text-warning rating" rating="<?php echo $product['rate']; ?>" style="font-size: 20px;"></p>
 									<div class="row card-buttons">
 										<div class="col col-9">
-											<p class="border rounded price_tablet"><b>18000 uah</b></p>
+												<p class="border rounded price_tablet"><b><?php echo $product['price']; ?> грн</b></p>
 										</div>
 										<div class="col col-3">
-											<button class="btn btn-danger"><i  class="fa fa-shopping-cart"></i></button>
-											<!-- <p class="border rounded">Cart</p> -->
+											<button class="btn btn-danger" type="submit" onclick="add_item(this)" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Добавлено в Корзину" data-id="<?php echo $product['id']; ?>" data-title="<?php echo $product['title']; ?>" data-price="<?php echo $product['price']; ?>"><i  class="fa fa-shopping-cart"></i></button>
 										</div>
 									</div>
 								</div>
@@ -122,11 +108,10 @@
 			</div>
 		<?php endforeach; ?>
 	</div>
-	</div>
+</div>
 </div>
 
-<div class="container">
-</div>
+<div class="container"></div>
 
 </div>
 
