@@ -3,7 +3,7 @@
 namespace application\controllers;
 
 use application\core\Controller;
-use application\lib\db;
+use application\lib\Db;
 
 class Product_Controller extends Controller{
 
@@ -14,6 +14,7 @@ class Product_Controller extends Controller{
 		];
 		$this->view->render('Product Page', $vars);
 	}
+
 
 }
 

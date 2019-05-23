@@ -32,7 +32,7 @@ abstract class Controller
 		if(class_exists($path)){
 			return new $path;
 		}else{
-			echo 'No model <b>'.$name.'</b> found';
+			'No model <b>'.$name.'</b> found';
 		}
 	}
 

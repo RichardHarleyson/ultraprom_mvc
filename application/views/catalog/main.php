@@ -1,27 +1,36 @@
 <div class="gapper"></div>
 
 <div class="container">
+	<div class="text-center">
+		<a class="btn btn-danger d-block d-md-none mb-3 w-50 mx-auto" data-toggle="collapse" href="#filter_collapse" role="button" aria-expanded="false" aria-controls="filter_collapse">
+			Фильтр
+		</a>
+	</div>
+
 	<div class="row border">
 		<div class="col-lg-3 col-xl-3 border">
-			<div class="gapper"></div>
 
-			<div class="custom-control custom-checkbox">
-			  <input type="checkbox" class="custom-control-input" id="customCheck1">
-			  <label class="custom-control-label" for="customCheck1">Check this custom checkbox</label>
+			<div class="collapse d-md-block" id="filter_collapse">
+				<div class="gapper"></div>
+
+				<div class="custom-control custom-checkbox">
+				  <input type="checkbox" class="custom-control-input" id="customCheck1">
+				  <label class="custom-control-label" for="customCheck1">Check this custom checkbox</label>
+				</div>
+
+				<div class="custom-control custom-checkbox">
+				  <input type="checkbox" class="custom-control-input" id="customCheck2">
+				  <label class="custom-control-label" for="customCheck2">Check this custom checkbox</label>
+				</div>
+
+				<div class="custom-control custom-switch">
+				  <input type="checkbox" class="custom-control-input" id="customSwitch1">
+				  <label class="custom-control-label" for="customSwitch1">Toggle this switch element</label>
+				</div>
+
+				<label for="customRange1">Example range</label>
+					<input type="range" class="custom-range" id="customRange1">
 			</div>
-
-			<div class="custom-control custom-checkbox">
-			  <input type="checkbox" class="custom-control-input" id="customCheck2">
-			  <label class="custom-control-label" for="customCheck2">Check this custom checkbox</label>
-			</div>
-
-			<div class="custom-control custom-switch">
-			  <input type="checkbox" class="custom-control-input" id="customSwitch1">
-			  <label class="custom-control-label" for="customSwitch1">Toggle this switch element</label>
-			</div>
-
-			<label for="customRange1">Example range</label>
-				<input type="range" class="custom-range" id="customRange1">
 
 		</div>
 		<div class="col-lg-9 col-xl-9 border">
@@ -45,7 +54,7 @@
 							<!-- <img src="<?php echo $product['thumbnail']; ?>" alt="Product Thumbnail"> -->
 							<img src="https://via.placeholder.com/250" class="img-fluid" alt="Product Thumbnail">
 							<div class="card-body">
-								<a href="/ultraprom_mvc/product/<?php echo $product['id']; ?>" class="card-title"><span class="font-title"><?php echo $product['title']; ?></span></a>
+								<a href="/product/<?php echo $product['id']; ?>" class="card-title"><span class="font-title"><?php echo $product['title']; ?></span></a>
 								<p class="card-text border-top text-warning" style="font-size: 20px;">
 									<i class="fas fa-star"></i>
 									<i class="fas fa-star"></i>

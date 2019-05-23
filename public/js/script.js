@@ -185,30 +185,12 @@ $(function () {
 
 // =================================================================
 // CART
-// Add cart item
-// $(document).ready(function(){
-// 	$(".add_item_form11").submit(function(event){
-// 		alert($(this).attr('data-title'));
-// 		event.preventDefault();
-// 		$.ajax({
-// 			type: $(this).attr('method'),
-// 			url: $(this).attr('action'),
-// 			data: new FormData(this),
-// 			contentType: false,
-// 			cache: false,
-// 			processData: false,
-// 			success: function(result){
-// 				alert(result);
-// 			},
-// 		});
-// 	});
-// });
 
 function add_item(element){
 	event.preventDefault();
 	$.ajax({
 		type: "POST",
-		url: '/ultraprom_mvc/cart/add_item',
+		url: '/cart/add_item',
 		data: {id: $(element).data('id'), title: $(element).data('title'), price: $(element).data('price')},
 		success:function(res){
 			if(res==true){
@@ -232,7 +214,7 @@ function delete_item(element){
 	event.preventDefault();
 	$.ajax({
 		type: "POST",
-		url: '/ultraprom_mvc/cart/delete_item',
+		url: '/cart/delete_item',
 		data: {index: $(element).data('index')},
 		success:function(res){
 			var id = $(element).data('index');
@@ -246,10 +228,10 @@ function delete_all(){
 	event.preventDefault();
 	$.ajax({
 		type: "POST",
-		url: '/ultraprom_mvc/cart/empty_cart',
+		url: '/cart/empty_cart',
 		success:function(res){
 			if(res==true){
-				location.href='/ultraprom_mvc/';
+				location.href='/';
 			}else{
 				alert('Что то пошло не так');
 			}
@@ -271,3 +253,179 @@ $(".cart_quantity").change(function(){
 });
 
 // ===============================================================
+// INPUT MASK
+$(function(){
+  $(".phone").mask("+38(999) 999-9999");
+	$('.phone').focus();
+});
+// =========================================================
+// CALLBACK
+$(document).ready(function(){
+	$('.callback_form').submit(function(){
+		var data = $(this).serialize();
+		data += "&product=" + encodeURIComponent($(this).find(':submit').data('product'));
+		callback(data);
+		$(this).trigger('reset');
+		event.preventDefault();
+	});
+	$('.callback_form_modal').submit(function(){
+		var data = $(this).serialize();
+		callback(data);
+		$(this).trigger('reset');
+		event.preventDefault();
+	});
+});
+
+function callback(data){
+	event.preventDefault();
+	$.ajax({
+		type: "POST",
+		url: '/clients/callback',
+		data: data,
+		success:function(res){
+			alert('Сейчас перезвоним');
+		}
+	});
+}
+// ===============================================================
+// Contacts
+$(document).ready(function(){
+	$('#contact-form').submit(function(){
+		$('.status').html('Отправляем...');
+		var data = $(this).serialize();
+		$.ajax({
+			type: 'POST',
+			url: '/top_menu/contacts_send',
+			data: data,
+			success:function(res){
+				$(this).trigger('reset');
+				$('.status').html('Отправлено');
+			}
+		});
+		event.preventDefault();
+	});
+});
+// ==================================================================
+// ADMIN
+function admin_log_in(){
+	$.ajax({
+		type: 'POST',
+		url: '/admin/log_in',
+		success:function(res){
+			if(res == true){
+				alert('Можно Заходить');
+			}else{
+				alert('Что то не так');
+			}
+		}
+	});
+	event.preventDefault();
+}
+
+$(document).ready(function(){
+	$('#create_product').submit(function(){
+		event.preventDefault();
+		var data = new FormData($('form')[0]);
+		$.ajax({
+			type: 'POST',
+			url: '/admin/create_product',
+			data: data,
+			processData: false,
+			contentType: false,
+			success:function(res){
+				alert(res);
+			}
+		});
+	});
+});
+// ====================================================================
+// CATALOG
+function filter_headers(filter_headers){
+	var product_list = document.querySelectorAll(".product_item");
+	var checkboxes_state = [];
+	var current_request = {};
+	var checkboxes_on = {};
+
+	for( key in filter_headers){
+		//Собираем состояние всех чекбоксов по всем заголовкам
+		checkboxes_state[key] = document.querySelectorAll("[data-filter_key="+filter_headers[key]+"] input");
+		//Выделяем зажатые чекбоксы
+		for(let i = 0; i < checkboxes_state[key].length; i++){
+			if(checkboxes_state[key][i].checked){
+				// console.log('checked');
+				checkboxes_on[checkboxes_state[key][i].getAttribute('value')] = 1;
+				current_request[filter_headers[key]] = 1;
+			}else{
+				continue;
+			}
+		}
+	}
+	if(isEmpty(checkboxes_on)){
+		$('.product_item').show();
+		how_many(filter_headers)
+		return true;
+	}
+	//Перебираем товары их свойство по текущему заголовку
+	for(let i = 0; i < product_list.length; i++){
+		for(key in filter_headers){
+			if(!(filter_headers[key] in current_request)){
+				continue;
+			}
+			var curr_attr = product_list[i].getAttribute("data-"+filter_headers[key]);
+			if(curr_attr in checkboxes_on){
+				product_list[i].style.display = "block";
+			}else{
+				product_list[i].style.display = "none";
+				break;
+			}
+		}
+	}
+	how_many(filter_headers);
+}
+
+function isEmpty(obj) {
+		for (var key in obj) {
+		return false;
+		}
+		return true;
+}
+
+function how_many(filter_headers){
+	var product_list = document.querySelectorAll(".product_item");
+	var labels = [];
+
+	for( key in filter_headers){
+		//Собираем состояние всех чекбоксов по всем заголовкам
+		labels[key] = document.querySelectorAll("[data-filter_key="+filter_headers[key]+"] label");
+
+		for(let i = 0; i < labels[key].length; i++){
+			var attr_counter = 0;
+			var curr_attr = labels[key][i].getAttribute("data-info");
+			for(let j = 0; j < product_list.length; j++){
+				if(product_list[j].getAttribute("data-"+filter_headers[key]) == curr_attr && !( product_list[j].style.display == 'none')){
+					attr_counter++;
+				}
+			}
+			labels[key][i].innerHTML = curr_attr + ' ('+attr_counter+')';
+		}
+	}
+}
+
+$(document).ready(function(){
+	var filter_headers = $('#filter_collapse').data('filter_headers');
+	how_many(filter_headers);
+	$("input[type='checkbox']").click(function () {
+		how_many(filter_headers);
+	});
+	var sort_type = $('#sorting').val();
+	var url = window.location.pathname.split("/").pop();
+	$('option:selected', 'select[name="sorting"]').removeAttr('selected');
+	$("select option[value="+url).attr("selected","selected");
+	$('select[name="sorting"]').on('change', function() {
+  	window.location.href = "/catalog/"+$('#title').data('title')+"/sort/"+this.value;
+	});
+});
+
+
+
+// =======================================================================

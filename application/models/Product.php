@@ -9,7 +9,7 @@ class Product extends Model{
 		$params = [
 			'id' => $id,
 		];
-		$result = $this->db->row('SELECT * FROM products WHERE id=:id', $params);
+		$result = $this->db->row('SELECT * FROM up_products WHERE id=:id', $params);
 		return $result;
 	}
 }

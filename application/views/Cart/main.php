@@ -9,7 +9,7 @@
 		';
 	}else{
 		echo '
-		<h2>Ваша Корзина</h2>
+		<h2>Корзина</h2>
 		<div class="gapper"></div>
 		<table class="table table-responsive-sm">
 			 <thead>
@@ -53,7 +53,7 @@
 	<div class="row cart_bottom">
 		<div class="col col-12 col-lg-5 col-xl-5 align-self-center">
 			<div class="btn-group w-100">
-				<button class="btn btn-primary w-50" type="button" name="button" onclick="location.href='/ultraprom_mvc/';"><i class="fa fa-lg fa-chevron-left"></i> <b>Продолжить Покупки</b></button>
+				<button class="btn btn-primary w-50" type="button" name="button" onclick="location.href='/';"><i class="fa fa-lg fa-chevron-left"></i> <b>Продолжить Покупки</b></button>
 				<button class="btn btn-danger w-50" type="button" name="button" ><b>Произвести Заказ</b> <i class="fa fa-lg fa-chevron-right"></i></button>
 			</div>
 		</div>

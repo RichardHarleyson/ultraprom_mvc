@@ -15,6 +15,7 @@ class View
 
 	public function render($title, $vars = []){
 		$path = 'application/views/'.$this->path.'.php';
+		// debug($path);
 		extract($vars);
 		if(file_exists($path)){
 			ob_start();
@@ -27,7 +28,7 @@ class View
 	}
 
 	public function redirect($url){
-		header('location: /ultraprom_mvc'.$url);
+		header('location: /'.$url);
 		exit;
 	}
 

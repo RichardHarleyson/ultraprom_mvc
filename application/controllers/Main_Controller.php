@@ -3,7 +3,7 @@
 namespace application\controllers;
 
 use application\core\Controller;
-use application\lib\db;
+use application\lib\Db;
 
 class Main_Controller extends Controller{
 
@@ -23,11 +23,11 @@ class Main_Controller extends Controller{
 		// debug($data);
 
 		$result = $this->model->getProducts();
-		// $vars = array_chunk($result, 5, true);
+		// debug($result);
 		$vars =[
 			'result' => $result,
 		];
-		$this->view->render('Автономное Отопление Днепр - "Ултрапром"', $vars);
+		$this->view->render('Автономное Отопление Днепр - "Ультрапром"', $vars);
 	}
 
 

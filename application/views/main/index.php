@@ -1,4 +1,4 @@
-<div class='gapper'></div>
+<div class="gapper"></div>
 
 <div class='container'>
 	<div id="HCarousel" class="carousel slide border d-none d-md-block" data-ride="carousel">
@@ -8,14 +8,34 @@
 	</ul>
 		<div class="carousel-inner">
 			<div class="carousel-item active">
-				<img src="/ultraprom_mvc/public/media/img/ultraprom_teplo.jpg" class="d-block w-100" alt="slide1">
+				<img src="/public/media/img/ultraprom_teplo.jpg" class="d-block w-100" alt="slide1">
 			</div>
 			<div class="carousel-item">
-				<img src="/ultraprom_mvc/public/media/img/montag.jpg" class="d-block w-100" alt="slide2">
+				<img src="/public/media/img/montag.jpg" class="d-block w-100" alt="slide2">
 			</div>
 		</div>
 	</div>
 </div>
+
+<div class='gapper'></div>
+
+<div class="container">
+	<div class="text-center">
+		<h2><span class="text-danger">УЛЬТРА</span><span class="text-primary">ПРОМ</span> - Добро пожаловать в мир инжереных сетей</h2>
+	</div>
+	<p>Предприятие Ультрапром - современная, динамично развивающаяся компания, которая оказывает весь комплекс услуг по монтажу внутренних и внешних инженерных коммуникаций и систем, начиная от квартир, частных домов, магазинов и офисных помещений до крупных промышленных объектов.</p>
+	<div class="text-center py-3 px-4" style="background: #E6E6FA"><span class="font-weight-bold">Одним из основных и приоритетных направлений деятельности предприятия является оформление и монтаж <a href="http://ultraprom.com.ua/services.php"><strong><span style="color:#0000CD">АВТОНОМНОГО ОТОПЛЕНИЯ В ДНЕПРЕ</span></strong></a>.</span></div>
+	<div class="text-center mt-3">
+		<p>
+			<span class="text-danger"><strong>ИНТЕРЕСУЕТ АВТОНОМНОЕ ОТОПЛЕНИЕ, НО НЕ ЗНАЕТЕ, С ЧЕГО НАЧАТЬ?</strong></span>
+		</p>
+		<p>
+			Позвоните нам для получения консультации или запишитесь на бесплатный просчет проекта для вашей квартиры <a href="/top_menu/contacts">оставив заявку на сайте</a>
+		</p>
+	</div>
+</div>
+
+<hr class="w-50">
 
 <div class="gapper"></div>
 
@@ -36,14 +56,16 @@
 		<div class="carousel-inner" id="product_carousel" role="listbox">
 			<?php foreach(array_chunk($result, 5, true) as $products): ?>
 				<div class="carousel-item" id="4">
-					<div class="row product_lists">
+					<div class="row product_lists no-gutters">
 						<?php foreach ($products as $product): ?>
-							<div class="col col-12 col-xl col-lg-3 col-md-4 col-xs-12 col-sm-12 text-center">
-								<div class="card text-center mx-auto d-block">
-									<!-- <img src="<?php echo $product['thumbnail']; ?>" alt="Product Thumbnail"> -->
-									<img src="https://via.placeholder.com/250" class="img-fluid" alt="Product Thumbnail">
+							<div class="col col-12 col-xl col-lg-3 col-md-4 col-sm-12 text-center">
+								<div class="card text-center mx-auto">
+								<img src="<?php echo $product['thumbnail']; ?>" class="img-fluid" alt="Product Thumbnail">
+								<!-- <img src="https://via.placeholder.com/250" class="img-fluid" alt="Product Thumbnail"> -->
 									<div class="card-body">
-										<a href="/ultraprom_mvc/product/<?php echo $product['id']; ?>" class="card-title"><span class="font-title"><?php echo $product['title']; ?></span></a>
+										<div class="card-title align-self-center my-0">
+											<a href="/product/<?php echo $product['id']; ?>" class=""><span class="font-title"><?php echo $product['title']; ?></span></a>
+										</div>
 										<p class="card-text border-top text-warning rating" rating="<?php echo $product['rate']; ?>" style="font-size: 20px;"></p>
 										<div class="row card-buttons">
 											<div class="col col-9">
@@ -85,13 +107,14 @@
 			<div class="carousel-item" id="4">
 				<div class="row product_lists">
 					<?php foreach ($products as $product): ?>
-						<div class="col col-12 col-xl col-lg-3 col-md-4 col-xs-12 col-sm-12 text-center">
-							<div class="card text-center mx-auto d-block">
-								<!-- <img src="<?php echo $product['thumbnail']; ?>" alt="Product Thumbnail"> -->
-								<img src="https://via.placeholder.com/250" class="img-fluid" alt="Product Thumbnail">
+						<div class="col col-12 col-xl col-lg-3 col-md-4 col-sm-12 text-center">
+							<div class="card text-center mx-auto">
+								<img src="<?php echo $product['thumbnail']; ?>" class="img-fluid" alt="Product Thumbnail">
+								<!-- <img src="https://via.placeholder.com/250" class="img-fluid" alt="Product Thumbnail"> -->
 								<div class="card-body">
-									<a href="/ultraprom_mvc/product/<?php echo $product['id']; ?>" class="card-title"><span class="font-title"><?php echo $product['title']; ?></span></a>
-									<p class="card-text border-top text-warning rating" rating="<?php echo $product['rate']; ?>" style="font-size: 20px;"></p>
+									<div class="card-title align-self-center my-0">
+										<a href="/product/<?php echo $product['id']; ?>" class=""><span class="font-title"><?php echo $product['title']; ?></span></a>
+									</div>									<p class="card-text border-top text-warning rating" rating="<?php echo $product['rate']; ?>" style="font-size: 20px;"></p>
 									<div class="row card-buttons">
 										<div class="col col-9">
 												<p class="border rounded price_tablet"><b><?php echo $product['price']; ?> грн</b></p>
@@ -111,7 +134,34 @@
 </div>
 </div>
 
-<div class="container"></div>
+<hr class="w-50">
+
+<div class="container">
+	<div class="text-center text-primary my-1">
+		<h4>Сфера применения наших услуг по монтажу внутренних и внешних инженерных коммуникаций и систем огромна: от квартир, частных домов, магазинов и офисных помещений до крупных промышленных объектов.</h4>
+	</div>
+
+	<h5>Направления нашей деятельности:</h5>
+	<ul class="list-group list-group-flush mb-1">
+		<li class="list-group-item">
+			<span class="text-primary">Все виды автономного отопления!</span>
+		</li>
+		<li class="list-group-item">Газификация</li>
+		<li class="list-group-item">Установка систем водоснабжения, канализации и все виды сантехнических работ</li>
+		<li class="list-group-item">Электрификация</li>
+		<li class="list-group-item">Кондиционирование</li>
+		<li class="list-group-item">Комплексный Ремонт</li>
+		<li class="list-group-item">Обслуживание/Сервис</li>
+		<li class="list-group-item">Оформление/Согласование разрешительной и исполнительно-технической документации</li>
+		<li class="list-group-item">Инженерное проектирование</li>
+		<li class="list-group-item">Продажа сертифицированных материалов и оборудования</li>
+	</ul>
+
+	<p>Таким образом, сотрудничая с нашим предприятием, вы получаете полный объем высококвалифицированных услуг <strong>&laquo;ПОД КЛЮЧ&raquo;</strong>.</p>
+
+	<p><em><span style="font-size:11px">* - Из-за постоянного изменения курса валют, актуальность цен на оборудование и материалы уточняйте у менеджера.</span></em></p>
+
+</div>
 
 </div>
 

@@ -2,7 +2,7 @@
 	<div class='gapper'></div>
 
 	<div class="container">
-		<h3><?php echo $product[0]['title']; ?></h3>
+		<h4><?php echo $product[0]['title']; ?></h4>
 	</div>
 	<hr>
 
@@ -37,32 +37,30 @@
 							<i class="fas fa-check-square text-success"></i>
 							<b>В Наличии</b>
 						</div>
-						<div class="col-6 text-warning text-right" style="font-size: 16px;">
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="fas fa-star"></i>
-							<i class="far fa-star"></i>
+						<div class="col-6 text-right " rating="<?php echo $product[0]['rate']; ?>" style="font-size: 16px;">
+							<p class="text-warning rating" rating="<?php echo $product[0]['rate']; ?>"></p>
 						</div>
 					</div>
 				</div>
 				<div class="gapper"></div>
 				<div class="row text-center price_row">
-					<div class="col">
-						<p class="price_tablet_solo border rounded"><b>18000 UAH</b></p>
+					<div class="col col-12 col-lg-6 col-xl-6 mx-auto my-2">
+						<p class="price_tablet_solo border rounded mx-auto"><b><?php echo $product[0]['price']; ?> грн</b></p>
 					</div>
-					<div class="col">
-						<a class="btn btn-lg btn-danger" style="width: 155px; color: white">В корзину <i  class="fa fa-shopping-cart"></i> </a>
+					<div class="col col-12 col-lg-6 col-xl-6 text-center my-2">
+						<a class="btn btn-lg btn-danger" style="width: 155px; color: white" onclick="add_item(this)" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Добавлено в Корзину" data-id="<?php echo $product[0]['id']; ?>" data-title="<?php echo $product[0]['title']; ?>" data-price="<?php echo $product[0]['price']; ?>" >В корзину <i  class="fa fa-shopping-cart"></i> </a>
 					</div>
 				</div>
 				<div class="gapper"></div>
 				<div class="container text-center">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="+38(___) ___ __ __">
-						<div class="input-group-append w-50">
-							<button class="btn btn-primary w-100" type="button" id="button-addon2">Заказать</button>
+					<form class="callback_form">
+						<div class="input-group">
+							<input type="text" id="phone" required class="form-control text-center phone" name="phone" placeholder="+38(___) ___-____" autocomplete="off">
+							<div class="input-group-append w-50">
+								<button class="btn btn-primary w-100 btn-callback" type="submit" data-product="<?php echo $product[0]['title']; ?>">Заказать</button>
+							</div>
 						</div>
-					</div>
+					</form>
 				</div>
 			</div>
 			<!-- <div class="col-xl-3 col-md- col-sm-12">Side bar</div> -->

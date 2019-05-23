@@ -85,9 +85,12 @@ i.fas.fa-cart-arrow-down {
 	height: 3em;
 	overflow: hidden;
 }
+
 .card{
 	max-width: 250px;
+	margin: 0;
 }
+
 /* ------------------------------------------------- */
 .dropdown-submenu {
   position: relative;
@@ -169,7 +172,6 @@ footer{
 	/* line-height: 1.5em	!important;
 	height: 4em	!important;
 	overflow: hidden	!important; */
-
 }
 .card-text{
 	margin: 0;
@@ -181,22 +183,6 @@ footer{
 .card > img{
 	/* width: 216px;
 	height: 200px; */
-}
-
-::-webkit-input-placeholder {
-   text-align: center;
-}
-
-:-moz-placeholder { /* Firefox 18- */
-   text-align: center;
-}
-
-::-moz-placeholder {  /* Firefox 19+ */
-   text-align: center;
-}
-
-:-ms-input-placeholder {
-   text-align: center;
 }
 
 /* ------------------------------------------------------------------------ */
@@ -310,8 +296,20 @@ ul{
 }
 
 /* ------------------------------------------------------------------------ */
-/* Catalog range */
+/* Catalog*/
+.card {
+  position:relative;
+}
 
+.card .card-badge {
+  position:absolute;
+  top:-10px;
+  left:-20px;
+  padding:5px;
+  background:red;
+  color:white;
+  transform:rotate(-20deg);
+}
 /* =================================================================== */
 /* Carousel */
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
 
@@ -11,15 +11,14 @@
   <title><?php echo $title; ?></title>
 
   <!-- Bootstrap core CSS -->
-  <link href="/ultraprom_mvc/public/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/public/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom fonts for this template -->
   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
   <!-- Custom styles for this template -->
-	<link href="/ultraprom_mvc/public/css/style.css" rel="stylesheet">
+	<link href="/public/css/style.css" rel="stylesheet">
 
-  <!-- <link href="test/style.css" rel="stylesheet"> -->
 
 </head>
 
@@ -29,29 +28,27 @@
 	<div class='container-fluid bg-primary d-none d-md-block'>
 		<div class="container">
 			<nav class="nav bg-primary justify-content-center nav-pills"  id='top_menu'>
-
-						<li class="nav-item active">
-							<a class="nav-link" href="#">О Нас</a>
-						</li>
-						<li class="nav-item active">
-							<a class="nav-link" href="#">Автономное отопление</a>
-						</li>
-						<li class="nav-item active">
-							<a class="nav-link" href="#">Услуги</a>
-						</li>
-						<li class="nav-item active">
-							<a class="nav-link" href="#">Каталог</a>
-						</li>
-						<li class="nav-item active">
-							<a class="nav-link" href="#">Прайсы</a>
-						</li>
-						<li class="nav-item active">
-							<a class="nav-link" href="#">Новости и статьи</a>
-						</li>
-						<li class="nav-item active">
-							<a class="nav-link" href="#">Контакты</a>
-						</li>
-
+				<li class="nav-item active">
+					<a class="nav-link" href="/">Главная</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="/top_menu/about_us">О Нас</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="/top_menu/central_heating">Автономное отопление</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="/top_menu/services">Услуги</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="/top_menu/catalog">Каталог</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="/top_menu/prices">Прайсы</a>
+				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="/top_menu/contacts">Контакты</a>
+				</li>
 			</nav>
 		</div>
 	</div>
@@ -64,41 +61,40 @@
 				</span>
 			</button>
 			<div class="collapse navbar-collapse" id="first_menu">
-				<ul class="navbar-nav text-right">
+				<ul class="navbar-nav">
 					<li class="nav-item active">
-						<a class="nav-link border-bottom" href="#">О Нас</a>
+						<a class="nav-link" href="/">Главная</a>
 					</li>
 					<li class="nav-item active">
-						<a class="nav-link border-bottom" href="#">Автономное отопление</a>
+						<a class="nav-link border-bottom" href="/top_menu/about_us">О Нас</a>
 					</li>
 					<li class="nav-item active">
-						<a class="nav-link border-bottom" href="#">Услуги</a>
+						<a class="nav-link border-bottom" href="/top_menu/central_heating">Автономное отопление</a>
 					</li>
 					<li class="nav-item active">
-						<a class="nav-link border-bottom" href="#">Каталог</a>
+						<a class="nav-link border-bottom" href="/top_menu/services">Услуги</a>
 					</li>
 					<li class="nav-item active">
-						<a class="nav-link border-bottom" href="#">Прайсы</a>
+						<a class="nav-link border-bottom" href="/top_menu/catalog">Каталог</a>
 					</li>
 					<li class="nav-item active">
-						<a class="nav-link border-bottom" href="#">Новости и статьи</a>
+						<a class="nav-link border-bottom" href="/top_menu/prices">Прайсы</a>
 					</li>
 					<li class="nav-item active">
-						<a class="nav-link" href="#">Контакты</a>
+						<a class="nav-link" href="/top_menu/contacts">Контакты</a>
 					</li>
 				</ul>
 			</div>
-
 		</div>
 	</div>
 
 	<!-- Header -->
-	<div class='container d-none d-lg-block' id='header_container'>
+	<div class='container d-none d-md-block' id='header_container'>
 		<div class="row">
-			<div class="col-xl-1 col-md-1 align-self-center">
-				<a href="/ultraprom_mvc/"><img class="img-fluid" src="/ultraprom_mvc/public/media/img/logo_compressed.jpg"></a>
+			<div class="col-xl-1 col-lg-2 col-md-2 align-self-center">
+				<a href="/"><img class="img-fluid" src="/public/media/img/logo_compressed.jpg"></a>
 			</div>
-			<div class="col-4 align-self-center">
+			<div class="col-xl-4 col-lg-4 col-md-5 align-self-center">
 				<div class="input-group">
 					<input type="text" class="form-control" placeholder="Поиск Товаров" aria-label="Username" aria-describedby="basic-addon1">
 					<div class="input-group-prepend">
@@ -106,42 +102,42 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-xl-4 col-md-3 col-phone align-self-center text-center">
+			<div class="col-xl-4 col-lg-3 col-md-3 col-phone align-self-center text-center">
 				<div class="row">
 					<div class="col col-xl-6 col-md-12">
-						<img src="/ultraprom_mvc/public/media/img/kyivstar.png"><span>+38(098) 037-77-11</span>
+						<img src="/public/media/img/kyivstar.png"><span>+38(098) 037-77-11</span>
 					</div>
 					<div class="col col-xl-6 col-md-12">
-						<img src="/ultraprom_mvc/public/media/img/mts.png"><span>+38(050) 881-04-49</span>
+						<img src="/public/media/img/mts.png"><span>+38(050) 881-04-49</span>
 					</div>
 				</div>
 			</div>
-			<div class="col-xl-2 col-md-auto align-self-center">
-				<button class="btn btn-danger">Обратный Звонок</button>
+			<div class="col-xl-2 col-lg-2 d-none d-lg-block align-self-center">
+				<button class="btn btn-danger" data-toggle="modal" data-target="#callback">Обратный Звонок</button>
 			</div>
-			<div class="col-xl-1 col-md-auto align-self-center">
-				<a class="btn" href="/ultraprom_mvc/cart"><i class="text-danger fas fa-cart-arrow-down"></i></a>
+			<div class="col-xl-1 col-lg-1 col-md-2 align-self-center">
+				<a class="btn" href="/cart"><i class="text-danger fas fa-cart-arrow-down"></i></a>
 			</div>
 		</div>
 	</div>
 	<!-- Header mobile -->
 	<div class="container d-md-none header_mobile">
-		<div class="row">
+		<div class="row justify-center">
 			<div class="col col-3 col-sm-2 align-self-center">
-				<a href="/ultraprom_mvc/"><img class="img-fluid" src="/ultraprom_mvc/public/media/img/logo_compressed.jpg"></a>
+				<a href="/"><img class="img-fluid" src="/public/media/img/logo_compressed.jpg"></a>
 			</div>
-			<div class="col col-6 col-sm-5 align-self-center text-center">
+			<div class="col col-6 col-sm-8 align-self-center text-center">
 				<div class="row">
 					<div class="col-sm-12">
-						<img src="/ultraprom_mvc/public/media/img/kyivstar.png"><span>+38(098) 037-77-11</span>
+						<img class="d-none d-md-block" src="/public/media/img/kyivstar.png"><span>+38(098) 037-77-11</span>
 					</div>
 					<div class="col-sm-12">
-						<img src="/ultraprom_mvc/public/media/img/mts.png"><span>+38(050) 881-04-49</span>
+						<img class="d-none d-md-block" src="/public/media/img/mts.png"><span>+38(050) 881-04-49</span>
 					</div>
 				</div>
 			</div>
-			<div class="col col-3 col-sm-4 align-self-center">
-				<a class="btn" href="/ultraprom_mvc/cart"><i class="text-danger fas fa-cart-arrow-down"></i></a>
+			<div class="col col-3 col-sm-2 align-self-center pl-0">
+				<a class="btn" href="/cart"><i class="text-danger fas fa-cart-arrow-down"></i></a>
 			</div>
 		</div>
 		<div class="container">
@@ -174,40 +170,40 @@
 												<div class="row">
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Настенные Газовые Котлы</a>
+															<a href="/catalog">Настенные Газовые Котлы</a>
 														</div>
 														<div class="image mx-auto d-block">
-															<a href="">
+															<a href="/catalog">
 																<img class="img-fluid" src="https://via.placeholder.com/100">
 															</a>
 														</div>
 													</div>
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Напольные Газовые Котлы</a>
+															<a href="/catalog">Напольные Газовые Котлы</a>
 														</div>
 														<div class="image mx-auto d-block">
-															<a href="">
+															<a href="/catalog">
 																<img class="img-fluid" src="https://via.placeholder.com/100">
 															</a>
 														</div>
 													</div>
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Конденсационные Газовые Котлы</a>
+															<a href="/catalog">Конденсационные Газовые Котлы</a>
 														</div>
 														<div class="image mx-auto d-block">
-															<a href="">
+															<a href="/catalog">
 																<img class="img-fluid" src="https://via.placeholder.com/100">
 															</a>
 														</div>
 													</div>
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Электрические Котлы<br>&nbsp;</a>
+															<a href="/catalog">Электрические Котлы<br>&nbsp;</a>
 														</div>
 														<div class="image mx-auto d-block">
-															<a href="">
+															<a href="/catalog">
 																<img class="img-fluid" src="https://via.placeholder.com/100">
 															</a>
 														</div>
@@ -785,6 +781,34 @@
 	</div>
 
 
+<!-- MODAL -->
+<div class="modal fade special-font" id="callback">
+		<div class="modal-dialog modal-dialog-centered" role="document" >
+				<div class="modal-content bg-primary">
+						<div class="modal-header text-center">
+								<h3 class="text-white">Всегда готовы перезвонить</h3>
+								<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+								</button>
+						</div>
+						<div class="container" >
+								<form class="form mt-1 callback_form_modal" id="callback_form">
+										<div class="form-group-lg">
+												<label class="text-white">Телефон</label>
+												<input type="text" id="phone" required class="form-control form-control-lg text-center my-2 phone" name="phone" placeholder="+38(___) ___-____" autocomplete="off">
+												<label class="text-white">Комментарий</label>
+												<textarea type="text" id="comment" class="form-control form-control-lg my-2" name="comment" rows="4"></textarea>
+												<div class="text-center">
+													<button onclick="fbq_onClick()" type="submit" class="btn btn-lg btn-outline-success btn-success text-white mt-1 mb-2 btn-callback" data-product="">Перезвоните</button>
+												</div>
+												<div class="h3 text-center modal-texts text-white d-none my-2">Отлично! Сейчас перезвоним</div>
+										</div>
+								</form>
+						</div>
+				</div>
+		</div>
+</div>
+
 
 <div class="wrapper" style="min-height:65%;">
 	<?php echo $content; ?>
@@ -796,7 +820,7 @@
 	<div class="container">
 		<div class="row bg-white py-3">
 			<div class="col-lg-2 col-xl-2">
-				<a href="/ultraprom_mvc/"><img class="img-fluid" src="/ultraprom_mvc/public/media/img/logo.jpg" alt=""></a>
+				<a href="/"><img class="img-fluid" src="/public/media/img/logo.jpg" alt=""></a>
 			</div>
 			<div class="col-lg-5 col-xl-5">
 				<div class="row">
@@ -822,17 +846,18 @@
 			</div>
 			<div class="col-lg-3 col-xl-3">
 				<span><h5>Телефоны</h5></span>
-				<img src="/ultraprom_mvc/public/media/img/kyivstar.png"><span>+38(098) 037-77-11</span><br>
-					<img src="/ultraprom_mvc/public/media/img/mts.png"><span>+38(050) 881-04-49</span>
+				<img src="/public/media/img/kyivstar.png"><span>+38(098) 037-77-11</span><br>
+					<img src="/public/media/img/mts.png"><span>+38(050) 881-04-49</span>
 			</div>
 		</div>
 	</div>
 </div>
 
 	<!-- Bootstrap core JavaScript -->
-	<script src="/ultraprom_mvc/public/vendor/jquery/jquery.min.js"></script>
-	<script src="/ultraprom_mvc/public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-	<script src="/ultraprom_mvc/public/js/script.js"></script>
+	<script src="/public/vendor/jquery/jquery.min.js"></script>
+	<script src="/public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="/public/js/script.js"></script>
+	<script src="/public/vendor/jquery.maskedinput.min.js"></script>
 	<!-- fontawesome -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 

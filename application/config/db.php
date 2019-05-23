@@ -1,8 +1,8 @@
 <?php
 return [
 	'host' => 'localhost',
-	'name' => 'db_test',
-	'password' => 'Omg01Omg02',
-	'user' => 'db_test',
+	'name' => 'newworld_ultp',
+	'password' => 'Omg01Omg01',
+	'user' => 'newworld_ultp',
 ]
  ?>

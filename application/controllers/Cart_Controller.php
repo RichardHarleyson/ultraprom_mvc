@@ -3,7 +3,7 @@
 namespace application\controllers;
 
 use application\core\Controller;
-use application\lib\db;
+use application\lib\Db;
 
 if(empty($_SESSION['cart'])){
 	$_SESSION['cart'] = array();
