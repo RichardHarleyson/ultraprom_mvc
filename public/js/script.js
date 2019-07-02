@@ -191,7 +191,7 @@ function add_item(element){
 	$.ajax({
 		type: "POST",
 		url: '/cart/add_item',
-		data: {id: $(element).data('id'), title: $(element).data('title'), price: $(element).data('price')},
+		data: {id: $(element).data('id'), title: $(element).data('title'), price_uah: $(element).data('price')},
 		success:function(res){
 			if(res==true){
 				setTimeout(function () {
@@ -245,11 +245,20 @@ function count_total(){
 		total = total + ($(this).val() * $(this).data('price'));
 	});
 	$('.total_price').empty();
-	$('.total_price').html('<h4>Общая стоимость: '+total+' грн</h4>');
+	$('.total_price').html('<h4>Общая стоимость: '+new Intl.NumberFormat('ru-RU').format(total)+' грн</h4>');
+}
+
+function count_item_total(index){
+	var total = 0;
+	// Считываем текущий quantity
+	total = total + $('input[data-index="'+index+'"]').val() * $('input[data-index="'+index+'"]').data('price');
+	$('div[data-index="'+index+'"]').empty();
+	$('div[data-index="'+index+'"]').html(new Intl.NumberFormat('ru-RU').format(total)+' грн');
 }
 
 $(".cart_quantity").change(function(){
 	count_total();
+	count_item_total(($(this).data('index')));
 });
 
 // ===============================================================
@@ -311,16 +320,60 @@ function admin_log_in(){
 	$.ajax({
 		type: 'POST',
 		url: '/admin/log_in',
+		data: $('#admin_login_form').serialize(),
 		success:function(res){
-			if(res == true){
-				alert('Можно Заходить');
+			if(res == 1){
+				$('.login_status').html('<h4 class="text-success">Все верно</h4>');
+				window.location.href = "/admin/panel";
 			}else{
-				alert('Что то не так');
+				$('.login_status').html('<h4 class="text-danger">Неверный логин или пароль</h4>');
 			}
 		}
 	});
 	event.preventDefault();
 }
+
+$("select[name='category']").change(function(){
+	if($(this).val() == '1'){
+		//Настенные Газовые Котлы: Бренд, Камера Сгорания, Теплообменник, Страна Прозводитель, Контур, Мощность
+
+	}else if ($(this).val() == '2') {
+		$('#filter_teploobmen').hide();
+		$('#filter_teploobmen select').prop('disabled', true);
+		$('#filter_burn_cam').hide();
+		$('#filter_burn_cam select').prop('disabled', true);
+		$('#filter_nasos').hide();
+		$('#filter_nasos select').prop('disabled', true);
+		$('#filter_montaj').hide();
+		$('#filter_montaj select').prop('disabled', true);
+		$('#filter_napryajenie').hide();
+		$('#filter_napryajenie input').prop('disabled', true);
+	}else if ($(this).val() == '3') {
+		$('#filter_teploobmen').hide();
+		$('#filter_teploobmen select').prop('disabled', true);
+		$('#filter_burn_cam').hide();
+		$('#filter_burn_cam select').prop('disabled', true);
+		$('#filter_nasos').hide();
+		$('#filter_nasos select').prop('disabled', true);
+		$('#filter_montaj').hide();
+		$('#filter_montaj select').prop('disabled', true);
+		$('#filter_napryajenie').hide();
+		$('#filter_napryajenie input').prop('disabled', true);
+	}
+	else if ($(this).val() == '4') {
+		$('#filter_teploobmen').hide();
+		$('#filter_teploobmen select').prop('disabled', true);
+		$('#filter_burn_cam').hide();
+		$('#filter_burn_cam select').prop('disabled', true);
+		$('#filter_nasos').show();
+		$('#filter_nasos select').prop('disabled', false);
+		$('#filter_montaj').show();
+		$('#filter_montaj select').prop('disabled', false);
+		$('#filter_napryajenie').show();
+		$('#filter_napryajenie input').prop('disabled', false);
+	}
+	// alert($(this).val());
+});
 
 $(document).ready(function(){
 	$('#create_product').submit(function(){
@@ -338,6 +391,25 @@ $(document).ready(function(){
 		});
 	});
 });
+
+$(document).ready(function(){
+	if($('#PageType').is(".PageType_Currency")){
+		$('#set_curr_auto').on('click',function(){
+			var curr_data = { usd_buy: $('#USD_buy').data('buy'), usd_sale: $('#USD_sale').data('sale'), eur_buy: $('#EUR_buy').data('buy'), eur_sale: $('#EUR_sale').data('sale'), };
+			$.ajax({
+				type: 'POST',
+				url: '/admin/currency_auto_update',
+				data: curr_data,
+				success:function(res){
+					if( res == 1){
+						$('#auto_status').html('<h4>Курс Установлен</h4>');
+					}
+				}
+			});
+		});
+	}
+});
+
 // ====================================================================
 // CATALOG
 function filter_headers(filter_headers){
@@ -345,6 +417,9 @@ function filter_headers(filter_headers){
 	var checkboxes_state = [];
 	var current_request = {};
 	var checkboxes_on = {};
+	// Минимальная и максимальная цена товаров для полей воода цены
+	var min_price = Number($('#price_start').val());
+	var max_price = Number($('#price_end').val());
 
 	for( key in filter_headers){
 		//Собираем состояние всех чекбоксов по всем заголовкам
@@ -362,13 +437,23 @@ function filter_headers(filter_headers){
 	}
 	if(isEmpty(checkboxes_on)){
 		$('.product_item').show();
+		for(let i = 0; i < product_list.length; i++){
+			if(!(product_list[i].getAttribute("data-product_price") >= min_price && product_list[i].getAttribute("data-product_price") <= max_price)){
+				product_list[i].style.display = "none";
+				continue;
+			}
+		}
 		how_many(filter_headers)
 		return true;
 	}
 	//Перебираем товары их свойство по текущему заголовку
 	for(let i = 0; i < product_list.length; i++){
+		if(!(product_list[i].getAttribute("data-product_price") >= min_price && product_list[i].getAttribute("data-product_price") <= max_price)){
+			product_list[i].style.display = "none";
+			continue;
+		}
 		for(key in filter_headers){
-			if(!(filter_headers[key] in current_request)){
+			if(!(filter_headers[key] in current_request) ){
 				continue;
 			}
 			var curr_attr = product_list[i].getAttribute("data-"+filter_headers[key]);
@@ -380,6 +465,7 @@ function filter_headers(filter_headers){
 			}
 		}
 	}
+	// Пересчитываем кол-во доступных товаров по текущей настройке фильтра
 	how_many(filter_headers);
 }
 
@@ -390,6 +476,7 @@ function isEmpty(obj) {
 		return true;
 }
 
+// Подсчет колва товаров на каждое свойство фильтра
 function how_many(filter_headers){
 	var product_list = document.querySelectorAll(".product_item");
 	var labels = [];
@@ -400,30 +487,59 @@ function how_many(filter_headers){
 
 		for(let i = 0; i < labels[key].length; i++){
 			var attr_counter = 0;
+			// Получаем заголовок текущего свойства
 			var curr_attr = labels[key][i].getAttribute("data-info");
+			// Прогоняемся по списку товаров для подсчета
 			for(let j = 0; j < product_list.length; j++){
 				if(product_list[j].getAttribute("data-"+filter_headers[key]) == curr_attr && !( product_list[j].style.display == 'none')){
 					attr_counter++;
 				}
 			}
+			// Устанавливаем кол-во элементов доступных при данных настройках фильтра
 			labels[key][i].innerHTML = curr_attr + ' ('+attr_counter+')';
 		}
 	}
 }
 
+function get_min_max(){
+	var product_list = document.querySelectorAll(".product_item");
+		// Минимальная и максимальная цена товаров для полей воода цены
+	var min_price = product_list[0].getAttribute("data-product_price");
+	var max_price = product_list[0].getAttribute("data-product_price");
+	// Считаем максимальный и минимальный ценник
+	for(let j = 0; j < product_list.length; j++){
+		if(!( product_list[j].style.display == 'none')){
+			// Вычисляем максимальный ценник
+			if(product_list[j].getAttribute("data-product_price") > max_price){
+				max_price = product_list[j].getAttribute("data-product_price");
+			}
+			// Вычисляем минмиальный ценник
+			if(product_list[j].getAttribute("data-product_price") < min_price){
+				min_price = product_list[j].getAttribute("data-product_price");
+			}
+		}
+	}
+	// Устанавливаем минимальный и максимальный ценники
+	$('#price_start').val(min_price);
+	$('#price_end').val(max_price);
+}
+
 $(document).ready(function(){
-	var filter_headers = $('#filter_collapse').data('filter_headers');
-	how_many(filter_headers);
-	$("input[type='checkbox']").click(function () {
+	if($('#PageType').is(".PageType_Catalog")){
+		get_min_max();
+		var filter_headers = $('#filter_collapse').data('filter_headers');
 		how_many(filter_headers);
-	});
-	var sort_type = $('#sorting').val();
-	var url = window.location.pathname.split("/").pop();
-	$('option:selected', 'select[name="sorting"]').removeAttr('selected');
-	$("select option[value="+url).attr("selected","selected");
-	$('select[name="sorting"]').on('change', function() {
-  	window.location.href = "/catalog/"+$('#title').data('title')+"/sort/"+this.value;
-	});
+		$("input[type='checkbox']").click(function () {
+			how_many(filter_headers);
+		});
+		var sort_type = $('#sorting').val();
+		var url = window.location.pathname.split("/").pop();
+		$('option:selected', 'select[name="sorting"]').removeAttr('selected');
+		$("select option[value="+url).attr("selected","selected");
+		$('select[name="sorting"]').on('change', function() {
+			window.location.href = "/catalog/"+$('#title').data('title')+"/sort/"+this.value;
+		});
+	}
 });
 
 

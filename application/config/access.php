@@ -22,6 +22,7 @@
 			'catalog',
 			'contacts',
 			'contacts_send',
+			'price_list',
 			//admin
 			'login',
 			'log_in',
@@ -31,6 +32,7 @@
 			'products',
 			'currency',
 			'create_product',
+			'currency_auto_update',
 		]
 	];
  ?>

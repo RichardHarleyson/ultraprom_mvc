@@ -64,7 +64,8 @@
 	                <!--Grid row-->
 
 									<div class="text-center">
-											<button class="btn w-25 btn-primary text-light" type="submit">Отправить</button>
+											<button class="btn w-25 btn-primary text-light d-none d-md-block mx-auto" type="submit">Отправить</button>
+											<button class="btn w-100 btn-primary text-light d-md-none" type="submit">Отправить</button>
 									</div>
 									<div class="status text-center mt-4"></div>
 

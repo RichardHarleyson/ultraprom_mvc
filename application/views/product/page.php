@@ -27,7 +27,7 @@
 	<div class="product_content">
 		<div class="row">
 			<div class="col-xl-6 col-md-5 col-sm-12" style="padding: 0;">
-				<!-- <img class="img-fluid" src="<?php echo $product[0]['image'];?>" style="margin: 5px"> -->
+				<!-- <img class="img-fluid mx-auto" src="/public/media/uploads/<?php echo $product[0]['image'];?>" style="margin: 5px"> -->
 				<img class="img-fluid" src="https://via.placeholder.com/400" style="margin: 5px">
 			</div>
 			<div class="col-xl-4 col-md-6 col-sm-12 align-self-center">
@@ -37,18 +37,18 @@
 							<i class="fas fa-check-square text-success"></i>
 							<b>В Наличии</b>
 						</div>
-						<div class="col-6 text-right " rating="<?php echo $product[0]['rate']; ?>" style="font-size: 16px;">
-							<p class="text-warning rating" rating="<?php echo $product[0]['rate']; ?>"></p>
+						<div class="col-6 text-right " rating="<?php echo $product[0]['rating']; ?>" style="font-size: 16px;">
+							<p class="text-warning rating" rating="<?php echo $product[0]['rating']; ?>"></p>
 						</div>
 					</div>
 				</div>
 				<div class="gapper"></div>
 				<div class="row text-center price_row">
 					<div class="col col-12 col-lg-6 col-xl-6 mx-auto my-2">
-						<p class="price_tablet_solo border rounded mx-auto"><b><?php echo $product[0]['price']; ?> грн</b></p>
+						<p class="price_tablet_solo border rounded mx-auto"><b><?php echo number_format($product[0]['price_uah'], 0, ',', ' '); ?> грн</b></p>
 					</div>
 					<div class="col col-12 col-lg-6 col-xl-6 text-center my-2">
-						<a class="btn btn-lg btn-danger" style="width: 155px; color: white" onclick="add_item(this)" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Добавлено в Корзину" data-id="<?php echo $product[0]['id']; ?>" data-title="<?php echo $product[0]['title']; ?>" data-price="<?php echo $product[0]['price']; ?>" >В корзину <i  class="fa fa-shopping-cart"></i> </a>
+						<a class="btn btn-lg btn-danger" style="width: 155px; color: white" onclick="add_item(this)" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Добавлено в Корзину" data-id="<?php echo $product[0]['id']; ?>" data-title="<?php echo $product[0]['title']; ?>" data-price="<?php echo $product[0]['price_uah']; ?>" >В корзину <i  class="fa fa-shopping-cart"></i> </a>
 					</div>
 				</div>
 				<div class="gapper"></div>
@@ -77,40 +77,36 @@
 			<table class="table table-striped">
 				<tbody>
 					<tr>
-						<td>Mark</td>
+						<td>Высота</td>
 						<td>Otto</td>
 					</tr>
 					<tr>
-						<td>Jacob</td>
+						<td>Ширини</td>
 						<td>Thornton</td>
 					</tr>
 					<tr>
-						<td>Larry</td>
-						<td>the Bird</td>
-					</tr>
-					<tr>
-						<td>Mark</td>
+						<td>Высота</td>
 						<td>Otto</td>
 					</tr>
 					<tr>
-						<td>Jacob</td>
+						<td>Ширини</td>
 						<td>Thornton</td>
 					</tr>
 					<tr>
-						<td>Larry</td>
-						<td>the Bird</td>
-					</tr>
-					<tr>
-						<td>Mark</td>
+						<td>Высота</td>
 						<td>Otto</td>
 					</tr>
 					<tr>
-						<td>Jacob</td>
+						<td>Ширини</td>
 						<td>Thornton</td>
 					</tr>
 					<tr>
-						<td>Larry</td>
-						<td>the Bird</td>
+						<td>Высота</td>
+						<td>Otto</td>
+					</tr>
+					<tr>
+						<td>Ширини</td>
+						<td>Thornton</td>
 					</tr>
 				</tbody>
 			</table>

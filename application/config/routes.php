@@ -74,6 +74,11 @@ return [
 		'controller' => 'top_menu',
 		'action' => 'contacts_send',
 	],
+	'top_menu/price/{id:\d+}' =>[
+		'controller' => 'top_menu',
+		'action' => 'price_list',
+	],
+
 	// ADMIN
 	'admin' =>[
 		'controller' => 'admin',
@@ -99,6 +104,11 @@ return [
 		'controller' => 'admin',
 		'action' => 'currency',
 	],
+	'admin/currency_auto_update' =>[
+		'controller' => 'admin',
+		'action' => 'currency_auto_update',
+	],
+
 
 ];
 ?>

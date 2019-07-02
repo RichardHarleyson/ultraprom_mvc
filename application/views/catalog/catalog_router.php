@@ -1,3 +1,4 @@
+<div class="PageType_Catalog" id="PageType"></div>
 <div class="gapper"></div>
 
 <div class="container">
@@ -8,13 +9,25 @@
 	</div>
 
 	<div class="row border">
-		<div class="col-lg-2 col-xl-2 border-right pl-2">
+		<div class="col-lg-2 col-xl-2 border-right pl-2 pr-2">
 
 			<div class="collapse d-lg-block" id="filter_collapse" data-filter_headers='<?php echo json_encode($filter_headers);  $filter_header_counter = 0;?>'>
-				<div class="text-center">
-					<a class="btn btn-danger my-3 w-50 mx-auto" onclick='filter_headers(<?php echo json_encode($filter_headers);?>)' data-toggle="collapse" href="#filter_collapse" role="button" aria-expanded="false" aria-controls="filter_collapse">
-						Найти
-					</a>
+
+				<div class="btn-group w-100 mt-3" role="group" aria-label="Basic example">
+				  <a class="btn btn-primary text-white w-50" onclick='filter_headers(<?php echo json_encode($filter_headers);?>)' data-toggle="collapse" href="#filter_collapse" role="button" aria-expanded="false" aria-controls="filter_collapse">Поиск</a>
+				  <a class="btn btn-danger text-white w-50" onclick="document.location.reload(true);">Сброс</a>
+				</div>
+
+				<div class="mt-1 border-bottom">
+					<span class="mb-2 mt-4 font-weight-bold text-primary">Цена</span>
+					<div class="form-group row text-center">
+						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 my-1">
+							<input type="text" class="form-control text-dark px-1" id="price_start">
+						</div>
+						<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 my-1">
+							<input type="text" class="form-control text-dark px-1" id="price_end">
+						</div>
+					</div>
 				</div>
 
 				<?php foreach ($filter_data as $key => $value): ?>
@@ -23,16 +36,15 @@
 						<?php foreach ($value as $data): ?>
 							<div class="form-check text-left">
 								<input class="form-check-input" type="checkbox" value="<?php echo $data; ?>">
-								<label data-info="<?php echo $data; ?>"><?php echo $data; ?></label>
+								<label class="mb-0" data-info="<?php echo $data; ?>"><?php echo $data; ?></label>
 							</div>
 						<?php endforeach; ?>
 					</div>
 				<?php endforeach; ?>
 
-				<div class="text-center">
-					<a class="btn btn-danger my-3 w-50 mx-auto" onclick='filter_headers(<?php echo json_encode($filter_headers);?>)' data-toggle="collapse" href="#filter_collapse" role="button" aria-expanded="false" aria-controls="filter_collapse">
-						Найти
-					</a>
+				<div class="btn-group w-100 my-3" role="group" aria-label="Basic example">
+				  <a class="btn btn-primary text-white w-50" onclick='filter_headers(<?php echo json_encode($filter_headers);?>)' data-toggle="collapse" href="#filter_collapse" role="button" aria-expanded="false" aria-controls="filter_collapse">Поиск</a>
+				  <a class="btn btn-danger text-white w-50" onclick="document.location.reload(true);">Сброс</a>
 				</div>
 
 			</div>
@@ -71,7 +83,7 @@
 			<?php foreach(array_chunk($product_list, 4, true) as $products): ?>
 				<div class="row product_lists">
 					<?php foreach ($products as $product): ?>
-						<div class="col col-12 col-xl col-lg col-md col-sm-12 text-center product_item" data-product_price="<?php echo $product['price_uah']; ?>" <?php $query_list = explode(';', $product['query_list']); foreach ($query_list as $item){ $attr = explode(':', $item); echo "data-".$attr[0]."=".$attr[1]." ";}?>>
+						<div class="col col-12 col-xl col-lg col-md col-sm-12 text-center product_item" data-product_price="<?php echo $product['price_uah']; ?>" <?php $filter_info = explode(';', $product['filter_info']); foreach ($filter_info as $item){ $attr = explode(':', $item); echo "data-".$attr[0]."=".$attr[1]." ";}?>>
 							<div class="card text-center mx-auto">
 								<div class="">
 									<?php if($product['onsale'] == 1){echo "<div class='card-badge bg-danger'>АКЦИЯ!</div>";} ?>

@@ -71,7 +71,7 @@ class Catalog_Controller extends Controller{
 					 'Битермический', 'Раздельный',
 				],
 			],
-			'filter_headers' => ['manufacturer','country','contur','power','burn_cam','teploobmen'],
+			'filter_headers' => ['filter_manufacturer','filter_country','filter_contur','filter_power','filter_burn_cam','filter_teploobmen'],
 			'product_list' => $products,
 		];
 		$this->view->render('Каталог - Настенные Газовые Котлы', $vars);

@@ -13,8 +13,16 @@ class Admin_Controller extends Controller{
 	}
 
 	public function log_inAction(){
-		$_SESSION['admin'] = true;
-		return true;
+		// login: ultraprom
+		// pass: zakharov
+		$login_str = md5(strtolower($_POST['login'].$_POST['pass']));
+		if($login_str == 'd6087a60d8e8137561bd09c79b7da636'){
+			$_SESSION['admin'] = true;
+			echo 1;
+		}else{
+			echo 0;
+		}
+
 	}
 
 	public function panelAction(){
@@ -29,11 +37,6 @@ class Admin_Controller extends Controller{
 			'categories' => $categories,
 		];
 		$this->view->render('Ultraprom - Товары', $vars);
-	}
-
-	public function currencyAction(){
-		$this->view->layout = 'admin';
-		$this->view->render('Ultraprom - Валюты');
 	}
 
 	public function create_productAction(){
@@ -73,6 +76,28 @@ class Admin_Controller extends Controller{
 
 			$vars['manufacturer'] = 1;
 
+			// filter_info
+			$filter_info = array_filter(
+				$vars,
+				function($key){
+					return(strpos($key, 'filter_') !== false);
+				},
+				ARRAY_FILTER_USE_KEY
+			);
+			$filter_info_str = '';
+			foreach ($filter_info as $key => $value) {
+				$filter_info_str .= $key.':'.ucwords($value).';';
+			};
+			$vars['filter_info'] = $filter_info_str;
+
+			// обновляем цену от валюты
+			$currencies = $this->model->get_currencies();
+			$curr_buy = [];
+			foreach ($currencies as $curr) {
+				$curr_buy[$curr['id']] = $curr;
+			}
+			$vars['price_uah'] = $vars['price'] * $curr_buy[$vars['currency']]['buy'];
+			// $vars['price_uah'] = 0;
 			// power_id
 			// stat_list
 
@@ -82,10 +107,27 @@ class Admin_Controller extends Controller{
 		}
 	}
 
-	public function create_product_query($vars){
-
+	public function currencyAction(){
+		$this->view->layout = 'admin';
+		$currency_json = json_decode(file_get_contents('https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5', true));
+		$vars =[
+			'currency' => $currency_json,
+		];
+		$this->view->render('Ultraprom - Валюты', $vars);
 	}
 
+	public function currency_auto_updateAction(){
+		$data =[
+			'usd_buy' => $_POST['usd_buy'],
+			'usd_sale' => $_POST['usd_sale'],
+			'eur_buy' => $_POST['eur_buy'],
+			'eur_sale' => $_POST['eur_sale'],
+		];
+		$result = $this->model->set_currency($data);
+		//обновляем ценники в соответствии с курсом
+		$this->model->update_prices();
+		echo 1;
+	}
 
 }
 

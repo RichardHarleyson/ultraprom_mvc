@@ -15,49 +15,49 @@
 
 	<div class="row text-center">
 		<div class="col-xl-3 col-lg-3 col-md-4 col-sm-2 col-12 my-2 px-1">
-			<a href="/public/media/docs/pdf-test.pdf">
+			<a href="/top_menu/price/1">
 				<img style="object-fit: none; object-position: center; height: 208px; width: 255px;" src="/public/media/img/prices/1.jpg" alt="">
 				<p><span>Монтажные работы по отоплению, водоснабжению, канализации</span></p>
 			</a>
 		</div>
 		<div class="col-xl-3 col-lg-3 col-md-4 col-sm-2 col-12 my-2 px-1">
-			<a href="/public/media/docs/pdf-test.pdf">
+			<a href="/top_menu/price/2">
 				<img style="object-fit: none; object-position: center; height: 208px; width: 255px;" src="/public/media/img/prices/2.jpg" alt="">
 				<p><span>Демонтажные работы</span></p>
 			</a>
 		</div>
 		<div class="col-xl-3 col-lg-3 col-md-4 col-sm-2 col-12 my-2 px-1">
-			<a href="/public/media/docs/pdf-test.pdf">
+			<a href="/top_menu/price/3">
 				<img style="object-fit: none; object-position: center; height: 208px; width: 255px;" src="/public/media/img/prices/3.jpg" alt="">
 				<p><span>Электромонтажные работы</span></p>
 			</a>
 		</div>
 		<div class="col-xl-3 col-lg-3 col-md-4 col-sm-2 col-12 my-2 px-1">
-			<a href="/public/media/docs/pdf-test.pdf">
+			<a href="/top_menu/price/4">
 				<img style="object-fit: none; object-position: center; height: 208px; width: 255px;" src="/public/media/img/prices/4.jpg" alt="">
 				<p><span>Полы</span></p>
 			</a>
 		</div>
 		<div class="col-xl-3 col-lg-3 col-md-4 col-sm-2 col-12 my-2 px-1">
-			<a href="/public/media/docs/pdf-test.pdf">
+			<a href="/top_menu/price/5">
 				<img style="object-fit: none; object-position: center; height: 208px; width: 255px;" src="/public/media/img/prices/5.jpg" alt="">
 				<p><span>Потолки</span></p>
 			</a>
 		</div>
 		<div class="col-xl-3 col-lg-3 col-md-4 col-sm-2 col-12 my-2 px-1">
-			<a href="/public/media/docs/pdf-test.pdf">
+			<a href="/top_menu/price/6">
 				<img style="object-fit: none; object-position: center; height: 208px; width: 255px;" src="/public/media/img/prices/6.jpg" alt="">
 				<p><span>Стены</span></p>
 			</a>
 		</div>
 		<div class="col-xl-3 col-lg-3 col-md-4 col-sm-2 col-12 my-2 px-1">
-			<a href="/public/media/docs/pdf-test.pdf">
+			<a href="/top_menu/price/7">
 				<img style="object-fit: none; object-position: center; height: 208px; width: 255px;" src="/public/media/img/prices/7.jpg" alt="">
 				<p><span>Проемы, двери, окна</span></p>
 			</a>
 		</div>
 		<div class="col-xl-3 col-lg-3 col-md-4 col-sm-2 col-12 my-2 px-1">
-			<a href="/public/media/docs/pdf-test.pdf">
+			<a href="/top_menu/price/8">
 				<img style="object-fit: none; object-position: center; height: 208px; width: 255px;" src="/public/media/img/prices/8.jpeg" alt="">
 				<p><span>Дополнительные работы</span></p>
 			</a>

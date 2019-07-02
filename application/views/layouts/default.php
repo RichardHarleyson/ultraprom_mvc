@@ -113,7 +113,7 @@
 				</div>
 			</div>
 			<div class="col-xl-2 col-lg-2 d-none d-lg-block align-self-center">
-				<button class="btn btn-danger" data-toggle="modal" data-target="#callback">Обратный Звонок</button>
+				<button class="btn btn-danger w-100" data-toggle="modal" data-target="#callback">Звонок</button>
 			</div>
 			<div class="col-xl-1 col-lg-1 col-md-2 align-self-center">
 				<a class="btn" href="/cart"><i class="text-danger fas fa-cart-arrow-down"></i></a>
@@ -170,20 +170,20 @@
 												<div class="row">
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="/catalog">Настенные Газовые Котлы</a>
+															<a href="/catalog/nastennue_gaz_kotly">Настенные Газовые Котлы</a>
 														</div>
 														<div class="image mx-auto d-block">
-															<a href="/catalog">
+															<a href="/catalog/nastennue_gaz_kotly">
 																<img class="img-fluid" src="https://via.placeholder.com/100">
 															</a>
 														</div>
 													</div>
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="/catalog">Напольные Газовые Котлы</a>
+															<a href="#">Напольные Газовые Котлы</a>
 														</div>
 														<div class="image mx-auto d-block">
-															<a href="/catalog">
+															<a href="#">
 																<img class="img-fluid" src="https://via.placeholder.com/100">
 															</a>
 														</div>
@@ -193,17 +193,17 @@
 															<a href="/catalog">Конденсационные Газовые Котлы</a>
 														</div>
 														<div class="image mx-auto d-block">
-															<a href="/catalog">
+															<a href="#">
 																<img class="img-fluid" src="https://via.placeholder.com/100">
 															</a>
 														</div>
 													</div>
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="/catalog">Электрические Котлы<br>&nbsp;</a>
+															<a href="#">Электрические Котлы<br>&nbsp;</a>
 														</div>
 														<div class="image mx-auto d-block">
-															<a href="/catalog">
+															<a href="#">
 																<img class="img-fluid" src="https://via.placeholder.com/100">
 															</a>
 														</div>
@@ -651,7 +651,7 @@
 										<a class="dropdown-item text-light border-bottom">Электрический Теплый Пол</a>
 									</li>
 									<li>
-										<a class="dropdown-item text-light border-bottom">Труда Для Теплого Пола</a>
+										<a class="dropdown-item text-light border-bottom">Труба Для Теплого Пола</a>
 									</li>
 									<li>
 										<a class="dropdown-item text-light border-bottom">Инфракрасный Теплый Пол</a>
@@ -755,7 +755,7 @@
 								<a class="dropdown-item dropdown-toggle bg-primary text-light non-headers border-bottom">Газовые Водонагреватели</a>
 								<ul class="dropdown-menu bg-primary border-0">
 									<li>
-										<a class="dropdown-item text-light border-bottom">Назовые Колонки</a>
+										<a class="dropdown-item text-light border-bottom">Газовые Колонки</a>
 									</li>
 								</ul>
 							</li>

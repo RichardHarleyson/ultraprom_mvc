@@ -1,3 +1,4 @@
+<div class="PageType_Index"></div>
 <div class="gapper"></div>
 
 <div class='container'>
@@ -8,10 +9,10 @@
 	</ul>
 		<div class="carousel-inner">
 			<div class="carousel-item active">
-				<img src="/public/media/img/ultraprom_teplo.jpg" class="d-block w-100" alt="slide1">
+				<a href="/top_menu/central_heating"><img src="/public/media/img/ultraprom_teplo.jpg" class="d-block w-100" alt="slide1"></a>
 			</div>
 			<div class="carousel-item">
-				<img src="/public/media/img/montag.jpg" class="d-block w-100" alt="slide2">
+				<a href="/top_menu/services"><img src="/public/media/img/montag.jpg" class="d-block w-100" alt="slide2"></a>
 			</div>
 		</div>
 	</div>
@@ -55,24 +56,24 @@
 
 		<div class="carousel-inner" id="product_carousel" role="listbox">
 			<?php foreach(array_chunk($result, 5, true) as $products): ?>
-				<div class="carousel-item" id="4">
+				<div class="carousel-item">
 					<div class="row product_lists no-gutters">
 						<?php foreach ($products as $product): ?>
 							<div class="col col-12 col-xl col-lg-3 col-md-4 col-sm-12 text-center">
 								<div class="card text-center mx-auto">
-								<img src="<?php echo $product['thumbnail']; ?>" class="img-fluid" alt="Product Thumbnail">
+								<img src="/public/media/uploads/<?php echo $product['image']; ?>" class="img-fluid" alt="Product Thumbnail">
 								<!-- <img src="https://via.placeholder.com/250" class="img-fluid" alt="Product Thumbnail"> -->
 									<div class="card-body">
 										<div class="card-title align-self-center my-0">
 											<a href="/product/<?php echo $product['id']; ?>" class=""><span class="font-title"><?php echo $product['title']; ?></span></a>
 										</div>
-										<p class="card-text border-top text-warning rating" rating="<?php echo $product['rate']; ?>" style="font-size: 20px;"></p>
+										<p class="card-text border-top text-warning rating" rating="<?php echo $product['rating']; ?>" style="font-size: 20px;"></p>
 										<div class="row card-buttons">
 											<div class="col col-9">
-												<p class="border rounded price_tablet"><b><?php echo $product['price']; ?> грн</b></p>
+												<p class="border rounded price_tablet"><b><?php echo number_format($product['price_uah'], 0, ',', ' '); ?> грн</b></p>
 											</div>
 											<div class="col col-3">
-												<button class="btn btn-danger" type="submit" onclick="add_item(this)" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Добавлено в Корзину" data-id="<?php echo $product['id']; ?>" data-title="<?php echo $product['title']; ?>" data-price="<?php echo $product['price']; ?>"><i  class="fa fa-shopping-cart"></i></button>
+												<button class="btn btn-danger" type="submit" onclick="add_item(this)" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Добавлено в Корзину" data-id="<?php echo $product['id']; ?>" data-title="<?php echo $product['title']; ?>" data-price="<?php echo $product['price_uah']; ?>"><i  class="fa fa-shopping-cart"></i></button>
 											</div>
 										</div>
 									</div>
@@ -104,23 +105,23 @@
 
 	<div class="carousel-inner" id="product_carousel" role="listbox">
 		<?php foreach(array_chunk($result, 5, true) as $products): ?>
-			<div class="carousel-item" id="4">
+			<div class="carousel-item">
 				<div class="row product_lists">
 					<?php foreach ($products as $product): ?>
 						<div class="col col-12 col-xl col-lg-3 col-md-4 col-sm-12 text-center">
 							<div class="card text-center mx-auto">
-								<img src="<?php echo $product['thumbnail']; ?>" class="img-fluid" alt="Product Thumbnail">
+								<img src="/public/media/uploads/<?php echo $product['image']; ?>" class="img-fluid" alt="Product Thumbnail">
 								<!-- <img src="https://via.placeholder.com/250" class="img-fluid" alt="Product Thumbnail"> -->
 								<div class="card-body">
 									<div class="card-title align-self-center my-0">
 										<a href="/product/<?php echo $product['id']; ?>" class=""><span class="font-title"><?php echo $product['title']; ?></span></a>
-									</div>									<p class="card-text border-top text-warning rating" rating="<?php echo $product['rate']; ?>" style="font-size: 20px;"></p>
+									</div>									<p class="card-text border-top text-warning rating" rating="<?php echo $product['rating']; ?>" style="font-size: 20px;"></p>
 									<div class="row card-buttons">
 										<div class="col col-9">
-												<p class="border rounded price_tablet"><b><?php echo $product['price']; ?> грн</b></p>
+												<p class="border rounded price_tablet"><b><?php echo number_format($product['price_uah'], 0, ',', ' '); ?> грн</b></p>
 										</div>
 										<div class="col col-3">
-											<button class="btn btn-danger" type="submit" onclick="add_item(this)" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Добавлено в Корзину" data-id="<?php echo $product['id']; ?>" data-title="<?php echo $product['title']; ?>" data-price="<?php echo $product['price']; ?>"><i  class="fa fa-shopping-cart"></i></button>
+											<button class="btn btn-danger" type="submit" onclick="add_item(this)" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Добавлено в Корзину" data-id="<?php echo $product['id']; ?>" data-title="<?php echo $product['title']; ?>" data-price="<?php echo $product['price_uah']; ?>"><i  class="fa fa-shopping-cart"></i></button>
 										</div>
 									</div>
 								</div>
@@ -143,18 +144,18 @@
 
 	<h5>Направления нашей деятельности:</h5>
 	<ul class="list-group list-group-flush mb-1">
-		<li class="list-group-item">
+		<li class="py-1 list-group-item">
 			<span class="text-primary">Все виды автономного отопления!</span>
 		</li>
-		<li class="list-group-item">Газификация</li>
-		<li class="list-group-item">Установка систем водоснабжения, канализации и все виды сантехнических работ</li>
-		<li class="list-group-item">Электрификация</li>
-		<li class="list-group-item">Кондиционирование</li>
-		<li class="list-group-item">Комплексный Ремонт</li>
-		<li class="list-group-item">Обслуживание/Сервис</li>
-		<li class="list-group-item">Оформление/Согласование разрешительной и исполнительно-технической документации</li>
-		<li class="list-group-item">Инженерное проектирование</li>
-		<li class="list-group-item">Продажа сертифицированных материалов и оборудования</li>
+		<li class="py-1 list-group-item">Газификация</li>
+		<li class="py-1 list-group-item">Установка систем водоснабжения, канализации и все виды сантехнических работ</li>
+		<li class="py-1 list-group-item">Электрификация</li>
+		<li class="py-1 list-group-item">Кондиционирование</li>
+		<li class="py-1 list-group-item">Комплексный Ремонт</li>
+		<li class="py-1 list-group-item">Обслуживание/Сервис</li>
+		<li class="py-1 list-group-item">Оформление/Согласование разрешительной и исполнительно-технической документации</li>
+		<li class="py-1 list-group-item">Инженерное проектирование</li>
+		<li class="py-1 list-group-item">Продажа сертифицированных материалов и оборудования</li>
 	</ul>
 
 	<p>Таким образом, сотрудничая с нашим предприятием, вы получаете полный объем высококвалифицированных услуг <strong>&laquo;ПОД КЛЮЧ&raquo;</strong>.</p>

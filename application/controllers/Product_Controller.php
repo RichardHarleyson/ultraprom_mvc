@@ -12,7 +12,8 @@ class Product_Controller extends Controller{
 		$vars = [
 			'product' => $result,
 		];
-		$this->view->render('Product Page', $vars);
+		$title = $result[0]['title'].' - Лучшая цена '.number_format($result[0]['price_uah'], 0, ',', ' ').' грн';
+		$this->view->render($title, $vars);
 	}
 
 

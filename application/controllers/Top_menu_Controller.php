@@ -19,15 +19,43 @@ class Top_menu_Controller extends Controller{
 	}
 
 	public function central_heatingAction(){
-		$this->view->render('Ultraprom - Прайсы');
+		$this->view->render('Ultraprom - Автономное Отопление');
 	}
 
 	public function catalogAction(){
-		$this->view->render('Ultraprom - Прайсы');
+		$this->view->render('Ultraprom - Каталог');
 	}
 
 	public function contactsAction(){
-		$this->view->render('Ultraprom - Прайсы');
+		$this->view->render('Ultraprom - Контакты');
+	}
+
+	public function price_listAction(){
+		if($this->route['id'] == '1'){
+			$this->view->path = 'top_menu/price1';
+			$this->view->render('Ultraprom - Прайс(Отопление, Водоснабжение, Канализация)');
+		}elseif($this->route['id'] == '2'){
+			$this->view->path = 'top_menu/price2';
+			$this->view->render('Ultraprom - Прайс(Демонтажные работы)');
+		}elseif($this->route['id'] == '3'){
+			$this->view->path = 'top_menu/price3';
+			$this->view->render('Ultraprom - Прайс(Электромонтажные работы)');
+		}elseif($this->route['id'] == '4'){
+			$this->view->path = 'top_menu/price4';
+			$this->view->render('Ultraprom - Прайс(Полы)');
+		}elseif($this->route['id'] == '5'){
+			$this->view->path = 'top_menu/price5';
+			$this->view->render('Ultraprom - Прайс(Потолки)');
+		}elseif($this->route['id'] == '6'){
+			$this->view->path = 'top_menu/price6';
+			$this->view->render('Ultraprom - Прайс(Стены)');
+		}elseif($this->route['id'] == '7'){
+			$this->view->path = 'top_menu/price7';
+			$this->view->render('Ultraprom - Прайс(Проемы, Двери, Окна)');
+		}elseif($this->route['id'] == '8'){
+			$this->view->path = 'top_menu/price8';
+			$this->view->render('Ultraprom - Прайс(Дополнительные Работы)');
+		}
 	}
 
 	public function contacts_sendAction(){
