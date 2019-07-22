@@ -23,6 +23,9 @@
 </head>
 
 <body>
+	<!-- <section>
+	    <span class="load" id="preloader"></span>
+	</section> -->
 
 	<!-- 1st Menu -->
 	<div class='container-fluid bg-primary d-none d-md-block'>
@@ -174,37 +177,57 @@
 														</div>
 														<div class="image mx-auto d-block">
 															<a href="/catalog/nastennue_gaz_kotly">
-																<img class="img-fluid" src="https://via.placeholder.com/100">
+																<img class="img-fluid" src="/public/media/img/menu/1.jpg">
 															</a>
 														</div>
 													</div>
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="#">Напольные Газовые Котлы</a>
+															<a href="/catalog/napolnue_gaz_kotly">Напольные Газовые Котлы</a>
 														</div>
 														<div class="image mx-auto d-block">
-															<a href="#">
-																<img class="img-fluid" src="https://via.placeholder.com/100">
+															<a href="/catalog/napolnue_gaz_kotly">
+																<img class="img-fluid" src="/public/media/img/menu/2.jpg">
 															</a>
 														</div>
 													</div>
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="/catalog">Конденсационные Газовые Котлы</a>
+															<a href="/catalog/cond_gaz_kotly">Конденсационные Газовые Котлы</a>
 														</div>
 														<div class="image mx-auto d-block">
-															<a href="#">
-																<img class="img-fluid" src="https://via.placeholder.com/100">
+															<a href="/catalog/cond_gaz_kotly">
+																<img class="img-fluid" src="/public/media/img/menu/3.jpg">
 															</a>
 														</div>
 													</div>
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="#">Электрические Котлы<br>&nbsp;</a>
+															<a href="/catalog/electro_kotly">Электрические Котлы<br>&nbsp;</a>
 														</div>
 														<div class="image mx-auto d-block">
-															<a href="#">
-																<img class="img-fluid" src="https://via.placeholder.com/100">
+															<a href="/catalog/electro_kotly">
+																<img class="img-fluid" src="/public/media/img/menu/4.jpg">
+															</a>
+														</div>
+													</div>
+													<div class="col col-sm-4 text-center menu_item_block">
+														<div class="title">
+															<a href="/catalog/tverdotop_kotly">Твердотопливные Котлы</a>
+														</div>
+														<div class="image mx-auto d-block">
+															<a href="/catalog/tverdotop_kotly">
+																<img class="img-fluid" src="/public/media/img/menu/5.jpg">
+															</a>
+														</div>
+													</div>
+													<div class="col col-sm-4 text-center menu_item_block">
+														<div class="title">
+															<a href="/catalog/comp_kotly">Комплектующие для Котлов</a>
+														</div>
+														<div class="image mx-auto d-block">
+															<a href="/catalog/comp_kotly">
+																<img class="img-fluid" src="/public/media/img/menu/6.jpg">
 															</a>
 														</div>
 													</div>
@@ -214,71 +237,71 @@
 												<div class="row">
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Стальные Радиаторы<br>&nbsp;</a>
+															<a href="/catalog/stal_rad">Стальные Радиаторы<br>&nbsp;</a>
 														</div>
 														<div class="image mx-auto d-block">
-															<a href="">
-																<img class="img-fluid" src="https://via.placeholder.com/100">
+															<a href="/catalog/stal_rad">
+																<img class="img-fluid" src="/public/media/img/menu/7.jpg">
 															</a>
 														</div>
 													</div>
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Алюминиевые Радиаторы</a>
+															<a href="/catalog/alum_rad">Алюминиевые Радиаторы</a>
 														</div>
 														<div class="image mx-auto d-block">
-															<a href="">
-																<img class="img-fluid" src="https://via.placeholder.com/100">
+															<a href="/catalog/alum_rad">
+																<img class="img-fluid" src="/public/media/img/menu/8.jpg">
 															</a>
 														</div>
 													</div>
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Биметаллические Радиаторы</a>
+															<a href="/catalog/bimetal_rad">Биметаллические Радиаторы</a>
 														</div>
 														<div class="image mx-auto d-block">
-															<a href="">
-																<img class="img-fluid" src="https://via.placeholder.com/100">
+															<a href="/catalog/bimetal_rad">
+																<img class="img-fluid" src="/public/media/img/menu/9.jpg">
 															</a>
 														</div>
 													</div>
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Чугунные Радиаторы<br>&nbsp;</a>
+															<a href="/catalog/chugun_rad">Чугунные Радиаторы<br>&nbsp;</a>
 														</div>
 														<div class="image mx-auto d-block">
-															<a href="">
-																<img class="img-fluid" src="https://via.placeholder.com/100">
+															<a href="/catalog/chugun_rad">
+																<img class="img-fluid" src="/public/media/img/menu/10.jpg">
 															</a>
 														</div>
 													</div>
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Электрические Радиаторы</a>
+															<a href="/catalog/electro_rad">Электрические Радиаторы</a>
 														</div>
 														<div class="image mx-auto d-block">
-															<a href="">
-																<img class="img-fluid" src="https://via.placeholder.com/100">
+															<a href="/catalog/electro_rad">
+																<img class="img-fluid" src="/public/media/img/menu/10.5.jpg">
 															</a>
 														</div>
 													</div>
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Дизайнерские Радиаторы</a>
+															<a href="/catalog/design_rad">Дизайнерские Радиаторы</a>
 														</div>
 														<div class="image mx-auto d-block">
-															<a href="">
-																<img class="img-fluid" src="https://via.placeholder.com/100">
+															<a href="/catalog/design_rad">
+																<img class="img-fluid" src="/public/media/img/menu/11.jpg">
 															</a>
 														</div>
 													</div>
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Комплектующие Для Радиаторов</a>
+															<a href="/catalog/comp_rad">Комплектующие Для Радиаторов</a>
 														</div>
 														<div class="image mx-auto d-block">
-															<a href="">
-																<img class="img-fluid" src="https://via.placeholder.com/100">
+															<a href="/catalog/comp_rad">
+																<img class="img-fluid" src="/public/media/img/menu/12.jpg">
 															</a>
 														</div>
 													</div>
@@ -288,51 +311,51 @@
 												<div class="row">
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Электрический Теплый Пол</a>
+															<a href="/catalog/electro_flour">Электрический Теплый Пол</a>
 														</div>
 														<div class="image mx-auto d-block">
-															<a href="">
-																<img class="img-fluid" src="https://via.placeholder.com/100">
+															<a href="/catalog/electro_flour">
+																<img class="img-fluid" src="/public/media/img/menu/13.jpg">
 															</a>
 														</div>
 													</div>
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Труба Для Теплого Пола</a>
+															<a href="/catalog/truby_flour">Труба Для Теплого Пола</a>
 														</div>
 														<div class="image mx-auto d-block">
-															<a href="">
-																<img class="img-fluid" src="https://via.placeholder.com/100">
+															<a href="/catalog/truby_flour">
+																<img class="img-fluid" src="/public/media/img/menu/14.jpg">
 															</a>
 														</div>
 													</div>
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Инфракрасный Теплый Пол</a>
+															<a href="/catalog/infro_flour">Инфракрасный Теплый Пол</a>
 														</div>
 														<div class="image mx-auto d-block">
-															<a href="">
-																<img class="img-fluid" src="https://via.placeholder.com/100">
+															<a href="/catalog/infro_flour">
+																<img class="img-fluid" src="/public/media/img/menu/15.jpg">
 															</a>
 														</div>
 													</div>
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Водяной Теплый Пол<br>&nbsp;</a>
+															<a href="/catalog/water_flour">Водяной Теплый Пол<br>&nbsp;</a>
 														</div>
 														<div class="image mx-auto d-block">
-															<a href="">
-																<img class="img-fluid" src="https://via.placeholder.com/100">
+															<a href="/catalog/water_flour">
+																<img class="img-fluid" src="/public/media/img/menu/16.jpg">
 															</a>
 														</div>
 													</div>
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Коллекторные Шкафы<br>&nbsp;</a>
+															<a href="/catalog/collect_shkaf">Коллекторные Шкафы<br>&nbsp;</a>
 														</div>
 														<div class="image mx-auto d-block">
-															<a href="">
-																<img class="img-fluid" src="https://via.placeholder.com/100">
+															<a href="/catalog/collect_shkaf">
+																<img class="img-fluid" src="/public/media/img/menu/17.jpg">
 															</a>
 														</div>
 													</div>
@@ -358,41 +381,41 @@
 												<div class="row">
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">ППР Трубы и Фитинги</a>
+															<a href="/catalog/ppr_pipes">ППР Трубы и Фитинги</a>
 														</div>
 														<div class="image mx-auto d-block">
-															<a href="">
-																<img class="img-fluid" src="https://via.placeholder.com/100">
+															<a href="/catalog/ppr_pipes">
+																<img class="img-fluid" src="/public/media/img/menu/18.jpg">
 															</a>
 														</div>
 													</div>
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Обжимные Фитинги</a>
+															<a href="/catalog/obj_fittings">Обжимные Фитинги</a>
 														</div>
 														<div class="image mx-auto d-block">
-															<a href="">
-																<img class="img-fluid" src="https://via.placeholder.com/100">
+															<a href="/catalog/obj_fittings">
+																<img class="img-fluid" src="/public/media/img/menu/19.jpg">
 															</a>
 														</div>
 													</div>
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Изоляция для Труб</a>
+															<a href="/catalog/pipes_isol">Изоляция для Труб</a>
 														</div>
 														<div class="image mx-auto d-block">
-															<a href="">
-																<img class="img-fluid" src="https://via.placeholder.com/100">
+															<a href="/catalog/pipes_isol">
+																<img class="img-fluid" src="/public/media/img/menu/20.jpg">
 															</a>
 														</div>
 													</div>
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Металопластиковые Трубы</a>
+															<a href="/catalog/metal_pipes">Металопластиковые Трубы</a>
 														</div>
 														<div class="image mx-auto d-block">
-															<a href="">
-																<img class="img-fluid" src="https://via.placeholder.com/100">
+															<a href="/catalog/metal_pipes">
+																<img class="img-fluid" src="/public/media/img/menu/21.jpg">
 															</a>
 														</div>
 													</div>
@@ -402,31 +425,31 @@
 												<div class="row">
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Внутрення Канализация</a>
+															<a href="/catalog/instock">Внутрення Канализация</a>
 														</div>
 														<div class="image mx-auto d-block">
-															<a href="">
-																<img class="img-fluid" src="https://via.placeholder.com/100">
+															<a href="/catalog/instock">
+																<img class="img-fluid" src="/public/media/img/menu/22.jpg">
 															</a>
 														</div>
 													</div>
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Наружная Канализация</a>
+															<a href="/catalog/outstock">Наружная Канализация</a>
 														</div>
 														<div class="image mx-auto d-block">
-															<a href="">
-																<img class="img-fluid" src="https://via.placeholder.com/100">
+															<a href="/catalog/outstock">
+																<img class="img-fluid" src="/public/media/img/menu/23.jpg">
 															</a>
 														</div>
 													</div>
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Бесшумная Канализация</a>
+															<a href="/catalog/quitstock">Бесшумная Канализация</a>
 														</div>
 														<div class="image mx-auto d-block">
-															<a href="">
-																<img class="img-fluid" src="https://via.placeholder.com/100">
+															<a href="/catalog/quitstock">
+																<img class="img-fluid" src="/public/media/img/menu/24.jpg">
 															</a>
 														</div>
 													</div>
@@ -451,21 +474,21 @@
 												<div class="row">
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Кандиционеры Настенного Типа</a>
+															<a href="/catalog/wall_cond">Кандиционеры Настенного Типа</a>
 														</div>
 														<div class="image mx-auto d-block">
-															<a href="">
-																<img class="img-fluid" src="https://via.placeholder.com/100">
+															<a href="/catalog/wall_cond">
+																<img class="img-fluid" src="/public/media/img/menu/25.jpg">
 															</a>
 														</div>
 													</div>
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Мобильные Кондиционеры</a>
+															<a href="/catalog/mobile_cond">Мобильные Кондиционеры</a>
 														</div>
 														<div class="image mx-auto d-block">
-															<a href="">
-																<img class="img-fluid" src="https://via.placeholder.com/100">
+															<a href="/catalog/mobile_cond">
+																<img class="img-fluid" src="/public/media/img/menu/26.jpg">
 															</a>
 														</div>
 													</div>
@@ -493,11 +516,11 @@
 												<div class="row">
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Циркулярные Насосы</a>
+															<a href="/catalog/circ_pump">Циркулярные Насосы</a>
 														</div>
 														<div class="image mx-auto d-block">
-															<a href="">
-																<img class="img-fluid" src="https://via.placeholder.com/100">
+															<a href="/catalog/circ_pump">
+																<img class="img-fluid" src="/public/media/img/menu/27.jpg">
 															</a>
 														</div>
 													</div>
@@ -522,21 +545,21 @@
 												<div class="row">
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Бойлеры Электрические<br>&nbsp;</a>
+															<a href="/catalog/electro_boiler">Бойлеры Электрические<br>&nbsp;</a>
 														</div>
 														<div class="image mx-auto d-block">
-															<a href="">
-																<img class="img-fluid" src="https://via.placeholder.com/100">
+															<a href="/catalog/electro_boiler">
+																<img class="img-fluid" src="/public/media/img/menu/28.jpg">
 															</a>
 														</div>
 													</div>
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Проточные Электрические Водонагреватели</a>
+															<a href="/catalog/waterheater">Проточные Электрические Водонагреватели</a>
 														</div>
 														<div class="image mx-auto d-block">
-															<a href="">
-																<img class="img-fluid" src="https://via.placeholder.com/100">
+															<a href="/catalog/waterheater">
+																<img class="img-fluid" src="/public/media/img/menu/29.jpg">
 															</a>
 														</div>
 													</div>
@@ -546,11 +569,11 @@
 												<div class="row">
 													<div class="col col-sm-4 text-center menu_item_block">
 														<div class="title">
-															<a href="">Газовые Колонки</a>
+															<a href="/catalog/gaz_kolonky">Газовые Колонки</a>
 														</div>
 														<div class="image mx-auto d-block">
-															<a href="">
-																<img class="img-fluid" src="https://via.placeholder.com/100">
+															<a href="/catalog/gaz_kolonky">
+																<img class="img-fluid" src="/public/media/img/menu/30.jpg">
 															</a>
 														</div>
 													</div>
@@ -600,64 +623,64 @@
 								<a class="dropdown-item dropdown-toggle bg-primary text-light non-headers border-bottom">Котлы Отопления</a>
 								<ul class="dropdown-menu bg-primary border-0">
 									<li>
-										<a class="dropdown-item text-light border-bottom">Настенные Газовые Котлы</a>
+										<a href="/catalog/nastennue_gaz_kotly" class="dropdown-item text-light border-bottom">Настенные Газовые Котлы</a>
 									</li>
 									<li>
-										<a class="dropdown-item text-light border-bottom">Напольные Газовые Котлы</a>
+										<a href="/catalog/napolnue_gaz_kotly"  class="dropdown-item text-light border-bottom">Напольные Газовые Котлы</a>
 									</li>
 									<li>
-										<a class="dropdown-item text-light border-bottom">Конденсационные Газовые Котлы</a>
+										<a href="/catalog/cond_gaz_kotly"  class="dropdown-item text-light border-bottom">Конденсационные Газовые Котлы</a>
 									</li>
 									<li>
-										<a class="dropdown-item text-light border-bottom">Электрические Котлы</a>
+										<a href="/catalog/electro_kotly"  class="dropdown-item text-light border-bottom">Электрические Котлы</a>
 									</li>
 									<li>
-										<a class="dropdown-item text-light border-bottom">Твердотоплевные Котлы</a>
+										<a href="/catalog/tverdotop_kotly"  class="dropdown-item text-light border-bottom">Твердотоплевные Котлы</a>
 									</li>
 									<li>
-										<a class="dropdown-item text-light border-bottom">Комплектующие Для Котлов</a>
+										<a href="/catalog/comp_kotly"  class="dropdown-item text-light border-bottom">Комплектующие Для Котлов</a>
 									</li>
 								</ul>
 								<a class="dropdown-item dropdown-toggle bg-primary text-light non-headers border-bottom">Радиаторы Отопления</a>
 								<ul class="dropdown-menu bg-primary border-0">
 									<li>
-										<a class="dropdown-item text-light border-bottom">Стальные Радиаторы</a>
+										<a  href="/catalog/stal_rad" class="dropdown-item text-light border-bottom">Стальные Радиаторы</a>
 									</li>
 									<li>
-										<a class="dropdown-item text-light border-bottom">Алюминиевые Радиаторы</a>
+										<a  href="/catalog/alum_rad" class="dropdown-item text-light border-bottom">Алюминиевые Радиаторы</a>
 									</li>
 									<li>
-										<a class="dropdown-item text-light border-bottom">Биметаллические Радиаторы</a>
+										<a  href="/catalog/bimetal_rad" class="dropdown-item text-light border-bottom">Биметаллические Радиаторы</a>
 									</li>
 									<li>
-										<a class="dropdown-item text-light border-bottom">Чугунные Радиаторы</a>
+										<a  href="/catalog/chugun_rad" class="dropdown-item text-light border-bottom">Чугунные Радиаторы</a>
 									</li>
 									<li>
-										<a class="dropdown-item text-light border-bottom">Электрические Радиаторы</a>
+										<a  href="/catalog/electro_rad" class="dropdown-item text-light border-bottom">Электрические Радиаторы</a>
 									</li>
 									<li>
-										<a class="dropdown-item text-light border-bottom">Дизайнерские Радиаторы</a>
+										<a  href="/catalog/design_rad" class="dropdown-item text-light border-bottom">Дизайнерские Радиаторы</a>
 									</li>
 									<li>
-										<a class="dropdown-item text-light border-bottom">Комплектующие Для Радиаторов</a>
+										<a  href="/catalog/comp_rad" class="dropdown-item text-light border-bottom">Комплектующие Для Радиаторов</a>
 									</li>
 								</ul>
 								<a class="dropdown-item dropdown-toggle bg-primary text-light non-headers border-bottom">Теплый Пол</a>
 								<ul class="dropdown-menu bg-primary border-0">
 									<li>
-										<a class="dropdown-item text-light border-bottom">Водяной Теплый Пол</a>
+										<a href="/catalog/water_flour" class="dropdown-item text-light border-bottom">Водяной Теплый Пол</a>
 									</li>
 									<li>
-										<a class="dropdown-item text-light border-bottom">Электрический Теплый Пол</a>
+										<a href="/catalog/electro_flour" class="dropdown-item text-light border-bottom">Электрический Теплый Пол</a>
 									</li>
 									<li>
-										<a class="dropdown-item text-light border-bottom">Труба Для Теплого Пола</a>
+										<a href="/catalog/truby_flour" class="dropdown-item text-light border-bottom">Труба Для Теплого Пола</a>
 									</li>
 									<li>
-										<a class="dropdown-item text-light border-bottom">Инфракрасный Теплый Пол</a>
+										<a href="/catalog/infro_flour" class="dropdown-item text-light border-bottom">Инфракрасный Теплый Пол</a>
 									</li>
 									<li>
-										<a class="dropdown-item text-light border-bottom">Коллекторные Шкафы</a>
+										<a href="/catalog/collect_shkaf" class="dropdown-item text-light border-bottom">Коллекторные Шкафы</a>
 									</li>
 								</ul>
 							</li>
@@ -673,28 +696,28 @@
 								<a class="dropdown-item dropdown-toggle bg-primary text-light non-headers border-bottom">Водопровод</a>
 								<ul class="dropdown-menu bg-primary border-0">
 									<li>
-										<a class="dropdown-item text-light border-bottom">ППР Трубы и Фитинги</a>
+										<a  href="/catalog/ppr_pipes" class="dropdown-item text-light border-bottom">ППР Трубы и Фитинги</a>
 									</li>
 									<li>
-										<a class="dropdown-item text-light border-bottom">Обжимные Фитинги</a>
+										<a  href="/catalog/obj_fittings" class="dropdown-item text-light border-bottom">Обжимные Фитинги</a>
 									</li>
 									<li>
-										<a class="dropdown-item text-light border-bottom">Изоляция Для Труб</a>
+										<a  href="/catalog/pipes_isol" class="dropdown-item text-light border-bottom">Изоляция Для Труб</a>
 									</li>
 									<li>
-										<a class="dropdown-item text-light border-bottom">Металлопластиковые Трубы</a>
+										<a  href="/catalog/metal_pipes" class="dropdown-item text-light border-bottom">Металлопластиковые Трубы</a>
 									</li>
 								</ul>
 								<a class="dropdown-item dropdown-toggle bg-primary text-light non-headers border-bottom">Канализация</a>
 								<ul class="dropdown-menu bg-primary border-0">
 									<li>
-										<a class="dropdown-item text-light border-bottom">Внутренняя Канализация</a>
+										<a  href="/catalog/instock" class="dropdown-item text-light border-bottom">Внутренняя Канализация</a>
 									</li>
 									<li>
-										<a class="dropdown-item text-light border-bottom">Наружная Канализация</a>
+										<a  href="/catalog/outstock" class="dropdown-item text-light border-bottom">Наружная Канализация</a>
 									</li>
 									<li>
-										<a class="dropdown-item text-light border-bottom">Бесшумная Канализация</a>
+										<a  href="/catalog/quitstock" class="dropdown-item text-light border-bottom">Бесшумная Канализация</a>
 									</li>
 								</ul>
 							</li>
@@ -710,10 +733,10 @@
 								<a class="dropdown-item dropdown-toggle bg-primary text-light non-headers border-bottom">Кондиционеры</a>
 								<ul class="dropdown-menu bg-primary border-0">
 									<li>
-										<a class="dropdown-item text-light border-bottom">Кондиционеры Настенного Типа</a>
+										<a  href="/catalog/wall_cond" class="dropdown-item text-light border-bottom">Кондиционеры Настенного Типа</a>
 									</li>
 									<li>
-										<a class="dropdown-item text-light border-bottom">Мобильные Кондиционеры</a>
+										<a  href="/catalog/mobile_cond" class="dropdown-item text-light border-bottom">Мобильные Кондиционеры</a>
 									</li>
 								</ul>
 								<a class="dropdown-item dropdown-toggle bg-primary text-light non-headers border-bottom">Увлижнители Воздуха</a>
@@ -730,7 +753,7 @@
 								<a class="dropdown-item dropdown-toggle bg-primary text-light non-headers border-bottom">Насосы Для Отопления</a>
 								<ul class="dropdown-menu bg-primary border-0">
 									<li>
-										<a class="dropdown-item text-light border-bottom">Циркулярные Насосы</a>
+										<a  href="/catalog/circ_pump" class="dropdown-item text-light border-bottom">Циркулярные Насосы</a>
 									</li>
 								</ul>
 							</li>
@@ -746,16 +769,16 @@
 								<a class="dropdown-item dropdown-toggle bg-primary text-light non-headers border-bottom">Электрические Водонагреватели</a>
 								<ul class="dropdown-menu bg-primary border-0">
 									<li>
-										<a class="dropdown-item text-light border-bottom">Бойлеры Электрические</a>
+										<a  href="/catalog/electro_boiler" class="dropdown-item text-light border-bottom">Бойлеры Электрические</a>
 									</li>
 									<li>
-										<a class="dropdown-item text-light border-bottom">Проточные Электрические Водонагреватели</a>
+										<a  href="/catalog/waterheater" class="dropdown-item text-light border-bottom">Проточные Электрические Водонагреватели</a>
 									</li>
 								</ul>
 								<a class="dropdown-item dropdown-toggle bg-primary text-light non-headers border-bottom">Газовые Водонагреватели</a>
 								<ul class="dropdown-menu bg-primary border-0">
 									<li>
-										<a class="dropdown-item text-light border-bottom">Газовые Колонки</a>
+										<a  href="/catalog/gaz_kolonky" class="dropdown-item text-light border-bottom">Газовые Колонки</a>
 									</li>
 								</ul>
 							</li>
@@ -809,7 +832,6 @@
 		</div>
 </div>
 
-
 <div class="wrapper" style="min-height:65%;">
 	<?php echo $content; ?>
 </div>
@@ -826,16 +848,16 @@
 				<div class="row">
 					<div class="col-6">
 						<span><h5>Покупателю</h5></span>
-						<span><a href="">О Нас<br></a></span>
-						<span><a href="">Услуги<br></a></span>
-						<span><a href="">Доставка<br></a></span>
-						<span><a href="">Контакты<br></a></span>
+						<span><a href="/top_menu/about_us">О Нас<br></a></span>
+						<span><a href="/top_menu/services">Услуги<br></a></span>
+						<!-- <span><a href="">Доставка<br></a></span> -->
+						<span><a href="/top_menu/contacts">Контакты<br></a></span>
 					</div>
 					<div class="col-6">
 						<span><h5>Асортимент</h5></span>
-						<span><a href="">Бренды<br></a></span>
-						<span><a href="">Акции<br></a></span>
-						<span><a href="">Популярное<br></a></span>
+						<span><a href="/top_menu/catalog">Бренды<br></a></span>
+						<span><a href="/">Акции<br></a></span>
+						<span><a href="/">Популярное<br></a></span>
 					</div>
 				</div>
 			</div>
@@ -857,6 +879,9 @@
 	<script src="/public/vendor/jquery/jquery.min.js"></script>
 	<script src="/public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="/public/js/script.js"></script>
+	<link rel="stylesheet" type="text/css" href="/public/vendor/slick-1.8.1/slick/slick.css"/>
+	<link rel="stylesheet" type="text/css" href="/public/vendor/slick-1.8.1/slick/slick-theme.css"/>
+	<script type="text/javascript" src="/public/vendor/slick-1.8.1/slick/slick.min.js"></script>
 	<script src="/public/vendor/jquery.maskedinput.min.js"></script>
 	<!-- fontawesome -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">

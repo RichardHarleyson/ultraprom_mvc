@@ -25,7 +25,7 @@ class Main_Controller extends Controller{
 		$result = $this->model->getProducts();
 		// debug($result);
 		$vars =[
-			'result' => $result,
+			'products' => $result,
 		];
 		$this->view->render('Автономное Отопление Днепр - "Ультрапром"', $vars);
 	}

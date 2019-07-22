@@ -28,6 +28,7 @@ class Admin extends Model{
 			(float)$vars['price'],
 			(int)$vars['currency'],
 			(int)$vars['price_uah'],
+			(int)$vars['onsale'],
 			$vars['description'],
 			(int)$vars['rating'],
 			(int)$vars['category'],
@@ -40,8 +41,8 @@ class Admin extends Model{
 		];
 
 		$result = $this->db->insert_query("INSERT INTO up_product(`title`, `image`, `price`, `currency`, `price_uah`,
-			`description`, `rating`, `category_id`, `manufacturer_id`, `power_id`, `stat_list`, `filter_info`,
-			`available`, `status`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)", $data);
+			`onsale`,`description`, `rating`, `category_id`, `manufacturer_id`, `power_id`, `stat_list`, `filter_info`,
+			`available`, `status`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", $data);
 
 		// $result = $this->db->insert_query("INSERT INTO `up_product`(`title`, `image`, `price`, `currency`,
 		// 	`description`, `rating`, `category_id`, `manufacturer_id`, `power_id`, `stat_list`,
@@ -52,6 +53,22 @@ class Admin extends Model{
 
 	public function get_categoroies(){
 		$result = $this->db->row('SELECT * FROM up_category');
+		return $result;
+	}
+
+	public function get_products(){
+		$result = $this->db->row('SELECT * FROM up_product WHERE status=1');
+		return $result;
+	}
+
+	public function product_update($product){
+		$result = $this->db->insert_query("UPDATE up_product SET title=:title, price=:price, currency=:currency, price_uah=:price_uah, description=:description,
+		onsale=:onsale, available=:available WHERE id=:id", $product);
+		return $result;
+	}
+
+	public function product_del($id){
+		$result = $this->db->insert_query("UPDATE up_product SET status=0, available=0 WHERE id=".$id);
 		return $result;
 	}
 

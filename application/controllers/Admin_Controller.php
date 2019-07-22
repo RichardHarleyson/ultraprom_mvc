@@ -33,8 +33,10 @@ class Admin_Controller extends Controller{
 	public function productsAction(){
 		$this->view->layout = 'admin';
 		$categories = $this->model->get_categoroies();
+		$products = $this->model->get_products();
 		$vars = [
 			'categories' => $categories,
+			'products' => $products,
 		];
 		$this->view->render('Ultraprom - Товары', $vars);
 	}
@@ -55,6 +57,7 @@ class Admin_Controller extends Controller{
 				$target_file = $target_dir . $name . $i . '.' . $extension;
 				$i++;
 			}
+			$target_file = $target_dir . $name . $i . '.' . $extension;
 
 			if (move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file)) {
 				 // echo "Товар ".$vars['title']." успешно загружен";
@@ -66,13 +69,21 @@ class Admin_Controller extends Controller{
 			//Добавляем доп параметры
 			if($vars['photo'] == ''){
 				$vars['status'] = 0;
+			}else{
+				$vars['status'] = 1;
 			}
-			$vars['status'] = 1;
 
 			if($vars['available'] == 'off'){
 				$vars['available'] = 0;
+			}else{
+				$vars['available'] = 1;
 			}
-			$vars['available'] = 1;
+
+			if($vars['onsale'] == 'off'){
+				$vars['onsale'] = 0;
+			}else{
+				$vars['onsale']	= 1;
+			}
 
 			$vars['manufacturer'] = 1;
 
@@ -88,6 +99,7 @@ class Admin_Controller extends Controller{
 			foreach ($filter_info as $key => $value) {
 				$filter_info_str .= $key.':'.ucwords($value).';';
 			};
+			$filter_info_str = trim($filter_info_str, ';');
 			$vars['filter_info'] = $filter_info_str;
 
 			// обновляем цену от валюты
@@ -103,8 +115,44 @@ class Admin_Controller extends Controller{
 
 			$result = $this->model->create_product($vars);
 
-			var_dump($result);
+			// var_dump($result);
+			echo $vars['filter_info'];
 		}
+	}
+
+	public function product_updateAction(){
+		if($_POST['del'] == 'true'){
+			// Удаляем запись
+			$this->model->product_del($_POST['item_id']);
+			return 0;
+		}
+		$product = [
+			'id' => $_POST['item_id'],
+			'title' => $_POST['item_title'],
+			'price' => (int)$_POST['item_price'],
+			'currency' => (int)$_POST['item_currency'],
+			'price_uah' => 0,
+			'description' => $_POST['item_description'],
+			'onsale' => 0,
+			'available' => 0,
+		];
+		if($_POST['item_onsale'] == 'true'){
+			$product['onsale'] = 1;
+		}
+		if($_POST['item_available'] == 'true'){
+			$product['available'] = 1;
+		}
+		//Обновляем цену по валюте
+		$currencies = $this->model->get_currencies();
+		$curr_buy = [];
+		foreach ($currencies as $curr) {
+			$curr_buy[$curr['id']] = $curr;
+		}
+		$product['price_uah'] = $product['price'] * $curr_buy[$_POST['item_currency']]['buy'];
+
+		$result = $this->model->product_update($product);
+
+		var_dump($product);
 	}
 
 	public function currencyAction(){

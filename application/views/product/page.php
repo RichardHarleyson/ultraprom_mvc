@@ -1,3 +1,4 @@
+<div class="PageType_ProductPage" id="PageType"></div>
 <div class="container">
 	<div class='gapper'></div>
 
@@ -27,8 +28,10 @@
 	<div class="product_content">
 		<div class="row">
 			<div class="col-xl-6 col-md-5 col-sm-12" style="padding: 0;">
-				<!-- <img class="img-fluid mx-auto" src="/public/media/uploads/<?php echo $product[0]['image'];?>" style="margin: 5px"> -->
-				<img class="img-fluid" src="https://via.placeholder.com/400" style="margin: 5px">
+				<!-- <img class="img-fluid" src="https://via.placeholder.com/400" style="margin: 5px"> -->
+				<div class="m-auto">
+					<img class="mx-auto d-block" src="/public/media/uploads/<?php echo $product[0]['image'] ?>">
+				</div>
 			</div>
 			<div class="col-xl-4 col-md-6 col-sm-12 align-self-center">
 				<div class="container" style="padding-top: 10px;">
@@ -72,59 +75,91 @@
 
 	<div class="row">
 		<div class="col-xl-6 col-sm-12">
-			<h4 class="text-danger">Характеристики Товара</h4>
+			<h4 class="text-danger">Отзывы о Товаре</h4>
 			<hr>
-			<table class="table table-striped">
-				<tbody>
-					<tr>
-						<td>Высота</td>
-						<td>Otto</td>
-					</tr>
-					<tr>
-						<td>Ширини</td>
-						<td>Thornton</td>
-					</tr>
-					<tr>
-						<td>Высота</td>
-						<td>Otto</td>
-					</tr>
-					<tr>
-						<td>Ширини</td>
-						<td>Thornton</td>
-					</tr>
-					<tr>
-						<td>Высота</td>
-						<td>Otto</td>
-					</tr>
-					<tr>
-						<td>Ширини</td>
-						<td>Thornton</td>
-					</tr>
-					<tr>
-						<td>Высота</td>
-						<td>Otto</td>
-					</tr>
-					<tr>
-						<td>Ширини</td>
-						<td>Thornton</td>
-					</tr>
-				</tbody>
-			</table>
+			<div class="comments my-3">
+				<?php {
+					if(empty($reviews)){
+						echo '<div class="text-center my-3"><h6>Данный товар пока не иммеет отзывов. Вы можете оставить свой отзыв о товаре.</h6></div>';
+					}else{
+						foreach ($reviews as $review) {
+							echo '
+								<div class="">
+									<p class="d-inline mr-3"><span>'.$review['uname'].'</span></p>
+									<p class="d-inline text-warning rating" rating="'.$review['rating'].'"></p>
+									<p>'.$review['comment'].'</p>
+								</div>
+								<hr class="w-50">';
+						}
+					}
+				} ?>
+				<div class="text-center mt-3">
+					<button class="btn btn-primary" data-toggle="collapse" data-target="#reviewformdiv">Оставить отзыв о товаре</button>
+				</div>
+				<div class="my-3 collapse" id="reviewformdiv">
+					<form id="reviewform" data-product_id="<?php echo $product[0]['id'] ?>">
+						<div class="form-group">
+							<label>Имя:</label>
+							<input type="text" class="form-control" name="uname">
+						</div>
+						<div class="form-group">
+							<label>Отзыв:</label>
+							<textarea required rows=2 class="form-control" name="review"></textarea>
+						</div>
+						<div class="my-3 text-center" id="Оценки" onmouseout="Выбрать_звёздочку(-1);" style="font-size: 2rem;"></div>
+						<div class="text-center">
+							<button class="btn btn-success" type="submit">Сохранить отзыв</button>
+						</div>
+						<div class="text-center my-3" id="review_form_status">
+							<!-- <h5>Спасибо за Ваш отзыв!</h5> -->
+						</div>
+					</form>
+				</div>
+			</div>
 		</div>
 		<div class="col-xl-6 col-sm-12">
 			<h4 class="text-primary">Все о Товаре</h4>
 			<hr>
 			<span>
-				Котлы Данко изготавливаются как одноконтурные, так и с функцией водоподогрева. Оснащенные вертикальным или горизонтальным газоходом.
-	Усовершенствованная серия бытовых газовых котлов Данко мощностью от 8 до 24 кВт. Основной сварной трубчатый теплообменник изготавливается из высококачественной стали толщиной 3 мм. Газоходы теплообменника выполнены из большого количества дымогарных труб, в которые вставлены винтовые турбулизаторы. Это обеспечивает максимальный отбор температуры отходящих дымовых газов, быстрый нагрев теплоносителя в теплообменнике и максимальный КПД котла.
-Для комплектации Данко 8 используются: автоматика безопасности и регулирования SIT, а также импортные инжекционные низкофакельные горелки из высококачественной термостойкой нержавеющей стали, которые обеспечивают полное сгорание газа и стойкое пламя даже при падении давления газа до 635 Па.
-<br>
-Преимущества газовых котлов Данко:
-<br>
-энергосберегающие котлы;
-высокая надежность, гарантированная экономичность, эстетичное выполнение, легкое обслуживание.
+				<?php echo $product[0]['description'] ?>
 			</span>
 		</div>
-
+	</div>
+	<div class="my-3">
+		<div class="row">
+			<div class="col-4 text-left mb-4">
+				<h3>Похожие товары</h3>
+			</div>
+			<div class="col-8 text-right mb-4">
+				<a class="btn btn-primary text-white" id="btn_prev"><i class="fa fa-lg fa-chevron-left"></i></a>
+				<a class="btn btn-primary text-white" id="btn_next"><i class="fa fa-lg fa-chevron-right"></i></a>
+			</div>
+		</div>
+		<div class="" id="same_products_carousel">
+			<?php foreach ($same_products as $sproduct): ?>
+				<div class="col col-12 col-xl col-lg-3 col-md-4 col-sm-12 text-center mt-4">
+					<div class="card text-center mx-auto">
+						<?php if($sproduct['onsale'] == 1){echo "<div class='card-badge bg-danger'>АКЦИЯ!</div>";} ?>
+						<a href="/product/<?php echo $sproduct['id']; ?>">
+							<img src="/public/media/uploads/<?php echo $sproduct['image']; ?>" class="img-fluid" alt="Product Thumbnail">
+						</a>
+						<div class="card-body">
+							<div class="card-title align-self-center my-0">
+								<a href="/product/<?php echo $sproduct['id']; ?>" class=""><span class="font-title"><?php echo $sproduct['title']; ?></span></a>
+							</div>
+							<p class="card-text border-top text-warning rating" rating="<?php echo $sproduct['rating']; ?>" style="font-size: 20px;"></p>
+							<div class="row card-buttons">
+								<div class="col col-9">
+									<p class="border rounded price_tablet"><b><?php echo number_format($sproduct['price_uah'], 0, ',', ' '); ?> грн</b></p>
+								</div>
+								<div class="col col-3">
+									<button class="btn btn-danger" type="submit" onclick="add_item(this)" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Добавлено в Корзину" data-id="<?php echo $product['id']; ?>" data-title="<?php echo $product['title']; ?>" data-price="<?php echo $product['price_uah']; ?>"><i  class="fa fa-shopping-cart"></i></button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			<?php endforeach; ?>
+		</div>
 	</div>
 </div>

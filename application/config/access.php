@@ -3,12 +3,15 @@
 		'all' => [
 			// MAIN
 			'index',
+			// PRODUCT
 			'page',
+			'new_review',
 			// CART
 			'main',
 			'add_item',
 			'empty_cart',
 			'delete_item',
+			'cart_order',
 			//CATALOG
 			'catalog_router',
 			'catalog_sort',
@@ -33,6 +36,8 @@
 			'currency',
 			'create_product',
 			'currency_auto_update',
+			'product_update',
+			'product_del',
 		]
 	];
  ?>

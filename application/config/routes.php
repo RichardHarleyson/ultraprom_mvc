@@ -10,6 +10,10 @@ return [
 		'controller' => 'product',
 		'action' => 'page',
 	],
+	'product/new_review' => [
+		'controller' => 'product',
+		'action' => 'new_review',
+	],
 	// CATALOG
 	'catalog' => [
 		'controller' => 'catalog',
@@ -39,6 +43,10 @@ return [
 	'cart/delete_item' => [
 		'controller' => 'cart',
 		'action' => 'delete_item',
+	],
+	'cart/cart_order' => [
+		'controller' => 'cart',
+		'action' => 'cart_order',
 	],
 	// CLIENTS
 	'clients/callback' => [
@@ -107,6 +115,14 @@ return [
 	'admin/currency_auto_update' =>[
 		'controller' => 'admin',
 		'action' => 'currency_auto_update',
+	],
+	'admin/product_update' =>[
+		'controller' => 'admin',
+		'action' => 'product_update',
+	],
+	'admin/product_del' =>[
+		'controller' => 'admin',
+		'action' => 'product_del',
 	],
 
 

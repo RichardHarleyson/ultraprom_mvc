@@ -39,6 +39,42 @@ class Cart_Controller extends Controller{
 		array_splice($_SESSION['cart'], $_POST['index'], 1);
 		echo true;
 	}
+
+	public function cart_orderAction(){
+		// var_dump($_SESSION['cart']);
+		foreach ($_SESSION['cart'] as $key => $value) {
+			$items .= $value['quantity']." <a href='http://ultraprom.new.s8.hhos.ru/product/"
+								.$value['id']."'>"
+								.$value['title'].'</a>, '
+								.$value['price_uah'].' грн, '
+								."<br>";
+		};
+		$to      = 'richard.harleyson@gmail.com';
+		$subject = 'Заказ';
+		$headers = 'From: ultraprom';
+		$headers  = 'MIME-Version: 1.0' . "\r\n";
+		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+		$message = "<html>
+									<head>
+									  <title>Заказ</title>
+									</head>
+									<body>
+										Имя: ".$_POST['uname']."<br>"
+										."Телефон: ".$_POST['uphone']."<br>"
+										."Email: ".$_POST['umail']."<br>"
+										."Город: ".$_POST['ucity']."<br>"
+										."Адрес: ".$_POST['uaddr']."<br>"
+										."Доставка: ".$_POST['uhow']."<br>"
+										."Оплата: ".$_POST['upay']."<br>"
+										."Комментарий: ".$_POST['ucomment']."<br>"
+										."Заказ: <br>"
+										.$items
+										."Итого: ".$_POST['total_price'].' грн'."<br>
+									</body>
+								</html>";
+		mail($to, $subject, $message, $headers);
+		echo true;
+	}
 }
 
 

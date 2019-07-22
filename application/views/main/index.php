@@ -42,44 +42,39 @@
 
 <!-- Популярные товары -->
 <div class="container">
-	<div id="product_carousel_pop" class="carousel slide" data-ride="carousel" data-interval="0">
-
+	<div class="my-3">
 		<div class="row">
 			<div class="col-4 text-left mb-4">
-				<h3>Популярные Товары</h3>
+				<h3>Популярные товары</h3>
 			</div>
 			<div class="col-8 text-right mb-4">
-				<a class="btn btn-primary" href="#product_carousel_pop" title="prev" data-slide="prev"><i class="fa fa-lg fa-chevron-left"></i></a>
-				<a class="btn btn-primary" href="#product_carousel_pop" title="next" data-slide="next"><i class="fa fa-lg fa-chevron-right"></i></a>
+				<a class="btn btn-primary text-white" id="pop_btn_prev"><i class="fa fa-lg fa-chevron-left"></i></a>
+				<a class="btn btn-primary text-white" id="pop_btn_next"><i class="fa fa-lg fa-chevron-right"></i></a>
 			</div>
 		</div>
-
-		<div class="carousel-inner" id="product_carousel" role="listbox">
-			<?php foreach(array_chunk($result, 5, true) as $products): ?>
-				<div class="carousel-item">
-					<div class="row product_lists no-gutters">
-						<?php foreach ($products as $product): ?>
-							<div class="col col-12 col-xl col-lg-3 col-md-4 col-sm-12 text-center">
-								<div class="card text-center mx-auto">
-								<img src="/public/media/uploads/<?php echo $product['image']; ?>" class="img-fluid" alt="Product Thumbnail">
-								<!-- <img src="https://via.placeholder.com/250" class="img-fluid" alt="Product Thumbnail"> -->
-									<div class="card-body">
-										<div class="card-title align-self-center my-0">
-											<a href="/product/<?php echo $product['id']; ?>" class=""><span class="font-title"><?php echo $product['title']; ?></span></a>
-										</div>
-										<p class="card-text border-top text-warning rating" rating="<?php echo $product['rating']; ?>" style="font-size: 20px;"></p>
-										<div class="row card-buttons">
-											<div class="col col-9">
-												<p class="border rounded price_tablet"><b><?php echo number_format($product['price_uah'], 0, ',', ' '); ?> грн</b></p>
-											</div>
-											<div class="col col-3">
-												<button class="btn btn-danger" type="submit" onclick="add_item(this)" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Добавлено в Корзину" data-id="<?php echo $product['id']; ?>" data-title="<?php echo $product['title']; ?>" data-price="<?php echo $product['price_uah']; ?>"><i  class="fa fa-shopping-cart"></i></button>
-											</div>
-										</div>
-									</div>
+		<div class="" id="pop_products_carousel">
+			<?php foreach ($products as $product): ?>
+				<div class="col col-12 col-xl col-lg-3 col-md-4 col-sm-12 text-center mt-4">
+					<div class="card text-center mx-auto">
+						<?php if($product['onsale'] == 1){echo "<div class='card-badge bg-danger'>АКЦИЯ!</div>";} ?>
+						<a href="product/<?php echo $product['id']; ?>">
+							<img src="/public/media/uploads/<?php echo $product['image']; ?>" class="img-fluid" alt="Product Thumbnail">
+						</a>
+					<!-- <img src="https://via.placeholder.com/250" class="img-fluid" alt="Product Thumbnail"> -->
+						<div class="card-body">
+							<div class="card-title align-self-center my-0">
+								<a href="/product/<?php echo $product['id']; ?>" class=""><span class="font-title"><?php echo $product['title']; ?></span></a>
+							</div>
+							<p class="card-text border-top text-warning rating" rating="<?php echo $product['rating']; ?>" style="font-size: 20px;"></p>
+							<div class="row card-buttons">
+								<div class="col col-9">
+									<p class="border rounded price_tablet"><b><?php echo number_format($product['price_uah'], 0, ',', ' '); ?> грн</b></p>
+								</div>
+								<div class="col col-3">
+									<button class="btn btn-danger" type="submit" onclick="add_item(this)" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Добавлено в Корзину" data-id="<?php echo $product['id']; ?>" data-title="<?php echo $product['title']; ?>" data-price="<?php echo $product['price_uah']; ?>"><i  class="fa fa-shopping-cart"></i></button>
 								</div>
 							</div>
-						<?php endforeach; ?>
+						</div>
 					</div>
 				</div>
 			<?php endforeach; ?>
@@ -91,48 +86,44 @@
 
 <!-- Акционные товары -->
 <div class="container">
-	<div id="product_carousel_sale" class="carousel slide" data-ride="carousel" data-interval="0">
-
-	<div class="row">
-		<div class="col-4 text-left mb-4">
-			<h3>Акционные Предложения</h3>
+	<div class="my-3">
+		<div class="row">
+			<div class="col-4 text-left mb-4">
+				<h3>Акционные товары</h3>
+			</div>
+			<div class="col-8 text-right mb-4">
+				<a class="btn btn-primary text-white" id="onsale_btn_prev"><i class="fa fa-lg fa-chevron-left"></i></a>
+				<a class="btn btn-primary text-white" id="onsale_btn_next"><i class="fa fa-lg fa-chevron-right"></i></a>
+			</div>
 		</div>
-		<div class="col-8 text-right mb-4">
-			<a class="btn btn-primary" href="#product_carousel_sale" title="prev" data-slide="prev"><i class="fa fa-lg fa-chevron-left"></i></a>
-			<a class="btn btn-primary" href="#product_carousel_sale" title="next" data-slide="next"><i class="fa fa-lg fa-chevron-right"></i></a>
-		</div>
-	</div>
-
-	<div class="carousel-inner" id="product_carousel" role="listbox">
-		<?php foreach(array_chunk($result, 5, true) as $products): ?>
-			<div class="carousel-item">
-				<div class="row product_lists">
-					<?php foreach ($products as $product): ?>
-						<div class="col col-12 col-xl col-lg-3 col-md-4 col-sm-12 text-center">
-							<div class="card text-center mx-auto">
-								<img src="/public/media/uploads/<?php echo $product['image']; ?>" class="img-fluid" alt="Product Thumbnail">
-								<!-- <img src="https://via.placeholder.com/250" class="img-fluid" alt="Product Thumbnail"> -->
-								<div class="card-body">
-									<div class="card-title align-self-center my-0">
-										<a href="/product/<?php echo $product['id']; ?>" class=""><span class="font-title"><?php echo $product['title']; ?></span></a>
-									</div>									<p class="card-text border-top text-warning rating" rating="<?php echo $product['rating']; ?>" style="font-size: 20px;"></p>
-									<div class="row card-buttons">
-										<div class="col col-9">
-												<p class="border rounded price_tablet"><b><?php echo number_format($product['price_uah'], 0, ',', ' '); ?> грн</b></p>
-										</div>
-										<div class="col col-3">
-											<button class="btn btn-danger" type="submit" onclick="add_item(this)" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Добавлено в Корзину" data-id="<?php echo $product['id']; ?>" data-title="<?php echo $product['title']; ?>" data-price="<?php echo $product['price_uah']; ?>"><i  class="fa fa-shopping-cart"></i></button>
-										</div>
-									</div>
+		<div class="" id="onsale_products_carousel">
+			<?php foreach ($products as $product): ?>
+				<div class="col col-12 col-xl col-lg-3 col-md-4 col-sm-12 text-center mt-4">
+					<div class="card text-center mx-auto">
+					<?php if($product['onsale'] == 1){echo "<div class='card-badge bg-danger'>АКЦИЯ!</div>";} ?>
+						<a href="/product/<?php echo $product['id']; ?>">
+							<img src="/public/media/uploads/<?php echo $product['image']; ?>" class="img-fluid" alt="Product Thumbnail">
+						</a>
+					<!-- <img src="https://via.placeholder.com/250" class="img-fluid" alt="Product Thumbnail"> -->
+						<div class="card-body">
+							<div class="card-title align-self-center my-0">
+								<a href="/product/<?php echo $product['id']; ?>" class=""><span class="font-title"><?php echo $product['title']; ?></span></a>
+							</div>
+							<p class="card-text border-top text-warning rating" rating="<?php echo $product['rating']; ?>" style="font-size: 20px;"></p>
+							<div class="row card-buttons">
+								<div class="col col-9">
+									<p class="border rounded price_tablet"><b><?php echo number_format($product['price_uah'], 0, ',', ' '); ?> грн</b></p>
+								</div>
+								<div class="col col-3">
+									<button class="btn btn-danger" type="submit" onclick="add_item(this)" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Добавлено в Корзину" data-id="<?php echo $product['id']; ?>" data-title="<?php echo $product['title']; ?>" data-price="<?php echo $product['price_uah']; ?>"><i  class="fa fa-shopping-cart"></i></button>
 								</div>
 							</div>
 						</div>
-					<?php endforeach; ?>
+					</div>
 				</div>
-			</div>
-		<?php endforeach; ?>
+			<?php endforeach; ?>
+		</div>
 	</div>
-</div>
 </div>
 
 <hr class="w-50">
