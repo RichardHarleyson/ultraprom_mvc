@@ -73,16 +73,16 @@ class Admin_Controller extends Controller{
 				$vars['status'] = 1;
 			}
 
-			if($vars['available'] == 'off'){
-				$vars['available'] = 0;
-			}else{
+			if($vars['available'] == 'on'){
 				$vars['available'] = 1;
+			}else{
+				$vars['available'] = 0;
 			}
 
-			if($vars['onsale'] == 'off'){
-				$vars['onsale'] = 0;
+			if($vars['onsale'] == 'on'){
+				$vars['onsale'] = 1;
 			}else{
-				$vars['onsale']	= 1;
+				$vars['onsale']	= 0;
 			}
 
 			$vars['manufacturer'] = 1;
@@ -108,7 +108,7 @@ class Admin_Controller extends Controller{
 			foreach ($currencies as $curr) {
 				$curr_buy[$curr['id']] = $curr;
 			}
-			$vars['price_uah'] = $vars['price'] * $curr_buy[$vars['currency']]['buy'];
+			$vars['price_uah'] = $vars['price'] * $curr_buy[$vars['currency']]['sale'];
 			// $vars['price_uah'] = 0;
 			// power_id
 			// stat_list
@@ -148,7 +148,7 @@ class Admin_Controller extends Controller{
 		foreach ($currencies as $curr) {
 			$curr_buy[$curr['id']] = $curr;
 		}
-		$product['price_uah'] = $product['price'] * $curr_buy[$_POST['item_currency']]['buy'];
+		$product['price_uah'] = $product['price'] * $curr_buy[$_POST['item_currency']]['sale'];
 
 		$result = $this->model->product_update($product);
 

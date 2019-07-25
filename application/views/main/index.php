@@ -58,7 +58,7 @@
 					<div class="card text-center mx-auto">
 						<?php if($product['onsale'] == 1){echo "<div class='card-badge bg-danger'>АКЦИЯ!</div>";} ?>
 						<a href="product/<?php echo $product['id']; ?>">
-							<img src="/public/media/uploads/<?php echo $product['image']; ?>" class="img-fluid" alt="Product Thumbnail">
+							<img src="/public/media/uploads/<?php echo $product['image']; ?>" class="mx-auto d-block" alt="Product Thumbnail">
 						</a>
 					<!-- <img src="https://via.placeholder.com/250" class="img-fluid" alt="Product Thumbnail"> -->
 						<div class="card-body">
@@ -102,7 +102,7 @@
 					<div class="card text-center mx-auto">
 					<?php if($product['onsale'] == 1){echo "<div class='card-badge bg-danger'>АКЦИЯ!</div>";} ?>
 						<a href="/product/<?php echo $product['id']; ?>">
-							<img src="/public/media/uploads/<?php echo $product['image']; ?>" class="img-fluid" alt="Product Thumbnail">
+							<img src="/public/media/uploads/<?php echo $product['image']; ?>" class="mx-auto d-block" alt="Product Thumbnail">
 						</a>
 					<!-- <img src="https://via.placeholder.com/250" class="img-fluid" alt="Product Thumbnail"> -->
 						<div class="card-body">

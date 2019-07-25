@@ -4,7 +4,7 @@
 	visibility: hidden;
 }
 
-section {
+/* section {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -17,8 +17,6 @@ section {
 
     background: #1E88E5;
 }
-
-/* LOADER */
 
 span.load {
     display: flex;
@@ -63,7 +61,7 @@ span.load:after { border-width: 8px; }
     0%      { transform: scale(0); }
     50%     { transform: scale(1); }
     100%    { transform: scale(0); }
-}
+} */
 
 body,html {
   height: 100%;
@@ -249,9 +247,9 @@ footer{
 .product_lists{
 	margin: 0;
 }
-.card > img{
-	/* width: 216px;
-	height: 200px; */
+.card > a > img, .card > img{
+	/* width: 216px; */
+	height: 12rem;
 }
 
 /* ------------------------------------------------------------------------ */

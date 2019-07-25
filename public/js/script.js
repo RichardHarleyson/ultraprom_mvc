@@ -461,7 +461,7 @@ function cart_order(){
 		data: data,
 		success(res){
 			$('#cart_order_status').html('Заказ отправлен в обработку');
-			// $('#cart_order_status').html(typeof(res));
+			setTimeout(function(){$('#cart_order').modal('hide');}, 2000);
 		}
 	});
 }

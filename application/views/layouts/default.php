@@ -177,7 +177,7 @@
 														</div>
 														<div class="image mx-auto d-block">
 															<a href="/catalog/nastennue_gaz_kotly">
-																<img class="img-fluid" src="/public/media/img/menu/1.jpg">
+																<img class="img-fluid" src="/public/media/img/menu/1.jpg" data-toggle="tooltip" data-placement="top" title="Настенные Газовые Котлы">
 															</a>
 														</div>
 													</div>
@@ -187,7 +187,7 @@
 														</div>
 														<div class="image mx-auto d-block">
 															<a href="/catalog/napolnue_gaz_kotly">
-																<img class="img-fluid" src="/public/media/img/menu/2.jpg">
+																<img class="img-fluid" src="/public/media/img/menu/2.jpg" data-toggle="tooltip" data-placement="top" title="Напольные Газовые Котлы">
 															</a>
 														</div>
 													</div>
@@ -197,7 +197,7 @@
 														</div>
 														<div class="image mx-auto d-block">
 															<a href="/catalog/cond_gaz_kotly">
-																<img class="img-fluid" src="/public/media/img/menu/3.jpg">
+																<img class="img-fluid" src="/public/media/img/menu/3.jpg" data-toggle="tooltip" data-placement="top" title="Конденсационные Газовые Котлы">
 															</a>
 														</div>
 													</div>
@@ -207,7 +207,7 @@
 														</div>
 														<div class="image mx-auto d-block">
 															<a href="/catalog/electro_kotly">
-																<img class="img-fluid" src="/public/media/img/menu/4.jpg">
+																<img class="img-fluid" src="/public/media/img/menu/4.jpg" data-toggle="tooltip" data-placement="top" title="Электрические Котлы">
 															</a>
 														</div>
 													</div>
@@ -217,7 +217,7 @@
 														</div>
 														<div class="image mx-auto d-block">
 															<a href="/catalog/tverdotop_kotly">
-																<img class="img-fluid" src="/public/media/img/menu/5.jpg">
+																<img class="img-fluid" src="/public/media/img/menu/5.jpg" data-toggle="tooltip" data-placement="top" title="Твердотопливные Котлы">
 															</a>
 														</div>
 													</div>
@@ -227,7 +227,7 @@
 														</div>
 														<div class="image mx-auto d-block">
 															<a href="/catalog/comp_kotly">
-																<img class="img-fluid" src="/public/media/img/menu/6.jpg">
+																<img class="img-fluid" src="/public/media/img/menu/6.jpg" data-toggle="tooltip" data-placement="top" title="Комплектующие для Котлов">
 															</a>
 														</div>
 													</div>
@@ -241,7 +241,7 @@
 														</div>
 														<div class="image mx-auto d-block">
 															<a href="/catalog/stal_rad">
-																<img class="img-fluid" src="/public/media/img/menu/7.jpg">
+																<img class="img-fluid" src="/public/media/img/menu/7.jpg" data-toggle="tooltip" data-placement="top" title="Стальные Радиаторы">
 															</a>
 														</div>
 													</div>
@@ -251,7 +251,7 @@
 														</div>
 														<div class="image mx-auto d-block">
 															<a href="/catalog/alum_rad">
-																<img class="img-fluid" src="/public/media/img/menu/8.jpg">
+																<img class="img-fluid" src="/public/media/img/menu/8.jpg" data-toggle="tooltip" data-placement="top" title="Алюминиевые Радиаторы">
 															</a>
 														</div>
 													</div>
@@ -261,7 +261,7 @@
 														</div>
 														<div class="image mx-auto d-block">
 															<a href="/catalog/bimetal_rad">
-																<img class="img-fluid" src="/public/media/img/menu/9.jpg">
+																<img class="img-fluid" src="/public/media/img/menu/9.jpg" data-toggle="tooltip" data-placement="top" title="Биметаллические Радиаторы">
 															</a>
 														</div>
 													</div>
@@ -271,7 +271,7 @@
 														</div>
 														<div class="image mx-auto d-block">
 															<a href="/catalog/chugun_rad">
-																<img class="img-fluid" src="/public/media/img/menu/10.jpg">
+																<img class="img-fluid" src="/public/media/img/menu/10.jpg" data-toggle="tooltip" data-placement="top" title="Чугунные Радиаторы">
 															</a>
 														</div>
 													</div>
@@ -281,7 +281,7 @@
 														</div>
 														<div class="image mx-auto d-block">
 															<a href="/catalog/electro_rad">
-																<img class="img-fluid" src="/public/media/img/menu/10.5.jpg">
+																<img class="img-fluid" src="/public/media/img/menu/10.5.jpg" data-toggle="tooltip" data-placement="top" title="Электрические Радиаторы">
 															</a>
 														</div>
 													</div>
@@ -291,7 +291,7 @@
 														</div>
 														<div class="image mx-auto d-block">
 															<a href="/catalog/design_rad">
-																<img class="img-fluid" src="/public/media/img/menu/11.jpg">
+																<img class="img-fluid" src="/public/media/img/menu/11.jpg" data-toggle="tooltip" data-placement="top" title="Дизайнерские Радиаторы">
 															</a>
 														</div>
 													</div>
@@ -301,7 +301,7 @@
 														</div>
 														<div class="image mx-auto d-block">
 															<a href="/catalog/comp_rad">
-																<img class="img-fluid" src="/public/media/img/menu/12.jpg">
+																<img class="img-fluid" src="/public/media/img/menu/12.jpg" data-toggle="tooltip" data-placement="top" title="Комплектующие Для Радиаторов">
 															</a>
 														</div>
 													</div>
@@ -315,7 +315,7 @@
 														</div>
 														<div class="image mx-auto d-block">
 															<a href="/catalog/electro_flour">
-																<img class="img-fluid" src="/public/media/img/menu/13.jpg">
+																<img class="img-fluid" src="/public/media/img/menu/13.jpg" data-toggle="tooltip" data-placement="top" title="Электрический Теплый Пол">
 															</a>
 														</div>
 													</div>
@@ -325,7 +325,7 @@
 														</div>
 														<div class="image mx-auto d-block">
 															<a href="/catalog/truby_flour">
-																<img class="img-fluid" src="/public/media/img/menu/14.jpg">
+																<img class="img-fluid" src="/public/media/img/menu/14.jpg" data-toggle="tooltip" data-placement="top" title="Труба Для Теплого Пола">
 															</a>
 														</div>
 													</div>
@@ -335,7 +335,7 @@
 														</div>
 														<div class="image mx-auto d-block">
 															<a href="/catalog/infro_flour">
-																<img class="img-fluid" src="/public/media/img/menu/15.jpg">
+																<img class="img-fluid" src="/public/media/img/menu/15.jpg" data-toggle="tooltip" data-placement="top" title="Инфракрасный Теплый Пол">
 															</a>
 														</div>
 													</div>
@@ -345,7 +345,7 @@
 														</div>
 														<div class="image mx-auto d-block">
 															<a href="/catalog/water_flour">
-																<img class="img-fluid" src="/public/media/img/menu/16.jpg">
+																<img class="img-fluid" src="/public/media/img/menu/16.jpg" data-toggle="tooltip" data-placement="top" title="Водяной Теплый Пол">
 															</a>
 														</div>
 													</div>
@@ -355,7 +355,7 @@
 														</div>
 														<div class="image mx-auto d-block">
 															<a href="/catalog/collect_shkaf">
-																<img class="img-fluid" src="/public/media/img/menu/17.jpg">
+																<img class="img-fluid" src="/public/media/img/menu/17.jpg" data-toggle="tooltip" data-placement="top" title="Коллекторные Шкафы">
 															</a>
 														</div>
 													</div>
@@ -385,7 +385,7 @@
 														</div>
 														<div class="image mx-auto d-block">
 															<a href="/catalog/ppr_pipes">
-																<img class="img-fluid" src="/public/media/img/menu/18.jpg">
+																<img class="img-fluid" src="/public/media/img/menu/18.jpg" data-toggle="tooltip" data-placement="top" title="ППР Трубы и Фитинги">
 															</a>
 														</div>
 													</div>
@@ -395,7 +395,7 @@
 														</div>
 														<div class="image mx-auto d-block">
 															<a href="/catalog/obj_fittings">
-																<img class="img-fluid" src="/public/media/img/menu/19.jpg">
+																<img class="img-fluid" src="/public/media/img/menu/19.jpg" data-toggle="tooltip" data-placement="top" title="Обжимные Фитинги">
 															</a>
 														</div>
 													</div>
@@ -405,7 +405,7 @@
 														</div>
 														<div class="image mx-auto d-block">
 															<a href="/catalog/pipes_isol">
-																<img class="img-fluid" src="/public/media/img/menu/20.jpg">
+																<img class="img-fluid" src="/public/media/img/menu/20.jpg" data-toggle="tooltip" data-placement="top" title="Изоляция для Труб">
 															</a>
 														</div>
 													</div>
@@ -415,7 +415,7 @@
 														</div>
 														<div class="image mx-auto d-block">
 															<a href="/catalog/metal_pipes">
-																<img class="img-fluid" src="/public/media/img/menu/21.jpg">
+																<img class="img-fluid" src="/public/media/img/menu/21.jpg" data-toggle="tooltip" data-placement="top" title="Металопластиковые Трубы">
 															</a>
 														</div>
 													</div>
@@ -429,7 +429,7 @@
 														</div>
 														<div class="image mx-auto d-block">
 															<a href="/catalog/instock">
-																<img class="img-fluid" src="/public/media/img/menu/22.jpg">
+																<img class="img-fluid" src="/public/media/img/menu/22.jpg" data-toggle="tooltip" data-placement="top" title="Внутрення Канализация">
 															</a>
 														</div>
 													</div>
@@ -439,7 +439,7 @@
 														</div>
 														<div class="image mx-auto d-block">
 															<a href="/catalog/outstock">
-																<img class="img-fluid" src="/public/media/img/menu/23.jpg">
+																<img class="img-fluid" src="/public/media/img/menu/23.jpg" data-toggle="tooltip" data-placement="top" title="Наружная Канализация">
 															</a>
 														</div>
 													</div>
@@ -449,7 +449,7 @@
 														</div>
 														<div class="image mx-auto d-block">
 															<a href="/catalog/quitstock">
-																<img class="img-fluid" src="/public/media/img/menu/24.jpg">
+																<img class="img-fluid" src="/public/media/img/menu/24.jpg" data-toggle="tooltip" data-placement="top" title="Бесшумная Канализация">
 															</a>
 														</div>
 													</div>
@@ -478,7 +478,7 @@
 														</div>
 														<div class="image mx-auto d-block">
 															<a href="/catalog/wall_cond">
-																<img class="img-fluid" src="/public/media/img/menu/25.jpg">
+																<img class="img-fluid" src="/public/media/img/menu/25.jpg" data-toggle="tooltip" data-placement="top" title="Кандиционеры Настенного Типа">
 															</a>
 														</div>
 													</div>
@@ -488,7 +488,7 @@
 														</div>
 														<div class="image mx-auto d-block">
 															<a href="/catalog/mobile_cond">
-																<img class="img-fluid" src="/public/media/img/menu/26.jpg">
+																<img class="img-fluid" src="/public/media/img/menu/26.jpg" data-toggle="tooltip" data-placement="top" title="Мобильные Кондиционеры">
 															</a>
 														</div>
 													</div>
@@ -520,7 +520,7 @@
 														</div>
 														<div class="image mx-auto d-block">
 															<a href="/catalog/circ_pump">
-																<img class="img-fluid" src="/public/media/img/menu/27.jpg">
+																<img class="img-fluid" src="/public/media/img/menu/27.jpg" data-toggle="tooltip" data-placement="top" title="Циркулярные Насосы">
 															</a>
 														</div>
 													</div>
@@ -549,7 +549,7 @@
 														</div>
 														<div class="image mx-auto d-block">
 															<a href="/catalog/electro_boiler">
-																<img class="img-fluid" src="/public/media/img/menu/28.jpg">
+																<img class="img-fluid" src="/public/media/img/menu/28.jpg" data-toggle="tooltip" data-placement="top" title="Бойлеры Электрические">
 															</a>
 														</div>
 													</div>
@@ -559,7 +559,7 @@
 														</div>
 														<div class="image mx-auto d-block">
 															<a href="/catalog/waterheater">
-																<img class="img-fluid" src="/public/media/img/menu/29.jpg">
+																<img class="img-fluid" src="/public/media/img/menu/29.jpg" data-toggle="tooltip" data-placement="top" title="Проточные Электрические Водонагреватели">
 															</a>
 														</div>
 													</div>
@@ -573,7 +573,7 @@
 														</div>
 														<div class="image mx-auto d-block">
 															<a href="/catalog/gaz_kolonky">
-																<img class="img-fluid" src="/public/media/img/menu/30.jpg">
+																<img class="img-fluid" src="/public/media/img/menu/30.jpg" data-toggle="tooltip" data-placement="top" title="Газовые Колонки">
 															</a>
 														</div>
 													</div>

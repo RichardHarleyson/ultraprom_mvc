@@ -51,7 +51,7 @@ class Cart_Controller extends Controller{
 		};
 		$to      = 'richard.harleyson@gmail.com';
 		$subject = 'Заказ';
-		$headers = 'From: ultraprom';
+		$headers .= "From: ultraprom <ultraprom@ultraprom.com>\r\n"; //Наименование и почта отправителя
 		$headers  = 'MIME-Version: 1.0' . "\r\n";
 		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 		$message = "<html>

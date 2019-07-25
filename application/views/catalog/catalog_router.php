@@ -85,10 +85,10 @@
 					<?php foreach ($products as $product): ?>
 						<div class="col col-12 col-xl col-lg col-md col-sm-12 text-center product_item" data-product_price="<?php echo $product['price_uah']; ?>" <?php $filter_info = explode(';', $product['filter_info']); foreach ($filter_info as $item){ $attr = explode(':', $item); echo "data-".$attr[0]."=".$attr[1]." ";}?>>
 							<div class="card text-center mx-auto">
-								<div class="">
 									<?php if($product['onsale'] == 1){echo "<div class='card-badge bg-danger'>АКЦИЯ!</div>";} ?>
-									<img src="/public/media/uploads/<?php echo $product['image']; ?>" class="img-fluid" alt="Product Thumbnail">
-								</div>
+									<a href="/product/<?php echo $product['id']; ?>">
+										<img src="/public/media/uploads/<?php echo $product['image'];?>" class="mx-auto d-block" alt="Product Thumbnail"  data-toggle="tooltip" data-placement="top" title="<?php echo $product['title'] ?>">
+									</a>
 							<!-- <img src="https://via.placeholder.com/250" class="img-fluid" alt="Product Thumbnail"> -->
 								<div class="card-body">
 									<div class="card-title align-self-center my-0">
@@ -97,7 +97,7 @@
 									<p class="card-text border-top text-warning rating" rating="<?php echo $product['rating']; ?>" style="font-size: 20px;"></p>
 									<div class="row card-buttons">
 										<div class="col col-9">
-											<p class="border rounded price_tablet"><b><?php echo $product['price_uah']; ?> грн</b></p>
+											<p class="border rounded price_tablet"><b><?php echo number_format($product['price_uah'], 0, ',', ' '); ?> грн</b></p>
 										</div>
 										<div class="col col-3">
 											<button class="btn btn-danger" type="submit" onclick="add_item(this)" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Добавлено в Корзину" data-id="<?php echo $product['id']; ?>" data-title="<?php echo $product['title']; ?>" data-price="<?php echo $product['price']; ?>"><i  class="fa fa-shopping-cart"></i></button>

@@ -2,6 +2,16 @@
 <div class="container">
 	<div class='gapper'></div>
 
+	<nav aria-label="breadcrumb">
+	  <ol class="breadcrumb bg-white">
+	    <li class="breadcrumb-item"><a href="#">Главная</a></li>
+	    <li class="breadcrumb-item"><a href="#">Отопительная Техника</a></li>
+	    <li class="breadcrumb-item"><a href="#">Котлы Отопления</a></li>
+	    <li class="breadcrumb-item"><a href="#">Настенные Газовые Котлы</a></li>
+	    <li class="breadcrumb-item active" aria-current="page"><?php echo $product[0]['title'] ?></li>
+	  </ol>
+	</nav>
+
 	<div class="container">
 		<h4><?php echo $product[0]['title']; ?></h4>
 	</div>
@@ -141,7 +151,7 @@
 					<div class="card text-center mx-auto">
 						<?php if($sproduct['onsale'] == 1){echo "<div class='card-badge bg-danger'>АКЦИЯ!</div>";} ?>
 						<a href="/product/<?php echo $sproduct['id']; ?>">
-							<img src="/public/media/uploads/<?php echo $sproduct['image']; ?>" class="img-fluid" alt="Product Thumbnail">
+							<img src="/public/media/uploads/<?php echo $sproduct['image']; ?>" class="mx-auto d-block" alt="Product Thumbnail">
 						</a>
 						<div class="card-body">
 							<div class="card-title align-self-center my-0">
