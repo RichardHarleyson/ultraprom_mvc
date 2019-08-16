@@ -8,24 +8,11 @@ use application\lib\Db;
 class Main_Controller extends Controller{
 
 	public function indexAction(){
-		// $vars = [
-			// 'name' => 'Vasya',
-			// 'age' => '88',
-			// 'array' => [1, 2, 3],
-		// ];
-
-		// $form = 2;
-		// $params = [
-		// 	'id' => 2,
-		// ];
-		// $db = new Db;
-		// $data = $db->column('SELECT name FROM users WHERE id=:id', $params);
-		// debug($data);
-
-		$result = $this->model->getProducts();
-		// debug($result);
+		$products = $this->model->getProducts();
+		$products_onsale = $this->model->getProducts_onsale();
 		$vars =[
-			'products' => $result,
+			'products' => $products,
+			'onsale' => $products_onsale,
 		];
 		$this->view->render('Автономное Отопление Днепр - "Ультрапром"', $vars);
 	}

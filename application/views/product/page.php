@@ -4,10 +4,10 @@
 
 	<nav aria-label="breadcrumb">
 	  <ol class="breadcrumb bg-white">
-	    <li class="breadcrumb-item"><a href="#">Главная</a></li>
-	    <li class="breadcrumb-item"><a href="#">Отопительная Техника</a></li>
-	    <li class="breadcrumb-item"><a href="#">Котлы Отопления</a></li>
-	    <li class="breadcrumb-item"><a href="#">Настенные Газовые Котлы</a></li>
+	    <li class="breadcrumb-item"><a href="/">Главная</a></li>
+	    <!-- <li class="breadcrumb-item"><a href="#">Отопительная Техника</a></li> -->
+	    <li class="breadcrumb-item"><a href="/gcatalog/<?=$category_ename[0]['eng_name']; ?>"><?=$category_ename[0]['c_name']; ?></a></li>
+	    <li class="breadcrumb-item"><a href="/catalog/<?=$lcategory_ename[0]['eng_name']; ?>"><?=$lcategory_ename[0]['lc_name']; ?></a></li>
 	    <li class="breadcrumb-item active" aria-current="page"><?php echo $product[0]['title'] ?></li>
 	  </ol>
 	</nav>
@@ -17,30 +17,22 @@
 	</div>
 	<hr>
 
-	<!-- <div class="gapper"></div> -->
-
-	<div class="container" hidden>
-		<ul class="nav nav-tabs">
-		  <li class="nav-item">
-		    <a class="nav-link active">Все о Товаре</a>
-		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link">Характеристики товара</a>
-		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link">Отзывы</a>
-		  </li>
-		</ul>
+	<div aria-hidden="true" class="modal fade" id="modalIMG" role="dialog" tabindex="-1">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div id="imgmodal_inside" class="modal-body mb-0 p-0">
+					<img src="/public/media/uploads/<?php echo $product[0]['image'] ?>" alt="" style="width:100%">
+				</div>
+			</div>
+		</div>
 	</div>
-
-	<!-- <div class="gapper"></div> -->
 
 	<div class="product_content">
 		<div class="row">
-			<div class="col-xl-6 col-md-5 col-sm-12" style="padding: 0;">
+			<div class="col-xl-4 col-md-5 col-sm-12" style="padding: 0;">
 				<!-- <img class="img-fluid" src="https://via.placeholder.com/400" style="margin: 5px"> -->
-				<div class="m-auto">
-					<img class="mx-auto d-block" src="/public/media/uploads/<?php echo $product[0]['image'] ?>">
+				<div class="m-auto text-center" data-toggle="tooltip" data-placement="top" title="<?=$product[0]['title']; ?>">
+					<img class="product_page_img" src="/public/media/uploads/<?php echo $product[0]['image'] ?>"data-target="#modalIMG" data-toggle="modal">
 				</div>
 			</div>
 			<div class="col-xl-4 col-md-6 col-sm-12 align-self-center">
@@ -76,6 +68,26 @@
 					</form>
 				</div>
 			</div>
+			<div class="col-xl-4 col-lg-4 align-self-center">
+				<div class="d-none d-lg-block">
+					<h5 class="text-primary">Доставка</h5>
+					<p class="pl-3">
+						<i class="text-primary fas fa-dolly fa-2x"></i>
+						по Украине: по тарифам "Выбранного перевозчика"<br>
+						по г.Днепр: самовывоз со склада, доставка по адресу(по договоренности).
+					</p>
+					<h5 class="text-primary">Оплата</h5>
+					<p class="pl-3">
+						<i class="text-primary far fa-credit-card fa-2x"></i>
+						Наличными, Приват 24, Monobank, Альфа-Банк, Visa/MasterCard.
+					</p>
+					<h5 class="text-primary">Гарантия</h5>
+					<p class="pl-3">
+						<i class="text-primary far fa-file-alt fa-2x"></i>
+						Официальная от производителя.
+					</p>
+				</div>
+			</div>
 			<!-- <div class="col-xl-3 col-md- col-sm-12">Side bar</div> -->
 		</div>
 		<hr>
@@ -83,64 +95,105 @@
 
 	<!-- <div class="gapper"></div> -->
 
-	<div class="row">
-		<div class="col-xl-6 col-sm-12">
-			<h4 class="text-danger">Отзывы о Товаре</h4>
-			<hr>
-			<div class="comments my-3">
-				<?php {
-					if(empty($reviews)){
-						echo '<div class="text-center my-3"><h6>Данный товар пока не иммеет отзывов. Вы можете оставить свой отзыв о товаре.</h6></div>';
-					}else{
-						foreach ($reviews as $review) {
-							echo '
-								<div class="">
-									<p class="d-inline mr-3"><span>'.$review['uname'].'</span></p>
-									<p class="d-inline text-warning rating" rating="'.$review['rating'].'"></p>
-									<p>'.$review['comment'].'</p>
-								</div>
-								<hr class="w-50">';
-						}
-					}
-				} ?>
-				<div class="text-center mt-3">
-					<button class="btn btn-primary" data-toggle="collapse" data-target="#reviewformdiv">Оставить отзыв о товаре</button>
+	<ul class="nav nav-tabs" role="tablist">
+	  <li class="nav-item">
+	    <a class="nav-link active px-2" data-toggle="pill" href="#info_section" role="tab" aria-controls="info_section" aria-selected="true">Описание</a>
+	  </li>
+	  <li class="nav-item">
+	    <a class="nav-link px-2" data-toggle="pill" href="#param_section" role="tab" aria-controls="param_section" aria-selected="false">Характеристики</a>
+	  </li>
+	  <li class="nav-item">
+	    <a class="nav-link px-2" data-toggle="pill" href="#comment_section" role="tab" aria-controls="comment_section" aria-selected="false">Отзывы</a>
+	  </li>
+	</ul>
+	<div class="tab-content border border-top-0 px-4 py-3" id="pills-tabContent">
+	  <div class="tab-pane fade show active" id="info_section" role="tabpanel" aria-labelledby="pills-home-tab">
+			<div class="tab_height">
+					<h5 class="text-primary">Описание <?php echo $product[0]['title'] ?></h5>
+					<hr class="w-50">
+					<div class="text-justify">
+						<span>
+							<?php echo $product[0]['description'] ?>
+						</span>
+					</div>
 				</div>
-				<div class="my-3 collapse" id="reviewformdiv">
-					<form id="reviewform" data-product_id="<?php echo $product[0]['id'] ?>">
-						<div class="form-group">
-							<label>Имя:</label>
-							<input type="text" class="form-control" name="uname">
-						</div>
-						<div class="form-group">
-							<label>Отзыв:</label>
-							<textarea required rows=2 class="form-control" name="review"></textarea>
-						</div>
-						<div class="my-3 text-center" id="Оценки" onmouseout="Выбрать_звёздочку(-1);" style="font-size: 2rem;"></div>
-						<div class="text-center">
-							<button class="btn btn-success" type="submit">Сохранить отзыв</button>
-						</div>
-						<div class="text-center my-3" id="review_form_status">
-							<!-- <h5>Спасибо за Ваш отзыв!</h5> -->
-						</div>
-					</form>
+		</div>
+	  <div class="tab-pane fade" id="param_section" role="tabpanel" aria-labelledby="pills-profile-tab">
+			<div class="tab_height">
+				<h5 class="text-primary">Характеристики <?php echo $product[0]['title']?></h5>
+				<div class="">
+					<table class="table">
+					  <tbody>
+							<?php $stat_list = explode(';', $product[0]['stat_list']);
+								foreach ($stat_list as $item){
+									$stat = explode(':', $item);
+									echo
+									'<tr>
+										<td>'.$stat[0].'</td>
+										<td>'.$stat[1].'</td>
+									</tr>';
+								}
+							?>
+					  </tbody>
+					</table>
 				</div>
 			</div>
 		</div>
-		<div class="col-xl-6 col-sm-12">
-			<h4 class="text-primary">Все о Товаре</h4>
-			<hr>
-			<span>
-				<?php echo $product[0]['description'] ?>
-			</span>
+
+		<div class="tab-pane fade" id="comment_section" role="tabpanel" aria-labelledby="pills-profile-tab">
+			<div class="tab_height">
+				<h5 class="text-primary">Отзывы о <?php echo $product[0]['title'] ?></h5>
+				<hr class="w-50">
+				<div class="comments">
+					<?php {
+						if(empty($reviews)){
+							echo '<div class="text-center my-3"><h6>Данный товар пока не иммеет отзывов. Вы можете оставить свой отзыв о товаре.</h6></div>';
+						}else{
+							foreach ($reviews as $review) {
+								echo '
+									<div class="">
+										<p class="d-inline mr-3"><span>'.$review['uname'].'</span></p>
+										<p class="d-inline text-warning rating" rating="'.$review['rating'].'"></p>
+										<p>'.$review['comment'].'</p>
+									</div>
+									<hr class="w-50">';
+							}
+						}
+					} ?>
+					<div class="text-center mt-3">
+						<button class="btn btn-primary" data-toggle="collapse" data-target="#reviewformdiv">Оставить отзыв о товаре</button>
+					</div>
+					<div class="my-3 collapse" id="reviewformdiv">
+						<form id="reviewform" data-product_id="<?php echo $product[0]['id'] ?>">
+							<div class="form-group">
+								<label>Имя:</label>
+								<input type="text" class="form-control" name="uname">
+							</div>
+							<div class="form-group">
+								<label>Отзыв:</label>
+								<textarea required rows=2 class="form-control" name="review"></textarea>
+							</div>
+							<div class="my-3 text-center" id="Оценки" onmouseout="Выбрать_звёздочку(-1);" style="font-size: 2rem;"></div>
+							<div class="text-center">
+								<button class="btn btn-success" type="submit">Сохранить отзыв</button>
+							</div>
+							<div class="text-center my-3" id="review_form_status">
+								<!-- <h5>Спасибо за Ваш отзыв!</h5> -->
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
 		</div>
-	</div>
-	<div class="my-3">
+
+	<hr class="w-50">
+
+	<div class="my-4">
 		<div class="row">
-			<div class="col-4 text-left mb-4">
+			<div class="col-7 text-left mb-4">
 				<h3>Похожие товары</h3>
 			</div>
-			<div class="col-8 text-right mb-4">
+			<div class="col-5 text-right mb-4">
 				<a class="btn btn-primary text-white" id="btn_prev"><i class="fa fa-lg fa-chevron-left"></i></a>
 				<a class="btn btn-primary text-white" id="btn_next"><i class="fa fa-lg fa-chevron-right"></i></a>
 			</div>
@@ -150,12 +203,12 @@
 				<div class="col col-12 col-xl col-lg-3 col-md-4 col-sm-12 text-center mt-4">
 					<div class="card text-center mx-auto">
 						<?php if($sproduct['onsale'] == 1){echo "<div class='card-badge bg-danger'>АКЦИЯ!</div>";} ?>
-						<a href="/product/<?php echo $sproduct['id']; ?>">
+						<a href="/product/<?php echo $sproduct['eng_name']; ?>">
 							<img src="/public/media/uploads/<?php echo $sproduct['image']; ?>" class="mx-auto d-block" alt="Product Thumbnail">
 						</a>
 						<div class="card-body">
 							<div class="card-title align-self-center my-0">
-								<a href="/product/<?php echo $sproduct['id']; ?>" class=""><span class="font-title"><?php echo $sproduct['title']; ?></span></a>
+								<a href="/product/<?php echo $sproduct['eng_name']; ?>" class=""><span class="font-title"><?php echo $sproduct['title']; ?></span></a>
 							</div>
 							<p class="card-text border-top text-warning rating" rating="<?php echo $sproduct['rating']; ?>" style="font-size: 20px;"></p>
 							<div class="row card-buttons">

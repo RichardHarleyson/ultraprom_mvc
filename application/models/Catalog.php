@@ -10,7 +10,13 @@ class Catalog extends Model{
 		return $result;
 	}
 
+	public function getCategory(){
+		$result = $this->db->row('SELECT * FROM up_lower_category');
+		return $result;
+	}
+
 	public function getProducts_sorted($category, $type){
+		// $category_id = $this->db->row('SELECT * from up_category WHERE eng_name='.$category);
 		$query_data = ['category_id' => $category];
 		if($type == 'sale'){
 			$result = $this->db->row('SELECT * FROM up_product WHERE category_id=:category_id  AND available=1 ORDER BY onsale=1 DESC', $query_data);
@@ -29,7 +35,17 @@ class Catalog extends Model{
 		}else{
 			$result = $this->getProducts($category);
 		}
+		return $result;
+	}
 
+	public function getCategories($category){
+		$vars = ['eng_name' => $category];
+		$category = $this->db->row('SELECT * FROM up_category WHERE eng_name=:eng_name', $vars);
+		return $category;
+	}
+
+	public function getLcategory($category){
+		$result = $this->db->row('SELECT * FROM up_lower_category WHERE c_id='.$category[0]['id']);
 		return $result;
 	}
 }

@@ -3,6 +3,7 @@
 namespace application\controllers;
 
 use application\core\Controller;
+use application\lib\Db;
 
 class Top_menu_Controller extends Controller{
 
@@ -23,7 +24,11 @@ class Top_menu_Controller extends Controller{
 	}
 
 	public function catalogAction(){
-		$this->view->render('Ultraprom - Каталог');
+		$brands = $this->model->getBrands();
+		$vars =[
+			'brands' => $brands,
+		];
+		$this->view->render('Ultraprom - Каталог', $vars);
 	}
 
 	public function contactsAction(){

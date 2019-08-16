@@ -5,8 +5,12 @@ return [
 		'controller' => 'main',
 		'action' => 'index',
 	],
+	'/' => [
+		'controller' => 'main',
+		'action' => 'index',
+	],
 	// PRODUCT
-	'product/{id:\d+}' => [
+	'product/{id:\w+}' => [
 		'controller' => 'product',
 		'action' => 'page',
 	],
@@ -18,6 +22,10 @@ return [
 	'catalog' => [
 		'controller' => 'catalog',
 		'action' => 'main',
+	],
+	'gcatalog/{category:\w+}' => [
+		'controller' => 'catalog',
+		'action' => 'gcatalog',
 	],
 	'catalog/{product:\w+}' => [
 		'controller' => 'catalog',
@@ -123,6 +131,22 @@ return [
 	'admin/product_del' =>[
 		'controller' => 'admin',
 		'action' => 'product_del',
+	],
+	'admin/add_category' =>[
+		'controller' => 'admin',
+		'action' => 'add_category',
+	],
+	'admin/add_lower_category' =>[
+		'controller' => 'admin',
+		'action' => 'add_lower_category',
+	],
+	'admin/add_manufacturer' =>[
+		'controller' => 'admin',
+		'action' => 'add_manufacturer',
+	],
+	'admin/del_manufacturer' =>[
+		'controller' => 'admin',
+		'action' => 'del_manufacturer',
 	],
 
 

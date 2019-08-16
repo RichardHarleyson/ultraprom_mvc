@@ -15,6 +15,7 @@
 			//CATALOG
 			'catalog_router',
 			'catalog_sort',
+			'gcatalog',
 			//CLIENTS
 			'callback',
 			//TOP MENU
@@ -38,6 +39,10 @@
 			'currency_auto_update',
 			'product_update',
 			'product_del',
+			'add_category',
+			'add_lower_category',
+			'add_manufacturer',
+			'del_manufacturer',
 		]
 	];
  ?>

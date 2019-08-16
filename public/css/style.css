@@ -68,7 +68,8 @@ body,html {
 }
 
 .gapper{
-	height: 30px;
+	/* height: 30px; */
+	height: 1.5rem;
 }
 
 .card>.img-fluid{
@@ -281,14 +282,10 @@ footer{
 	transform: translateX(-100%) !important;
 }
 
-@media screen and (max-width: 1024px) {
-	#main_menu > nav > li:nth-child(6) > div{
-		transform: translateX(-40%) !important;
-		margin-top: 50px;
-	}
-	.dropdown div.dropdown-menu {
-	    margin-top: 100px;
-	}
+
+.product_page_img{
+	max-height: 500px;
+	max-width: 400px;
 }
 
 
@@ -391,5 +388,42 @@ ul{
 }
 
 
+/* ADMIN */
+.panel_select{
+	width: 200px !important;
+}
 
 /* ========================================================== */
+/* Медиа Запросы */
+
+@media (min-width: 300px) {
+	.product_page_img{
+		max-height: 300px;
+		max-width: 250px;
+	}
+}
+
+@media (min-width: 768px) {
+	.tab_height{
+		min-height: 250px;
+	}
+
+	.product_page_img{
+		max-height: 350px;
+		max-width: 300px;
+	}
+}
+
+@media screen and (max-width: 1024px) {
+	#main_menu > nav > li:nth-child(6) > div{
+		transform: translateX(-40%) !important;
+		margin-top: 50px;
+	}
+	.dropdown div.dropdown-menu {
+	    margin-top: 100px;
+	}
+	.product_page_img{
+		max-height: 400px;
+		max-width: 360px;
+	}
+}

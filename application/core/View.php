@@ -1,12 +1,13 @@
 <?php
-
 namespace application\core;
 
-class View
-{
+use application\models\Menu;
+
+class View{
 	public $path;
 	public $route;
 	public $layout = 'default';
+	public $new_db;
 
 	public function __construct($route){
 		$this->route = $route;
@@ -14,6 +15,24 @@ class View
 	}
 
 	public function render($title, $vars = []){
+		// собираем меню
+		$this->new_db = new Menu();
+		$menu = array();
+		$menu_category_counter = 11;
+		$menu_lcategory_counter = 11;
+		$global_category = $this->new_db->row('SELECT * FROM newworld_ultp.up_global_category ORDER BY id ASC');
+		foreach ($global_category as $global) {
+			$category = array();
+			$cr = $this->new_db->row('SELECT *  FROM newworld_ultp.up_category WHERE gc_id='.$global['id'].' ORDER BY id ASC');
+			foreach ($cr as $item) {
+				$lcr = $this->new_db->row('SELECT * FROM newworld_ultp.up_lower_category WHERE c_id='.$item['id'].' ORDER BY id ASC');
+				$item['info'] = $lcr;
+				array_push($category, $item);
+			}
+			$global['info'] = $category;
+			array_push($menu, $global);
+		}
+		// debug($menu);
 		$path = 'application/views/'.$this->path.'.php';
 		// debug($path);
 		extract($vars);

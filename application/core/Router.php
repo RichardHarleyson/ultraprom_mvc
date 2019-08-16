@@ -32,6 +32,7 @@ class Router {
                 return true;
             }
         }
+        debug($url);
         return false;
     }
     public function run(){
@@ -46,14 +47,17 @@ class Router {
                     $controller->$action();
                 } else {
 										echo 'No Method<br>';
+                    debug($path);
                     View::errorCode(404);
                 }
             } else {
 								echo 'No Class<br>';
+                debug($path);
                 View::errorCode(404);
             }
         } else {
 						echo 'No Controller<br>';
+            // debug($path);
             View::errorCode(404);
         }
     }

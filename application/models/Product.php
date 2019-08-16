@@ -7,9 +7,9 @@ class Product extends Model{
 
 	public function getProduct($id){
 		$params = [
-			'id' => $id,
+			'eng_name' => $id,
 		];
-		$result = $this->db->row('SELECT * FROM up_product WHERE id=:id', $params);
+		$result = $this->db->row('SELECT * FROM up_product WHERE eng_name=:eng_name', $params);
 		return $result;
 	}
 
@@ -18,8 +18,18 @@ class Product extends Model{
 		return $result;
 	}
 
+	public function lcategory_ename($id){
+		$result = $this->db->row('SELECT * FROM up_lower_category WHERE id='.$id);
+		return $result;
+	}
+
+	public function category_ename($id){
+		$result = $this->db->row('SELECT * FROM up_category WHERE id='.$id);
+		return $result;
+	}
+
 	public function get_reviews($id){
-		$result = $this->db->row('SELECT * FROM up_comments WHERE product_id='.$id);
+		$result = $this->db->row('SELECT * FROM up_comments WHERE id='.$id);
 		return $result;
 	}
 

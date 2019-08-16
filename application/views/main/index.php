@@ -44,10 +44,10 @@
 <div class="container">
 	<div class="my-3">
 		<div class="row">
-			<div class="col-4 text-left mb-4">
+			<div class="col-8 text-left mb-4">
 				<h3>Популярные товары</h3>
 			</div>
-			<div class="col-8 text-right mb-4">
+			<div class="col-4 text-right mb-4">
 				<a class="btn btn-primary text-white" id="pop_btn_prev"><i class="fa fa-lg fa-chevron-left"></i></a>
 				<a class="btn btn-primary text-white" id="pop_btn_next"><i class="fa fa-lg fa-chevron-right"></i></a>
 			</div>
@@ -57,13 +57,13 @@
 				<div class="col col-12 col-xl col-lg-3 col-md-4 col-sm-12 text-center mt-4">
 					<div class="card text-center mx-auto">
 						<?php if($product['onsale'] == 1){echo "<div class='card-badge bg-danger'>АКЦИЯ!</div>";} ?>
-						<a href="product/<?php echo $product['id']; ?>">
+						<a href="product/<?php echo $product['eng_name']; ?>">
 							<img src="/public/media/uploads/<?php echo $product['image']; ?>" class="mx-auto d-block" alt="Product Thumbnail">
 						</a>
 					<!-- <img src="https://via.placeholder.com/250" class="img-fluid" alt="Product Thumbnail"> -->
 						<div class="card-body">
-							<div class="card-title align-self-center my-0">
-								<a href="/product/<?php echo $product['id']; ?>" class=""><span class="font-title"><?php echo $product['title']; ?></span></a>
+							<div class="card-title align-self-center my-0" data-toggle="tooltip" data-placement="top" title="<?=$product[0]['title'] ?>">
+								<a href="/product/<?php echo $product['eng_name']; ?>" class=""><span class="font-title"><?php echo $product['title']; ?></span></a>
 							</div>
 							<p class="card-text border-top text-warning rating" rating="<?php echo $product['rating']; ?>" style="font-size: 20px;"></p>
 							<div class="row card-buttons">
@@ -88,26 +88,26 @@
 <div class="container">
 	<div class="my-3">
 		<div class="row">
-			<div class="col-4 text-left mb-4">
+			<div class="col-8 text-left mb-4">
 				<h3>Акционные товары</h3>
 			</div>
-			<div class="col-8 text-right mb-4">
+			<div class="col-4 text-right mb-4">
 				<a class="btn btn-primary text-white" id="onsale_btn_prev"><i class="fa fa-lg fa-chevron-left"></i></a>
 				<a class="btn btn-primary text-white" id="onsale_btn_next"><i class="fa fa-lg fa-chevron-right"></i></a>
 			</div>
 		</div>
 		<div class="" id="onsale_products_carousel">
-			<?php foreach ($products as $product): ?>
+			<?php foreach ($onsale as $product): ?>
 				<div class="col col-12 col-xl col-lg-3 col-md-4 col-sm-12 text-center mt-4">
 					<div class="card text-center mx-auto">
 					<?php if($product['onsale'] == 1){echo "<div class='card-badge bg-danger'>АКЦИЯ!</div>";} ?>
-						<a href="/product/<?php echo $product['id']; ?>">
+						<a href="/product/<?php echo $product['eng_name']; ?>">
 							<img src="/public/media/uploads/<?php echo $product['image']; ?>" class="mx-auto d-block" alt="Product Thumbnail">
 						</a>
 					<!-- <img src="https://via.placeholder.com/250" class="img-fluid" alt="Product Thumbnail"> -->
 						<div class="card-body">
-							<div class="card-title align-self-center my-0">
-								<a href="/product/<?php echo $product['id']; ?>" class=""><span class="font-title"><?php echo $product['title']; ?></span></a>
+							<div class="card-title align-self-center my-0" data-toggle="tooltip" data-placement="top" title="<?=$product[0]['title'] ?>">
+								<a href="/product/<?php echo $product['eng_name']; ?>" class=""><span class="font-title"><?php echo $product['title']; ?></span></a>
 							</div>
 							<p class="card-text border-top text-warning rating" rating="<?php echo $product['rating']; ?>" style="font-size: 20px;"></p>
 							<div class="row card-buttons">

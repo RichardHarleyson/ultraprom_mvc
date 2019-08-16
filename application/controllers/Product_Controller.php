@@ -9,11 +9,22 @@ class Product_Controller extends Controller{
 
 	public function pageAction(){
 		$product = $this->model->getProduct($this->route['id']);
+		// debug(empty($product));
+		if(empty($product)){
+			$this->redirect('');
+		}
 		$same_products = $this->model->get_same_products($product[0]['category_id']);
-		$reviews = $this->model->get_reviews($this->route['id']);
+		$reviews = $this->model->get_reviews($product[0]['id']);
+		// var_dump($product);
+		$lcategory_ename = $this->model->lcategory_ename($product[0]['category_id']);
+		// var_dump($lcategory_ename);
+		$category_ename = $this->model->category_ename($lcategory_ename[0]['c_id']);
+		// var_dump($category_ename);
 		$vars = [
 			'product' => $product,
 			'same_products' => $same_products,
+			'lcategory_ename' => $lcategory_ename,
+			'category_ename' => $category_ename,
 			'reviews' => $reviews,
 		];
 		$title = $product[0]['title'].' - Лучшая цена '.number_format($product[0]['price_uah'], 0, ',', ' ').' грн';

@@ -26,7 +26,7 @@
 			 foreach ($data as $item){
 				 echo '
 				 <tr>
-		       <td><a href="/product/'.$item['id'].'">'.$item['title'].'</a></td>
+		       <td><a href="/product/'.$item['eng_name'].'">'.$item['title'].'</a></td>
 		       <td>'.number_format($item['price_uah'], 0, ',', ' ').' грн</td>
 					<td class="">
 		 				<input type="number" class="form-control cart_quantity" step="1"  min="1" data-index="'.$index.'" value="'.$item['quantity'].'" data-price="'.$item['price_uah'].'" style="width: 60px;">

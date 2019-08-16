@@ -54,7 +54,7 @@
 							<!-- <img src="<?php echo $product['thumbnail']; ?>" alt="Product Thumbnail"> -->
 							<img src="https://via.placeholder.com/250" class="img-fluid" alt="Product Thumbnail">
 							<div class="card-body">
-								<a href="/product/<?php echo $product['id']; ?>" class="card-title"><span class="font-title"><?php echo $product['title']; ?></span></a>
+								<a href="/product/<?php echo $product['eng_name']; ?>" class="card-title"><span class="font-title"><?php echo $product['title']; ?></span></a>
 								<p class="card-text border-top text-warning" style="font-size: 20px;">
 									<i class="fas fa-star"></i>
 									<i class="fas fa-star"></i>

@@ -1,14 +1,4 @@
 // возвращает cookie с именем name, если есть, если нет, то undefined
-
-// Preloader
-// document.addEventListener("DOMContentLoaded", function(event) {
-// // document.body.onload = function(){
-// 	setTimeout(function(){
-// 	// document.getElementById('preloader').css('opacity', '0');
-// 	document.getElementById('preloader').classList.add('done');
-// 	},1000);
-// })
-
 function getCookie(name) {
   var matches = document.cookie.match(new RegExp(
     "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
@@ -540,34 +530,52 @@ function admin_log_in(){
 
 $(document).ready(function(){
 	$('select[name="list_category"]').change(function(){
-		var list_items = document.querySelectorAll('.list_item');
 		$('.list_item').hide();
 		$('tr[data-product_type="'+$(this).val()+'"]').show();
-	})
+	});
+  $('select[name="manufacturers"]').change(function(){
+    $('.list_item').hide();
+    if($('select[name="list_category"]').val() == '0'){
+      $('tr[data-product_manufacturer="'+$(this).val()+'"]').show();
+    }else if ($('select[name="list_category"]').val() != '0') {
+        $('tr[data-product_type="'+$('select[name="list_category"]').val()+'"][data-product_manufacturer="'+$(this).val()+'"]').show();
+    }
+  });
 })
 
 function product_upd(elem){
-
+  event.preventDefault();
 	var omg_parent = $(elem).parent().parent().parent();
-	var item_title = omg_parent.find('td input[name="item_title"]').val();
-	var item_price = omg_parent.find('td input[name="item_price"]').val();
-	var item_currency =  omg_parent.find('td select[name="item_currency"]').val();
-	var item_description = omg_parent.find('td textarea[name="item_description"]').val();
-	var item_onsale = omg_parent.find('td input[name="item_onsale"]').is(':checked');
-	var item_available = omg_parent.find('td input[name="item_available"]').is(':checked');
-
-	var data = '&item_id='+$(elem).data('product_id')+'&item_title='+item_title+'&item_price='+item_price+'&item_currency='+item_currency+'&item_description='+item_description+'&item_onsale='+item_onsale+'&item_available='+item_available+'&del=false';
-	// console.log(data);
-	$.ajax({
+  var curform = document.getElementById('form_'+$(elem).data('product_id'));
+  var data = new FormData(curform);
+  data.append('del','false');
+  data.append('id', $(elem).data('product_id'));
+  $.ajax({
 		type: 'POST',
 		url: '/admin/product_update',
 		data: data,
+    contentType : false,
+    processData : false,
 		success: function(res){
-			// console.log(res);
+			console.log(res);
 			omg_parent.css('background', 'green');
 			setTimeout(function(){ omg_parent.css('background', 'white') }, 2000);
 		}
 	})
+}
+
+$('textarea.comment_expand').focus(function () {
+    $(this).animate({ height: "20rem", width:"35rem" }, 300);
+});
+
+$('textarea.comment_expand').focusout(function () {
+    $(this).animate({ height: "2.5rem", width:"15rem" }, 300);
+});
+
+function call_imgmodal_photo(elem){
+  var photo = $(elem).data('photo');
+  console.log(photo);
+  $('#imgmodal_inside').html('<img src="/public/media/uploads/'+photo+'" alt="" style="width:100%">');
 }
 
 function setback(elem){
@@ -578,6 +586,7 @@ function product_del(elem){
 	if(!confirm('Вы Уверены?')){
 		return 0;
 	}
+  event.preventDefault();
 	var data = '&item_id='+$(elem).data('product_id')+'&del=true';
 	var omg_parent = $(elem).parent().parent().parent();
 	$.ajax({
@@ -585,10 +594,26 @@ function product_del(elem){
 		url: '/admin/product_update',
 		data: data,
 		success: function(res){
+      console.log(res);
 			omg_parent.css('background', 'red');
 			setTimeout(function(){ omg_parent.css('background', 'white') }, 2000);
 		}
 	})
+}
+
+$(document).ready(function(){
+  $('#add_product').on('show.bs.collapse', function () {
+    $('#product_list').collapse('hide');
+  })
+  $('#product_list').on('show.bs.collapse', function () {
+    $('#add_product').collapse('hide');
+  })
+})
+
+function add_param(elem){
+  // var param_list = $('#product_param_list').html();
+  var param_list = '<div class="input-group my-2"><div class="input-group-prepend"><input name="params" type="text" class="form-control" placeholder="Высота(см)"></div>-<input name="values" type="text" class="form-control" placeholder="150"></div>';
+  $('#product_param_list').append(param_list);
 }
 
 $(document).ready(function(){
@@ -605,9 +630,9 @@ $("select[name='category']").change(function(){
 	$("#filter_info div[class='input-group'] select").prop("disabled", true);
 	//
 	$('#filter_manufacturer').show();
-	$('#filter_manufacturer input').prop('disabled', false);
+	$('#filter_manufacturer select').prop('disabled', false);
 	$('#filter_country').show();
-	$('#filter_country input').prop('disabled', false);
+	$('#filter_country select').prop('disabled', false);
 	if($(this).val() == '1'){
 		//Настенные Газовые Котлы:
 		// Бренд, Камера Сгорания, Теплообменник, Страна Прозводитель, Контур, Мощность
@@ -615,52 +640,72 @@ $("select[name='category']").change(function(){
 		// Включаем только нужные
 		$('#filter_burn_cam').show();
 		$('#filter_burn_cam select').prop('disabled', false);
-		$('#filter_teploobmen').show();
-		$('#filter_teploobmen select').prop('disabled', false);
 		$('#filter_contur').show();
 		$('#filter_contur select').prop('disabled', false);
 		$('#filter_power').show();
-		$('#filter_power input').prop('disabled', false);
+		$('#filter_power select').prop('disabled', false);
+    $('#filter_heating_square').show();
+    $('#filter_heating_square select').prop('disabled', false);
 	}else if ($(this).val() == '2') {
 		//Напольные Газовые Котлы:
 		// Бренд, Страна производитель, мощность, контур, теплообменник, тип розжига, способ отвода газов
 		// Вырубили все
 		// Включаем только нужные
 		$('#filter_power').show();
-		$('#filter_power input').prop('disabled', false);
+		$('#filter_power select').prop('disabled', false);
 		$('#filter_contur').show();
 		$('#filter_contur select').prop('disabled', false);
-		$('#filter_teploobmen').show();
-		$('#filter_teploobmen select').prop('disabled', false);
-		$('#filter_rozjig').show();
-		$('#filter_rozjig select').prop('disabled', false);
-		$('#filter_otvod').show();
-		$('#filter_otvod select').prop('disabled', false);
+		$('#filter_burn_cam').show();
+		$('#filter_burn_cam select').prop('disabled', false);
+    $('#filter_heating_square').show();
+    $('#filter_heating_square select').prop('disabled', false);
 	}else if ($(this).val() == '3') {
 		// Конденсационные Газовые Котлы:
 		// Производитель, Страна производитель, мощность, кол-во контуров.
 		// Вырубили все
 		// Включаем только нужные
-		$('#filter_power').show();
-		$('#filter_power input').prop('disabled', false);
-		$('#filter_contur').show();
+    $('#filter_contur').show();
 		$('#filter_contur select').prop('disabled', false);
+		$('#filter_power').show();
+		$('#filter_power select').prop('disabled', false);
+    $('#filter_heating_square').show();
+    $('#filter_heating_square select').prop('disabled', false);
 	}else if ($(this).val() == '4') {
 		// Электрические Котлы:
 		// Бренд, Страна Производитель, Наличие Насоса, /Напряжение/, управление, Мощность
 		// Вырубили все
 		// Включаем только нужные
-		$('#filter_power').show();
-		$('#filter_power input').prop('disabled', false);
-		$('#filter_contur').show();
-		$('#filter_contur select').prop('disabled', false);
-		// $('#filter_napryajenie').show();
-		// $('#filter_napryajenie input').prop('disabled', false);
+		$('#filter_epower').show();
+		$('#filter_epower select').prop('disabled', false);
+		$('#filter_napryajenie').show();
+		$('#filter_napryajenie select').prop('disabled', false);
 		$('#filter_nasos').show();
 		$('#filter_nasos select').prop('disabled', false);
-		$('#filter_controller').show();
-		$('#filter_controller select').prop('disabled', false);
-	}else if($(this).val() == '5'){
+    $('#filter_heating_square').show();
+    $('#filter_heating_square select').prop('disabled', false);
+	}
+  else if($(this).val() == '5'){
+    // Твердотопливные котлы
+    // Бренд, мощность
+    // Вырубили все
+    //
+    $('#filter_power').show();
+    $('#filter_power select').prop('disabled', false);
+    $('#filter_tteploobmen').show();
+    $('#filter_tteploobmen select').prop('disabled', false);
+    $('#filter_controller').show();
+    $('#filter_controller select').prop('disabled', false);
+    $('#filter_heating_square').show();
+    $('#filter_heating_square select').prop('disabled', false);
+  }
+  else if($(this).val() == '6'){
+    // Комплектующие для котлов
+    // Бренд, страна
+    // Вырубили все
+    $('#filter_country').hide();
+    $('#filter_country select').prop('disabled', true);
+  }
+  else if($(this).val() == '7'){
 		// Стальные радиаторы:
 		// Бренд, Страна Производитель, тип, высота, длина, подключение
 		$('#filter_rad_type').show();
@@ -672,201 +717,214 @@ $("select[name='category']").change(function(){
 		$('#filter_rad_conn').show();
 		$('#filter_rad_conn select').prop('disabled', false);
 	}
-	else if($(this).val() == '6'){
+	else if($(this).val() == '8'){
 		// Алюминиевые радиаторы:
 		// Бренд, Страна Производитель, межосевое расстояние
 		// Вырубили все
 		// Включаем только нужные
 		$('#filter_apex').show();
 		$('#filter_apex select').prop('disabled', false);
+    $('#filter_deep_sec').show();
+    $('#filter_deep_sec select').prop('disabled', false);
 	}
-	else if($(this).val() == '7'){
+	else if($(this).val() == '9'){
 		// Биметаллические радиаторы:
 		// Бренд, Страна Производитель, межосевое расстояние
 		// Вырубили все
 		// Включаем только нужные
-		$('#filter_apex').show();
+    $('#filter_apex').show();
 		$('#filter_apex select').prop('disabled', false);
+    $('#filter_deep_sec').show();
+    $('#filter_deep_sec select').prop('disabled', false);
 	}
-	else if($(this).val() == '8'){
+	else if($(this).val() == '10'){
 		// Чугунные радиаторы:
 		// Бренд, Страна Производитель, межосевое расстояние
 		// Вырубили все
 		// Включаем только нужные
-		$('#filter_apex').show();
-		$('#filter_apex select').prop('disabled', false);
-	}
-	else if($(this).val() == '9'){
-		// Электрические радиаторы:
-		// Бренд, мощность, секции
-		// Вырубили все
-		//
-		$('#filter_power').show();
-		$('#filter_power input').prop('disabled', false);
-		$('#filter_rad_sec').show();
-		$('#filter_rad_sec select').prop('disabled', false);
-	}
-	else if($(this).val() == '10'){
-		// Дизайнерские радиаторы:
-		// Бренд, мощность, страна
-		// Вырубили все
-		//
-		$('#filter_power').show();
-		$('#filter_power input').prop('disabled', false);
 	}
 	else if($(this).val() == '11'){
-		// Комплектующие для радиаторов:
-		// Бренд, страна производитель, тип комплектации, тип радиатора, диаметр подключения,
-		// Вырубили все
-		//
-		$('#filter_rad_elem_comp').show();
-		$('#filter_rad_elem_comp select').prop('disabled', false);
-		$('#filter_rad_kind').show();
-		$('#filter_rad_kind select').prop('disabled', false);
-		$('#filter_rad_eradius').show();
-		$('#filter_rad_eradius select').prop('disabled', false);
+		// Электрические радиаторы:
 	}
 	else if($(this).val() == '12'){
-		// Электрический теплый пол:
-		// Бренд, страна, тип, монтаж, тип кабель, диаметр кабеля
-		// Вырубили все
-		//
-		$('#filter_flour_type').show();
-		$('#filter_flour_type select').prop('disabled', false);
-		$('#filter_flour_montaj').show();
-		$('#filter_flour_montaj select').prop('disabled', false);
-		$('#filter_flour_cabtype').show();
-		$('#filter_flour_cabtype select').prop('disabled', false);
-		$('#filter_flour_cabrad').show();
-		$('#filter_flour_cabrad select').prop('disabled', false);
-
+		// Дизайнерские радиаторы:
+		$('#filter_country').hide();
+		$('#filter_select select').prop('disabled', true);
 	}
 	else if($(this).val() == '13'){
-		// Трубы для теплого пола:
-		// Бренд, мощность
-		// Вырубили все
-		//
+		// Комплектующие для радиаторов:
+    $('#filter_country').hide();
+		$('#filter_select select').prop('disabled', true);
 	}
 	else if($(this).val() == '14'){
-		// Инфракрасный теплый пол:
-		// Бренд, страна, площадь
-		// Вырубили все
-		//
+		// Электрический теплый пол:
+		$('#filter_flour_type').show();
+		$('#filter_flour_type select').prop('disabled', false);
+		$('#filter_flour_cabtype').show();
+		$('#filter_flour_cabtype select').prop('disabled', false);
 		$('#filter_flour_isqr').show();
 		$('#filter_flour_isqr select').prop('disabled', false);
 	}
 	else if($(this).val() == '15'){
-		// Водяной теплый пол
-		// Бренд, мощность
-		// Вырубили все
-		//
+		// Трубы для теплого пола:
+    $('#filter_pipe_rad').show();
+		$('#filter_pipe_rad select').prop('disabled', false);
 	}
 	else if($(this).val() == '16'){
-		// Коллекторные шкафы
-		// Бренд, мощность
-		// Вырубили все
-		//
+		// Инфракрасный теплый пол:
 	}
 	else if($(this).val() == '17'){
-		// Твердотопливные котлы
-		// Бренд, мощность
-		// Вырубили все
-		//
-		$('#filter_power').show();
-		$('#filter_power input').prop('disabled', false);
-		$('#filter_tteploobmen').show();
-		$('#filter_tteploobmen select').prop('disabled', false);
+		// Водяной теплый пол
+    $('#filter_ttype').show();
+		$('#filter_ttype select').prop('disabled', false);
 	}
 	else if($(this).val() == '18'){
-		// Комплектующие для котлов
-		// Бренд, страна
-		// Вырубили все
-		//
+		// Коллекторные шкафы
+    $('#filter_country').hide();
+    $('#filter_country select').prop('disabled', true);
+    $('#filter_stype').show();
+		$('#filter_stype select').prop('disabled', false);
+	}
+	else if($(this).val() == '19'){
+		// ППР трубы и фитинги
+    $('#filter_ppr_type').show();
+    $('#filter_ppr_type select').prop('disabled', false);
+    $('#filter_fitting_type').show();
+    $('#filter_fitting_type select').prop('disabled', false);
+	}
+	else if($(this).val() == '20'){
+		// Обжимные фитинги
+    $('#filter_pipe_rad').show();
+    $('#filter_pipe_rad select').prop('disabled', false);
+    $('#filter_ppr_type').show();
+    $('#filter_ppr_type select').prop('disabled', false);
+    $('#filter_fitting_type').show();
+    $('#filter_fitting_type select').prop('disabled', false);
 	}
 	else if($(this).val() == '21'){
-		// ППР трубы и фитинги
-		// Бренд, страна
-		// Вырубили все
-		//
+		// Изоляция для труб
+    $('#filter_country').hide();
+    $('#filter_country select').prop('disabled', true);
+    $('#filter_pipe_rad').show();
+    $('#filter_pipe_rad select').prop('disabled', false);
 	}
 	else if($(this).val() == '22'){
-		// Обжимные фитинги
-		// Бренд, страна
-		// Вырубили все
-		//
+		// Металлопластиковые трубы
+    $('#filter_pipe_rad').show();
+    $('#filter_pipe_rad select').prop('disabled', false);
 	}
 	else if($(this).val() == '23'){
-		// Изоляция для труб
-		// Бренд, страна
-		// Вырубили все
-		//
+		// Внутренняя канализация
+    $('#filter_stockfit_type').show();
+    $('#filter_stockfit_type select').prop('disabled', false);
 	}
 	else if($(this).val() == '24'){
-		// Металлопластиковые трубы
-		// Бренд, страна
-		// Вырубили все
-		//
+		// Наружная канализация
+    $('#filter_stockfit_type').show();
+    $('#filter_stockfit_type select').prop('disabled', false);
+    $('#filter_stock_rad').show();
+    $('#filter_stock_rad select').prop('disabled', false);
 	}
 	else if($(this).val() == '25'){
-		// Внутренняя канализация
-		// Бренд, страна
-		// Вырубили все
-		//
+		// Бесшумная канализация
+    $('#filter_stockfit_type').show();
+    $('#filter_stockfit_type select').prop('disabled', false);
 	}
 	else if($(this).val() == '26'){
-		// Наружная канализация
-		// Бренд, страна
-		// Вырубили все
-		//
+		// Кондиционеры настенного типа
+    $('#filter_wheating').show();
+    $('#filter_wheating select').prop('disabled', false);
+    $('#filter_invert').show();
+    $('#filter_invert select').prop('disabled', false);
+    $('#filter_bpower').show();
+    $('#filter_bpower select').prop('disabled', false);
+    $('#filter_csquare').show();
+    $('#filter_csquare select').prop('disabled', false);
+    $('#filter_ctype').show();
+    $('#filter_ctype select').prop('disabled', false);
 	}
 	else if($(this).val() == '27'){
-		// Бесшумная канализация
-		// Бренд, страна
-		// Вырубили все
-		//
+		// Мобильные кондиционеры
+    $('#filter_bpower').show();
+    $('#filter_bpower select').prop('disabled', false);
+    $('#filter_csquare').show();
+    $('#filter_csquare select').prop('disabled', false);
+    $('#filter_ctype').show();
+    $('#filter_ctype select').prop('disabled', false);
 	}
+  else if($(this).val() == '34'){
+    // Увлажнители Воздуха
+    $('#filter_country').hide();
+    $('#filter_country select').prop('disabled', true);
+    $('#filter_csquare').show();
+    $('#filter_csquare select').prop('disabled', false);
+  }
 	else if($(this).val() == '28'){
-		// Кондиционеры настенного типа
-		// Бренд, страна
-		// Вырубили все
-		//
+		// Циркуляционные насосы
+    $('#filter_napryajenie').show();
+    $('#filter_napryajenie select').prop('disabled', false);
+    $('#filter_napor').show();
+    $('#filter_napor select').prop('disabled', false);
+    $('#filter_effect').show();
+    $('#filter_effect select').prop('disabled', false);
+    $('#filter_nepower').show();
+    $('#filter_nepower select').prop('disabled', false);
+    $('#filter_mlength').show();
+    $('#filter_mlength select').prop('disabled', false);
 	}
 	else if($(this).val() == '29'){
-		// Мобильные кондиционеры
-		// Бренд, страна
-		// Вырубили все
-		//
+		// Бойлеры электрические
+    $('#filter_bform').show();
+    $('#filter_bform select').prop('disabled', false);
+    $('#filter_bset').show();
+    $('#filter_bset select').prop('disabled', false);
+    $('#filter_tentype').show();
+    $('#filter_tentype select').prop('disabled', false);
+    $('#filter_bsqrt').show();
+    $('#filter_bsqrt select').prop('disabled', false);
 	}
 	else if($(this).val() == '30'){
-		// Циркуляционные насосы
-		// Бренд, страна
-		// Вырубили все
-		//
+		// Проточные электрические водонагреватели
+    $('#filter_country').hide();
+    $('#filter_country select').prop('disabled', true);
 	}
 	else if($(this).val() == '31'){
-		// Бойлеры электрические
-		// Бренд, страна
-		// Вырубили все
-		//
-	}
-	else if($(this).val() == '32'){
-		// Проточные электрические водонагреватели
-		// Бренд, страна
-		// Вырубили все
-		//
-	}
-	else if($(this).val() == '33'){
 		// Газовые колонки
-		// Бренд, страна
-		// Вырубили все
-		//
+    $('#filter_country').hide();
+    $('#filter_country select').prop('disabled', true);
 	}
+  else if($(this).val() == '31'){
+    // Программаторы
+    $('#filter_country').hide();
+    $('#filter_country select').prop('disabled', true);
+    $('#filter_ptype').show();
+    $('#filter_ptype select').prop('disabled', false);
+  }
+  else if($(this).val() == '31'){
+    // Стабидизаторы Напряжения
+    $('#filter_country').hide();
+    $('#filter_country select').prop('disabled', true);
+  }
+
 });
 
 $(document).ready(function(){
 	$('#create_product').submit(function(){
 		event.preventDefault();
 		var data = new FormData($('form')[0]);
+    var params = $('#product_param_list input[name="params"]').map(function(){
+      if(this.value != '')
+        return this.value
+    }).get();
+    var values = $('#product_param_list input[name="values"]').map(function(){
+      return this.value
+    }).get();
+    var param_string = '';
+    for(let i=0; i<params.length; i++){
+      param_string += params[i] + ':' + values[i] + ';';
+    }
+    data.append('param_string', param_string);
+    data.append('m_id', $('select[name="filter_manufacturer"]').find('option:selected').data('m_id'));
 		$.ajax({
 			type: 'POST',
 			url: '/admin/create_product',
@@ -874,11 +932,71 @@ $(document).ready(function(){
 			processData: false,
 			contentType: false,
 			success:function(res){
+        // console.log(res);
 				alert('Товар Добавлен');
 			}
 		});
 	});
 });
+
+$(document).ready(function(){
+  $('#add_category').submit(function(){
+    event.preventDefault();
+    var data = $(this).serialize();
+    $.ajax({
+      type: 'POST',
+      url: '/admin/add_category',
+      data: data,
+      success: function(res){
+        console.log(res);
+        // alert(res);
+        // подсветка
+      }
+    })
+  });
+  $('#add_lower_category').submit(function(){
+    event.preventDefault();
+    var data = new FormData($('form')[1]);
+    $.ajax({
+      type: 'POST',
+      url: '/admin/add_lower_category',
+      data: data,
+      processData: false,
+      contentType: false,
+      success: function(res){
+        console.log(res);
+      }
+    })
+  });
+
+  $('#add_manufacturer').submit(function(){
+    event.preventDefault();
+    var data = new FormData($('form')[2]);
+    $.ajax({
+      type: 'POST',
+      url: '/admin/add_manufacturer',
+      data: data,
+      processData: false,
+      contentType: false,
+      success: function(res){
+        console.log(res);
+      }
+    })
+  });
+})
+
+function del_manufacturer(){
+  event.preventDefault();
+  console.log($('#manufacturer').val());
+  $.ajax({
+    type: 'POST',
+    url: '/admin/del_manufacturer',
+    data: { manufacturer_id : $('#manufacturer').val()},
+    success: function(res){
+      console.log(res);
+    }
+  })
+}
 
 $(document).ready(function(){
 	if($('#PageType').is(".PageType_Currency")){

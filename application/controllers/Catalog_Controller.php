@@ -29,80 +29,31 @@ class Catalog_Controller extends Controller{
 
 	}
 
+	public function gcatalogAction(){
+		$category = $this->route['category'];
+		$getcategory = $this->model->getCategories($category);
+		$lcategory = $this->model->getLcategory($getcategory);
+		$vars = [
+			'category' => $getcategory,
+			'lcategory' => $lcategory,
+		];
+		$this->view->render('Глобальный Каталог', $vars);
+	}
+
 	// Определяем категорию товаров
 	public function get_category($product){
-		if($product == 'nastennue_gaz_kotly'){
-			$category = 1;
-		}elseif ($product == 'napolnue_gaz_kotly') {
-			$category = 2;
-		}elseif ($product == 'cond_gaz_kotly') {
-			$category = 3;
-		}elseif ($product == 'electro_kotly') {
-			$category = 4;
-		}elseif ($product == 'stal_rad') {
-			$category = 5;
-		}elseif ($product == 'alum_rad') {
-			$category = 6;
-		}elseif ($product == 'bimetal_rad') {
-			$category = 7;
-		}elseif ($product == 'chugun_rad') {
-			$category = 8;
-		}elseif ($product == 'electro_rad') {
-			$category = 9;
-		}elseif ($product == 'design_rad') {
-			$category = 10;
-		}elseif ($product == 'comp_rad') {
-			$category = 11;
-		}elseif ($product == 'electro_flour') {
-			$category = 12;
-		}elseif ($product == 'truby_flour') {
-			$category = 13;
-		}elseif ($product == 'infro_flour') {
-			$category = 14;
-		}elseif ($product == 'water_flour') {
-			$category = 15;
-		}elseif ($product == 'collect_shkaf') {
-			$category = 16;
-		}elseif ($product == 'tverdotop_kotly') {
-			$category = 17;
-		}elseif ($product == 'comp_kotly') {
-			$category = 18;
-		}elseif ($product == 'empty') {
-			$category = 19;
-		}elseif ($product == 'empty') {
-			$category = 20;
-		}elseif ($product == 'ppr_pipes') {
-			$category = 21;
-		}elseif ($product == 'obj_fittings') {
-			$category = 22;
-		}elseif ($product == 'pipes_isol') {
-			$category = 23;
-		}elseif ($product == 'metal_pipes') {
-			$category = 24;
-		}elseif ($product == 'instock') {
-			$category = 25;
-		}elseif ($product == 'outstock') {
-			$category = 26;
-		}elseif ($product == 'quitstock') {
-			$category = 27;
-		}elseif ($product == 'wall_cond') {
-			$category = 28;
-		}elseif ($product == 'mobile_cond') {
-			$category = 29;
-		}elseif ($product == 'circ_pump') {
-			$category = 30;
-		}elseif ($product == 'electro_boiler') {
-			$category = 31;
-		}elseif ($product == 'waterheater') {
-			$category = 32;
-		}elseif ($product == 'gaz_kolonky') {
-			$category = 33;
+		// вытащить id категории из базы
+		$categories = $this->model->getCategory();
+		foreach ($categories as $item) {
+			if($item['eng_name'] == $product){
+				$category = $item['id'];
+			}
 		}
 		return $category;
 	}
 
 	// Категория: настенные газовые котлы
-	public function nastennue_gaz_kotly($category, $sorted = []){
+	public function Nastennie_Gazovie_Kotli($category, $sorted = []){
 		if(empty($sorted)){
 			$products = $this->model->getProducts($category);
 		}else{
@@ -110,37 +61,38 @@ class Catalog_Controller extends Controller{
 		}
 		$vars = [
 			'title' => 'Настенные Газовые Котлы',
-			'data_title'=>'nastennue_gaz_kotly',
+			'data_title'=>'Nastennie_Gazovie_Kotli',
 			'filter_data' => [
 				'Производитель' => [
-					'Baxi', 'Bosch', 'E.C.A', 'Immergas', 'Italtherm', 'Navien', 'Roctem',
-					 'Roda', 'Saunier Duval', 'Termet', 'Tiberis', 'Valliant',
+					'Ariston','Baxi','Beretta','Bosch','Buderus','Ferroli','Immergas',
+					'Protherm','Vaillant','Viessmann','Westen','Saunier Duval',
 				],
-				'Страна Производителя' => [
-					'Италия', 'Китай', 'Корея', 'Польша', 'Словакия', 'Турция',
+				'Тепловая Мощность' => [
+					 'До 20 кВт','20 - 24 кВт','24 - 30 кВт','30 – 40 кВт','Свыше 40 кВт',
+				],
+				'Отапливаемая площадь' => [
+					'До 120 м2','До 200 м2','До 250 м2','До 300 м2','До 400 м2','Свыше 400 м2',
 				],
 				'Количество контуров' => [
-					'Одноконтурный', 'Двухконтурный', 'Двухконтурный с Бойлером',
+					'Одноконтурный', 'Двухконтурный', 'Двухконтурный + бойлер',
 				],
-				'Номинальная Тепловая Мощность(КВт)' => [
-					 '10', '12', '13', '14', '16', '18', '20', '24', '25', '28',
-					  '30', '31', '32', '35', '36',
+				'Отвод продуктов сгорания' => [
+					 'Турбированный (Turbo)', 'Дымоходный (Atmo)',
 				],
-				'Камера сгорания' => [
-					 'Открытая (дымоходный)', 'Закрытый (турбированный)',
-				],
-				'Теплообменник' =>[
-					 'Битермический', 'Раздельный',
+				'Страна Производителя' => [
+					'Германия','Италия','Корея','Франция','Турция','Китай','Словакия',
+					'Португалия','Польша','Чехия',
 				],
 			],
-			'filter_headers' => ['filter_manufacturer','filter_country','filter_contur','filter_power','filter_burn_cam','filter_teploobmen'],
+			'filter_headers' => ['filter_manufacturer','filter_power','filter_heating_square',
+				'filter_contur','filter_burn_cam','filter_country'],
 			'product_list' => $products,
 		];
 		$this->view->render('Каталог - Настенные Газовые Котлы', $vars);
 	}
 
 	// Категория: напольные газовые котлы
-	public function napolnue_gaz_kotly($category, $sorted = []){
+	public function Napolynie_Gazovie_Kotli($category, $sorted = []){
 		if(empty($sorted)){
 			$products = $this->model->getProducts($category);
 		}else{
@@ -148,40 +100,38 @@ class Catalog_Controller extends Controller{
 		}
 		$vars = [
 			'title' => 'Напольные Газовые Котлы',
-			'data_title'=>'napolnue_gaz_kotly',
+			'data_title'=>'Napolynie_Gazovie_Kotli',
 			'filter_data' => [
 				'Производитель' => [
-					'Baxi', 'Beretta', 'Dani', 'Ferolli', 'Fondital', 'Nova Florida', 'Protech',
-					 'Protherm', 'Roda', 'Slime', 'Vaillant', 'Viadrus', 'Viessmann',
+					'Baxi', 'Beretta', 'Bosch', 'Buderus', 'Protherm', 'Vailant', 'Viessmann',
 				],
-				'Страна Производителя' => [
-					'Германия', 'Италия', 'Украина', 'Чехия',
+				'Тепловая Мощность' => [
+					 'До 20 кВт','20 - 24 кВт','24 - 30 кВт','30 – 40 кВт','40 – 50 кВт',
+					 '50 - 100 кВт','Свыше 100 кВт',
+				],
+				'Отапливаемая площадь' => [
+					'До 120 м2','До 200 м2','До 250 м2','До 300 м2','До 400 м2','До 500 м2',
+					'Свыше 500 м2',
 				],
 				'Количество контуров' => [
-					'Одноконтурный', 'Двухконтурный', 'Двухконтурный с Бойлером',
+					'Одноконтурный', 'Двухконтурный',
 				],
-				'Номинальная Тепловая Мощность(КВт)' => [
-					 '10', '12', '13', '14', '16', '18', '20', '24', '25', '28',
-						'30', '31', '32', '35', '36',
+				'Отвод продуктов сгорания' => [
+					'Турбированный (Turbo)', 'Дымоходный (Atmo)'
 				],
-				'Теплообменний' =>[
-					 'Первичный','Битермический', 'Раздельный',
-				],
-				'Тип Розжига' => [
-					'Пьезо', 'Электро',
-				],
-				'Способ Отвода Газов' => [
-					'Турбированный', 'Дымоходный', 'Парапетный'
+				'Страна Производителя' => [
+					'Германия', 'Италия', 'Турция', 'Словакия', 'Португалия', 'Польша', 'Чехия',
 				],
 			],
-			'filter_headers' => ['filter_manufacturer','filter_country','filter_contur','filter_power','filter_teploobmen','filter_rozjig','filter_otvod'],
+			'filter_headers' => ['filter_manufacturer','filter_power','filter_heating_square',
+				'filter_contur','filter_burn_cam','filter_country',],
 			'product_list' => $products,
 		];
 		$this->view->render('Каталог - Напольные Газовые Котлы', $vars);
 	}
 
 	// Категория: Конденсационные Газовые Котлы
-	public function cond_gaz_kotly($category, $sorted = []){
+	public function Kondesatsionnie_Gazovie_Kotli($category, $sorted = []){
 		if(empty($sorted)){
 			$products = $this->model->getProducts($category);
 		}else{
@@ -189,32 +139,35 @@ class Catalog_Controller extends Controller{
 		}
 		$vars = [
 			'title' => 'Конденсационные Газовые Котлы',
-			'data_title'=>'cond_gaz_kotly',
+			'data_title'=>'Kondesatsionnie_Gazovie_Kotli',
 			'filter_data' => [
 				'Производитель' => [
-					'Airfel', 'Ariston', 'Baxi', 'Buderus', 'De Dietrich',
-					'Fondital', 'Immergas', 'Nova florida', 'Protherm', 'Roda',
-					'Sime', 'Vaillant', 'Viessmann Group',
+					'Ariston','Baxi','Beretta','Bosch','Buderus','Ferroli','Immergas',
+					'Protherm','Vaillant','Viessmann','Westen','Saunier Duval',
 				],
-				'Страна Производителя' => [
-					'Италия', 'Англия', 'Турция', 'Франция', 'Германия', 'Словакия',
+				'Тепловая Мощность' => [
+					 'До 20 кВт','20 - 24 кВт','24 - 30 кВт','30 – 40 кВт','Свыше 40 кВт',
+				],
+				'Отапливаемая площадь' => [
+					'До 120 м2','До 200 м2','До 250 м2','До 300 м2','До 400 м2','Свыше 400 м2',
 				],
 				'Количество контуров' => [
-					'Одноконтурный', 'Двухконтурный', 'Двухконтурный с Бойлером',
+					'Одноконтурный', 'Двухконтурный',
 				],
-				'Номинальная Тепловая Мощность(КВт)' => [
-					 '10', '12', '13', '14', '16', '18', '20', '24', '25', '28',
-						'30', '31', '32', '35', '36',
+				'Страна Производителя' => [
+					'Германия','Италия','Корея','Франция','Турция','Китай','Словакия',
+					'Португалия','Польша','Чехия',
 				],
 			],
-			'filter_headers' => ['filter_manufacturer','filter_country','filter_contur','filter_power'],
+			'filter_headers' => ['filter_manufacturer','filter_epower','filter_heating_square',
+				'filter_contur','filter_country'],
 			'product_list' => $products,
 		];
 		$this->view->render('Каталог - Конденсационные Газовые Котлы', $vars);
 	}
 
 	// Категория: Электрические Котлы
-	public function electro_kotly($category, $sorted = []){
+	public function Yalektricheskie_Kotli($category, $sorted = []){
 		if(empty($sorted)){
 			$products = $this->model->getProducts($category);
 		}else{
@@ -222,33 +175,40 @@ class Catalog_Controller extends Controller{
 		}
 		$vars = [
 			'title' => 'Электрические Котлы',
-			'data_title'=>'electro_kotly',
+			'data_title'=>'Yalektricheskie_Kotli',
 			'filter_data' => [
 				'Производитель' => [
-					'Heatman', 'Hi-Therm', 'Hot-Well', 'Kospel', 'Mora-Top','Protherm',
-					'Roda', 'Tenko', 'Termit - Реноме', 'Vaillant', 'Маяк', 'Термия', 'Титан',
+					'Bosch','Ferroli','Hi-Therm', 'Hot-well', 'Kospel','Mora-top','Protherm',
+					'Tenko', 'Vaillant', 'Титан', 'Днепр',
 				],
-				'Страна Производителя' => [
-					'Чехи', 'Украина', 'Италия', 'Польша', 'Словакия', 'Турция',
+				'Электрическая Мощность' => [
+					 '3 - 5 кВт','6 - 10 кВт','11 - 15 кВт','16 - 20 кВт','21 - 25 кВт',
+					 '26 - 30 кВт','36 - 40 кВт','41 - 45 кВт','51 - 60 кВт',
+				],
+				'Напряжение Питания' => [
+					 '220','380','220-380'
+				],
+				'Отапливаемая площадь' => [
+					'До 50 м2','До 80 м2','До 100 м2','До 120 м2','До 200 м2','До 250 м2',
+					'До 300 м2','До 400 м2','Свыше 400 м2',
 				],
 				'Наличие насоса' => [
 					'Есть', 'Нет',
 				],
-				'Номинальная Тепловая Мощность(КВт)' => [
-					 '3', '4', '6', '8', '9', '10', '12', '14', '15', '18',
-						'21', '23', '24', '25', '28', '30', '36',
-				],
-				'Управление' => [
-					 'Механическое', 'Электромеханическое', 'Электронное',
+				'Страна Производителя' => [
+					'Германия','Италия','Корея','Франция','Турция','Китай','Украина','Словакия',
+					'Португалия','Польша','Чехия',
 				],
 			],
-			'filter_headers' => ['filter_manufacturer','filter_country','filter_nasos','filter_controller'],
+			'filter_headers' => ['filter_manufacturer','filter_epower','filter_napryajenie',
+				'filter_heating_square','filter_nasos','filter_country',],
 			'product_list' => $products,
 		];
 		$this->view->render('Каталог - Электрические Котлы', $vars);
 	}
+
 	// Категория: Твердотопливные Котлы
-	public function tverdotop_kotly($category, $sorted = []){
+	public function Tverdotoplivnie_Kotli($category, $sorted = []){
 		if(empty($sorted)){
 			$products = $this->model->getProducts($category);
 		}else{
@@ -256,30 +216,36 @@ class Catalog_Controller extends Controller{
 		}
 		$vars = [
 			'title' => 'Твердотопливные Котлы',
-			'data_title'=>'tverdotop_kotly',
+			'data_title'=>'Tverdotoplivnie_Kotli',
 			'filter_data' => [
 				'Производитель' => [
-					'Baxi', 'Altep', 'Amica', 'Atmos', 'Caldera', 'Candle', 'Carbon',
-					 'Carbon Lux', 'Demrad', 'Drew-Met',
+					'ATON','Altep','Baxi','Bosch','Buderus','Defro','Kronvas','Viadrus','Данко',
 				],
-				'Страна Производителя' => [
-					'Литва', 'Чехия', 'Италия', 'Польша', 'Россия', 'Турция',
+				'Тепловая Мощность' => [
+					 'До 20 кВт','20 - 24 кВт','24 - 30 кВт','30 – 40 кВт','Свыше 40 кВт',
 				],
-				'Номинальная Тепловая Мощность(КВт)' => [
-					 '10', '12', '13', '14', '16', '18', '20', '24', '25', '28',
-						'30', '31', '32', '35', '36',
+				'Отапливаемая площадь' => [
+					'До 120 м2','До 200 м2','До 250 м2','До 300 м2','До 400 м2','До 600 м2',
+					'До 800 м2','Свыше 800 м2',
 				],
 				'Теплообменник' => [
 					 'Стальной', 'Чугунный',
 				],
+				'Управление' => [
+					 'Механическое', 'Электронное',
+				],
+				'Страна Производителя' => [
+					'Германия','Италия','Турция','Украина','Польша','Чехия',
+				],
 			],
-			'filter_headers' => ['filter_manufacturer','filter_country','filter_power','filter_tteploobmen'],
+			'filter_headers' => ['filter_manufacturer','filter_power', 'filter_heating_square',
+				'filter_tteploobmen', 'filter_controller', 'filter_country',],
 			'product_list' => $products,
 		];
 		$this->view->render('Каталог - Твердотопливные Котлы', $vars);
 	}
 	// Категория: Комплектующие для Котлов
-	public function comp_kotly($category, $sorted = []){
+	public function Komplektuyushtie_dlya_Kotlov($category, $sorted = []){
 		if(empty($sorted)){
 			$products = $this->model->getProducts($category);
 		}else{
@@ -287,23 +253,20 @@ class Catalog_Controller extends Controller{
 		}
 		$vars = [
 			'title' => 'Комплектующие для Котлов',
-			'data_title'=>'comp_kotly',
+			'data_title'=>'Komplektuyushtie_dlya_Kotlov',
 			'filter_data' => [
 				'Производитель' => [
-					'Baxi', 'Bosch', 'E.C.A', 'Immergas', 'Italtherm', 'Navien', 'Roctem',
-					 'Roda', 'Saunier Duval', 'Termet', 'Tiberis', 'Valliant',
-				],
-				'Страна Производителя' => [
-					'Италия', 'Китай', 'Корея', 'Польша', 'Словакия', 'Турция',
+					'Baxi', 'Beretta', 'Bosch', 'Buderus', 'Ferroli', 'Protherm', 'Vaillant',
+					 'Viessmann', 'Westen',
 				],
 			],
-			'filter_headers' => ['filter_manufacturer','filter_country',],
+			'filter_headers' => ['filter_manufacturer',],
 			'product_list' => $products,
 		];
 		$this->view->render('Каталог - Комплектующие для Котлов', $vars);
 	}
 	// Категория: Стальные Радиаторы
-	public function stal_rad($category, $sorted = []){
+	public function Stalynie_Radiatori($category, $sorted = []){
 		if(empty($sorted)){
 			$products = $this->model->getProducts($category);
 		}else{
@@ -311,38 +274,37 @@ class Catalog_Controller extends Controller{
 		}
 		$vars = [
 			'title' => 'Стальные Радиаторы',
-			'data_title'=>'stal_rad',
+			'data_title'=>'Stalynie_Radiatori',
 			'filter_data' => [
 				'Производитель' => [
-					'Aquatronic', 'DayLux', 'Emko', 'Hi-Therm', 'Kermi', 'Korad', 'Korado',
-					 'Mastas', 'Protherm', 'Purmo', 'Rado', 'Roda',
-					 'Rozma', 'Sanica', 'TERRA teknik', 'Vogel&Noot', 'Zoom Boilers',
-				],
-				'Страна Производителя' => [
-					'Австрия', 'Чехия', 'Украина', 'Польша', 'Беларусь', 'Турция',
+					'Djoul','DaVinci','Energy','Kermi','Korado','Purmo','Terra Teknik',
+					'Copa','Krafter','Tiberis',
 				],
 				'Тип радиатора' => [
-					'11', '22', '33',
+					'Тип 11', 'Тип 22', 'Тип 33',
 				],
 				'Высота радиатора(мм)' => [
-					 '300', '400', '500', '600', '900',
+					 '200','300', '400', '500', '600', '900',
 				],
 				'Длинна радиатора(мм)' => [
-					 '400','500','600','700','800','900','1000','1100','1200','1400',
-					 '1600','1800','2000','2100','2200','2300','2400','2500','2600','2700',
+					 '400','500','600','700','800','900','1000','1100','1200','1300','1400','1500',
+					 '1600','1700','1800','1900','2000','2100','2200','2300','2400','2500','2600','2700',
 					 '2800','2900','3000',
 				],
 				'Подключение' =>[
 					 'Боковое', 'Нижнее',
 				],
+				'Страна Производителя' => [
+						'Германия','Польша','Украина','Турция','Италия','Чехия',
+				],
 			],
-			'filter_headers' => ['filter_manufacturer','filter_country','filter_rad_type','filter_rad_height','filter_rad_length','filter_rad_conn'],
+			'filter_headers' => ['filter_manufacturer','filter_rad_type','filter_rad_height','filter_rad_length','filter_rad_conn','filter_country',],
 			'product_list' => $products,
 		];
 		$this->view->render('Каталог - Стальные Радиаторы', $vars);
 	}
 	// Категория: Алюминиевые Радиаторы
-	public function alum_rad($category, $sorted = []){
+	public function Alyuminievie_Radiatori($category, $sorted = []){
 		if(empty($sorted)){
 			$products = $this->model->getProducts($category);
 		}else{
@@ -350,27 +312,28 @@ class Catalog_Controller extends Controller{
 		}
 		$vars = [
 			'title' => 'Алюминиевые Радиаторы',
-			'data_title'=>'alum_rad',
+			'data_title'=>'Alyuminievie_Radiatori',
 			'filter_data' => [
 				'Производитель' => [
-					'Calgoni', 'Esperado', 'Faral', 'Ferroli', 'Global', 'Heat Line', 'Hi-Therm',
-					 'Marek', 'Nova florida', 'Radal', 'Radiatori 2000', 'Roda',
-					 'Royal Thermo', 'Sakura', 'Sira', 'Summer', 'Tianrun', 'Tianrun',
+					'DaVinci','Mirado','Global','MAREK',
+				],
+				'Глубина Секции, мм' => [
+					 '80','90','96','100',
+				],
+				'Межосевое расстояние, мм' => [
+					 '350','500','800','1600',
 				],
 				'Страна Производителя' => [
-					'Италия', 'Китай', 'Испания', 'Польша', 'Украина',
-				],
-				'Межосевое расстояние(мм)' => [
-					 '300','350','500','900','1000','1200','1400','1600','1800','2000',
+					'Германия','Польша','Украина','Италия','Словакия','Китай'
 				],
 			],
-			'filter_headers' => ['filter_manufacturer','filter_country', 'filter_apex'],
+			'filter_headers' => ['filter_manufacturer','filter_apex','filter_deep_sec','filter_country',],
 			'product_list' => $products,
 		];
 		$this->view->render('Каталог - Алюминиевые Радиаторы', $vars);
 	}
 	// Категория: Биметаллические Радиаторы
-	public function bimetal_rad($category, $sorted = []){
+	public function Bimetallicheskie_Radiatori($category, $sorted = []){
 		if(empty($sorted)){
 			$products = $this->model->getProducts($category);
 		}else{
@@ -378,27 +341,28 @@ class Catalog_Controller extends Controller{
 		}
 		$vars = [
 			'title' => 'Биметаллические Радиаторы',
-			'data_title'=>'bimetal_rad',
+			'data_title'=>'Bimetallicheskie_Radiatori',
 			'filter_data' => [
-				'Производитель' => [
-						'Calgoni', 'Esperado', 'Faral', 'Ferroli', 'Global', 'Heat Line', 'Hi-Therm',
-						 'Marek', 'Nova florida', 'Radal', 'Radiatori 2000', 'Roda',
-						 'Royal Thermo', 'Sakura', 'Sira', 'Summer', 'Tianrun', 'Tianrun',
+					'Производитель' => [
+						'DaVinci','Mirado','Global','MAREK',
+					],
+					'Глубина Секции, мм' => [
+						 '80','90','96','100',
+					],
+					'Межосевое расстояние, мм' => [
+						 '350','500','800','1600',
 					],
 					'Страна Производителя' => [
-						'Италия', 'Китай', 'Испания', 'Польша', 'Украина',
-					],
-					'Межосевое расстояние(мм)' => [
-						 '300','350','500','900','1000','1200','1400','1600','1800','2000',
+						'Германия','Польша','Украина','Италия','Словакия','Китай'
 					],
 				],
-			'filter_headers' => ['filter_manufacturer','filter_country', 'filter_apex'],
+			'filter_headers' => ['filter_manufacturer','filter_apex','filter_deep_sec','filter_country',],
 			'product_list' => $products,
 		];
 		$this->view->render('Каталог - Биметаллические Радиаторы', $vars);
 	}
 	// Категория: Чугунные Радиаторы
-	public function chugun_rad($category, $sorted = []){
+	public function Chugunnie_Radiatori($category, $sorted = []){
 		if(empty($sorted)){
 			$products = $this->model->getProducts($category);
 		}else{
@@ -406,27 +370,22 @@ class Catalog_Controller extends Controller{
 		}
 		$vars = [
 			'title' => 'Чугунные Радиаторы',
-			'data_title'=>'chugun_rad',
+			'data_title'=>'Chugunnie_Radiatori',
 			'filter_data' => [
 				'Производитель' => [
-						'Calgoni', 'Esperado', 'Faral', 'Ferroli', 'Global', 'Heat Line', 'Hi-Therm',
-						 'Marek', 'Nova florida', 'Radal', 'Radiatori 2000', 'Roda',
-						 'Royal Thermo', 'Sakura', 'Sira', 'Summer', 'Tianrun', 'Tianrun',
+						'Viadrus',
 					],
 					'Страна Производителя' => [
-						'Италия', 'Китай', 'Испания', 'Польша', 'Украина',
-					],
-					'Межосевое расстояние(мм)' => [
-						 '300','350','500','900','1000','1200','1400','1600','1800','2000',
+						'Турция',' Чехия'
 					],
 				],
-			'filter_headers' => ['filter_manufacturer','filter_country', 'filter_apex'],
+			'filter_headers' => ['filter_manufacturer','filter_country',],
 			'product_list' => $products,
 		];
 		$this->view->render('Каталог - Чугунные Радиаторы', $vars);
 	}
 	// Категория: Электрические Радиаторы
-	public function electro_rad($category, $sorted = []){
+	public function Yalektricheskie_Radiatori($category, $sorted = []){
 		if(empty($sorted)){
 			$products = $this->model->getProducts($category);
 		}else{
@@ -434,30 +393,22 @@ class Catalog_Controller extends Controller{
 		}
 		$vars = [
 			'title' => 'Электрические Радиаторы',
-			'data_title'=>'electro_rad',
+			'data_title'=>'Yalektricheskie_Radiatori',
 			'filter_data' => [
 				'Производитель' => [
-					'Baxi', 'Bosch', 'E.C.A', 'Immergas', 'Italtherm', 'Navien', 'Roctem',
-					 'Roda', 'Saunier Duval', 'Termet', 'Tiberis', 'Valliant',
+					'Sun Wind'
 				],
 				'Страна Производителя' => [
-					'Италия', 'Китай', 'Испания', 'Польша', 'Украина',
-				],
-				'Номинальная Тепловая Мощность(КВт)' => [
-					 '10', '12', '13', '14', '16', '18', '20', '24', '25', '28',
-						'30', '31', '32', '35', '36',
-				],
-				'Количество секций' => [
-					'3', '4', '5', '6', '7', '8', '9', '10' , '11', '12'
+					'Украина',
 				],
 			],
-			'filter_headers' => ['filter_manufacturer','filter_country','filter_power', 'filter_rad_sec'],
+			'filter_headers' => ['filter_manufacturer','filter_country',],
 			'product_list' => $products,
 		];
 		$this->view->render('Каталог - Электрические Радиаторы', $vars);
 	}
 	// Категория: Дизайнерские Радиаторы
-	public function design_rad($category, $sorted = []){
+	public function Dizaynerskie_Radiatori($category, $sorted = []){
 		if(empty($sorted)){
 			$products = $this->model->getProducts($category);
 		}else{
@@ -465,26 +416,19 @@ class Catalog_Controller extends Controller{
 		}
 		$vars = [
 			'title' => 'Дизайнерские Радиаторы',
-			'data_title'=>'design_rad',
+			'data_title'=>'Dizaynerskie_Radiatori',
 			'filter_data' => [
 				'Производитель' => [
-					'Carron', 'Global', 'RETROstyle', 'Royal Thermo',
-				],
-				'Страна Производителя' => [
-					'Чехия', 'Англия', 'Италия', 'Турция', 'Австрия',
-				],
-				'Номинальная Тепловая Мощность(КВт)' => [
-					 '10', '12', '13', '14', '16', '18', '20', '24', '25', '28',
-						'30', '31', '32', '35', '36',
+					'Korado',
 				],
 			],
-			'filter_headers' => ['filter_manufacturer','filter_country','filter_power',],
+			'filter_headers' => ['filter_manufacturer',],
 			'product_list' => $products,
 		];
 		$this->view->render('Каталог - Дизайнерские Радиаторы', $vars);
 	}
 	// Категория: Комплектующие Для Радиаторов
-	public function comp_rad($category, $sorted = []){
+	public function Komplektuyushtie_dlya_Radiatorov($category, $sorted = []){
 		if(empty($sorted)){
 			$products = $this->model->getProducts($category);
 		}else{
@@ -492,33 +436,20 @@ class Catalog_Controller extends Controller{
 		}
 		$vars = [
 			'title' => 'Комплектующие Для Радиаторов',
-			'data_title'=>'comp_rad',
+			'data_title'=>'Komplektuyushtie_dlya_Radiatorov',
 			'filter_data' => [
 				'Производитель' => [
-					'Arco', 'HITTE', 'Polvax', 'Purmo', 'RETROstyle', 'Royal Thermo', 'SD Forte',
-					 'Sira', 'TeploWatt', 'Tianrun', 'Verano',
-				],
-				'Страна Производителя' => [
-					'Китай', 'Чехия', 'Италия', 'Польша', 'Россия', 'Турция',
-				],
-				'Тип Комплектации' => [
-					'Кран Маевского','Напольный крепеж','Настенный крепеж','Кронштейн угловой',
-					'Кронштейн анкерный','Решетка конвектора','Присоединительный набор','Кронштейн для сушки белья',
-				],
-				'Тип Радиаторов' => [
-					 'Чугунные','Панельные','Секционные','Внутрипольные',
-				],
-				'Диаметр Подключения(дюйм)' => [
-					 '1','1/2','3/4',
+					'Fado','Global','Royal Thermo'
 				],
 			],
-			'filter_headers' => ['filter_manufacturer','filter_country','filter_contur','filter_power','filter_burn_cam','filter_teploobmen'],
+			'filter_headers' => ['filter_manufacturer',],
 			'product_list' => $products,
 		];
 		$this->view->render('Каталог - Комплектующие Для Радиаторов', $vars);
 	}
+
 	// Категория: Электрический Теплый Пол
-	public function electro_flour($category, $sorted = []){
+	public function Yalektricheskie_Tepliy_Pol($category, $sorted = []){
 		if(empty($sorted)){
 			$products = $this->model->getProducts($category);
 		}else{
@@ -526,35 +457,32 @@ class Catalog_Controller extends Controller{
 		}
 		$vars = [
 			'title' => 'Электрический Теплый Пол',
-			'data_title'=>'electro_flour',
+			'data_title'=>'Yalektricheskie_Tepliy_Pol',
 			'filter_data' => [
 				'Производитель' => [
-					'Devi', 'Fenix', 'Green Box', 'IN-THERM', 'Nexans', 'TEPLOLUXE PROFI', 'WarmStad',
-					 'Наш комфорт', 'Теплолюкс',
-				],
-				'Страна Производителя' => [
-					'Дания', 'Чехия', 'Россия', 'Норвегия',
+					'Devi', 'Nexans',
 				],
 				'Тип Теплого Пола' => [
-					'Ногревальный мат','Нагревальный кабель',
-				],
-				'Способ Монтажа' => [
-					 'В стяжку','В слой плиточного клея','Под напольное покрытие',
+					'Пленка','Кабель','Мат'
 				],
 				'Тип Кабеля' => [
 					 'Двухжильный','Одножильный',
 				],
-				'Диаметр Кабеля(мм)' => [
-					 '1','1/2','3/4',
+				'Площадь мата, м2' => [
+					 '0.5','0.75','1.0','1.5','2.0','2.5','3.0','3.5',
+					 '4.0','5.0','6.0','7.0','8.0','10.0','12.0','14.0',
+				],
+				'Страна Производителя' => [
+					'Дания', 'Польша', 'Норвегия',
 				],
 			],
-			'filter_headers' => ['filter_manufacturer','filter_country','filter_flour_type','filter_flour_montaj','filter_flour_cabtype', 'filter_flour_cabrad'],
+			'filter_headers' => ['filter_manufacturer','filter_flour_type','filter_flour_cabtype','filter_flour_isqr','filter_country',],
 			'product_list' => $products,
 		];
 		$this->view->render('Каталог - Электрический Теплый Пол', $vars);
 	}
 	// Категория: Труба Для Теплого Пола
-	public function truby_flour($category, $sorted = []){
+	public function Truba_dlya_Teplogo_Pola($category, $sorted = []){
 		if(empty($sorted)){
 			$products = $this->model->getProducts($category);
 		}else{
@@ -562,23 +490,25 @@ class Catalog_Controller extends Controller{
 		}
 		$vars = [
 			'title' => 'Труба Для Теплого Пола',
-			'data_title'=>'truby_flour',
+			'data_title'=>'Truba_dlya_Teplogo_Pola',
 			'filter_data' => [
 				'Производитель' => [
-					'Baxi', 'Bosch', 'E.C.A', 'Immergas', 'Italtherm', 'Navien', 'Roctem',
-					 'Roda', 'Saunier Duval', 'Termet', 'Tiberis', 'Valliant',
+					'Djoul','Fado','Giacomini','Icma','Kermi','Rehau','TECE','VALTEC',
+				],
+				'Диаметр Трубы, мм' => [
+					'10','14','16','17','20',
 				],
 				'Страна Производителя' => [
-					'Италия', 'Китай', 'Корея', 'Польша', 'Словакия', 'Турция',
+					'Германия', 'Турция','Украина','Италия',
 				],
 			],
-			'filter_headers' => ['filter_manufacturer','filter_country',],
+			'filter_headers' => ['filter_manufacturer','filter_country','filter_pipe_rad',],
 			'product_list' => $products,
 		];
 		$this->view->render('Каталог - Труба Для Теплого Пола', $vars);
 	}
 	// Категория: Инфракрасный Теплый Пол
-	public function infro_flour($category, $sorted = []){
+	public function Infrakrasniy_Tepliy_Pol($category, $sorted = []){
 		if(empty($sorted)){
 			$products = $this->model->getProducts($category);
 		}else{
@@ -586,17 +516,17 @@ class Catalog_Controller extends Controller{
 		}
 		$vars = [
 			'title' => 'Инфракрасный Теплый Пол',
-			'data_title'=>'infro_flour',
+			'data_title'=>'Infrakrasniy_Tepliy_Pol',
 			'filter_data' => [
 				'Производитель' => [
-					'Baxi', 'Bosch', 'E.C.A', 'Immergas', 'Italtherm', 'Navien', 'Roctem',
-					 'Roda', 'Saunier Duval', 'Termet', 'Tiberis', 'Valliant',
-				],
-				'Страна Производителя' => [
-					'Италия', 'Китай', 'Корея', 'Польша', 'Словакия', 'Турция',
+					'Danfoss','Djoul','Fado','Giacomini','Icma','Kermi','Rehau','TECE',
+					'VALTEC','Watts',
 				],
 				'Площадь Укладки' => [
 					'0,5','1','2','3','4','5',
+				],
+				'Страна Производителя' => [
+					'Италия', 'Китай', 'Корея', 'Польша', 'Словакия', 'Турция',
 				],
 			],
 			'filter_headers' => ['filter_manufacturer','filter_country','filter_flour_isqr'],
@@ -605,7 +535,7 @@ class Catalog_Controller extends Controller{
 		$this->view->render('Каталог - Инфракрасный Теплый Пол', $vars);
 	}
 	// Категория: Водяной Теплый Пол
-	public function water_flour($category, $sorted = []){
+	public function Vodyanoy_Tepliy_Pol($category, $sorted = []){
 		if(empty($sorted)){
 			$products = $this->model->getProducts($category);
 		}else{
@@ -613,23 +543,28 @@ class Catalog_Controller extends Controller{
 		}
 		$vars = [
 			'title' => 'Водяной Теплый Пол',
-			'data_title'=>'water_flour',
+			'data_title'=>'Vodyanoy_Tepliy_Pol',
 			'filter_data' => [
 				'Производитель' => [
-					'Baxi', 'Bosch', 'E.C.A', 'Immergas', 'Italtherm', 'Navien', 'Roctem',
-					 'Roda', 'Saunier Duval', 'Termet', 'Tiberis', 'Valliant',
+					'Danfoss','Djoul','Fado','Giacomini','Icma','Kermi','Rehau','TECE',
+					'VALTEC','Watts',
+				],
+				'Тип Изделия ТП' => [
+					'Труба для теплого пола','Коллекторная группа','Маты и плиты для пола',
+					'Смесительный узел','Автоматика','Шкафы','Термоголовка с датчиком',
+					'Добавки в бетон','Демпферная лента','Крепежи','Комплектующие',
 				],
 				'Страна Производителя' => [
-					'Италия', 'Китай', 'Корея', 'Польша', 'Словакия', 'Турция',
+					'Германия', 'Дания', 'Польша','Турция', 'Италия',
 				],
 			],
-			'filter_headers' => ['filter_manufacturer','filter_country',],
+			'filter_headers' => ['filter_manufacturer','filter_ttype','filter_country',],
 			'product_list' => $products,
 		];
 		$this->view->render('Каталог - Водяной Теплый Пол', $vars);
 	}
 	// Категория: Коллекторные Шкафы
-	public function collect_shkaf($category, $sorted = []){
+	public function Kollektornie_Shkafi($category, $sorted = []){
 		if(empty($sorted)){
 			$products = $this->model->getProducts($category);
 		}else{
@@ -637,23 +572,22 @@ class Catalog_Controller extends Controller{
 		}
 		$vars = [
 			'title' => 'Коллекторные Шкафы',
-			'data_title'=>'collect_shkaf',
+			'data_title'=>'Kollektornie_Shkafi',
 			'filter_data' => [
 				'Производитель' => [
-					'Baxi', 'Bosch', 'E.C.A', 'Immergas', 'Italtherm', 'Navien', 'Roctem',
-					 'Roda', 'Saunier Duval', 'Termet', 'Tiberis', 'Valliant',
+					'Djoul',
 				],
-				'Страна Производителя' => [
-					'Италия', 'Китай', 'Корея', 'Польша', 'Словакия', 'Турция',
+				'Тип' => [
+					'Встроенный','Наружный'
 				],
 			],
-			'filter_headers' => ['filter_manufacturer','filter_country',],
+			'filter_headers' => ['filter_manufacturer','filter_stype',],
 			'product_list' => $products,
 		];
 		$this->view->render('Каталог - Коллекторные Шкафы', $vars);
 	}
 	// Категория: ППР Трубы и Фитинги
-	public function ppr_pipes($category, $sorted = []){
+	public function PPR_Trubi_i_Fitingi($category, $sorted = []){
 		if(empty($sorted)){
 			$products = $this->model->getProducts($category);
 		}else{
@@ -661,23 +595,33 @@ class Catalog_Controller extends Controller{
 		}
 		$vars = [
 			'title' => 'ППР Трубы и Фитинги',
-			'data_title'=>'ppr_pipes',
+			'data_title'=>'PPR_Trubi_i_Fitingi',
 			'filter_data' => [
 				'Производитель' => [
-					'Baxi', 'Bosch', 'E.C.A', 'Immergas', 'Italtherm', 'Navien', 'Roctem',
-					 'Roda', 'Saunier Duval', 'Termet', 'Tiberis', 'Valliant',
+					'Ekoplastik','Fado','VALTEC',
+				],
+				'Тип Изделия' => [
+					'Трубы','Фитинги','Крепления'
+				],
+				'Тип Фитинга' => [
+					'Заглушка','Муфта соеденительная','Муфта редукционная','Муфта с внутренней резьбой',
+					'Муфта с наружной резьбой','Муфта с накидной гайкой','Угол соеденительный',
+					'Угол с внутренней резьбой','Угол с наружной резьбой','Угол установочный',
+					'Тройник равнопроходной','Тройник редукционный','Тройник с внутренней резьбой',
+					'Тройник с наружной резьбой','Тройник двойной','Кран, вентиль','Планка монтажная','Коллектор',
 				],
 				'Страна Производителя' => [
-					'Италия', 'Китай', 'Корея', 'Польша', 'Словакия', 'Турция',
+					'Италия', 'Чехия',
 				],
 			],
-			'filter_headers' => ['filter_manufacturer','filter_country',],
+			'filter_headers' => ['filter_manufacturer','filter_ppr_type','filter_fitting_type','filter_country',],
 			'product_list' => $products,
 		];
 		$this->view->render('Каталог - ППР Трубы и Фитинги', $vars);
 	}
+
 	// Категория: Обжимные Фитинги
-	public function obj_fittings($category, $sorted = []){
+	public function Obzhimnie_Fitingi($category, $sorted = []){
 		if(empty($sorted)){
 			$products = $this->model->getProducts($category);
 		}else{
@@ -685,23 +629,35 @@ class Catalog_Controller extends Controller{
 		}
 		$vars = [
 			'title' => 'Обжимные Фитинги',
-			'data_title'=>'obj_fittings',
+			'data_title'=>'Obzhimnie_Fitingi',
 			'filter_data' => [
 				'Производитель' => [
-					'Baxi', 'Bosch', 'E.C.A', 'Immergas', 'Italtherm', 'Navien', 'Roctem',
-					 'Roda', 'Saunier Duval', 'Termet', 'Tiberis', 'Valliant',
+					'Fado',
+				],
+				'Диаметр Трубы, мм' => [
+					'16','20','26','32',
+				],
+				'Тип Изделия' => [
+					'Трубы','Фитинги',
+				],
+				'Тип Фитинга' => [
+					'Муфта соеденительная','Муфта с внутренней резьбой','Муфта с наружной резьбой',
+					'Угол соеденительный','Угол с внутренней резьбой','Угол с наружной резьбой',
+					'Угол установочный','Тройник равнопроходной','Тройник с внутренней резьбой',
+					'Тройник с наружной резьбой',
 				],
 				'Страна Производителя' => [
-					'Италия', 'Китай', 'Корея', 'Польша', 'Словакия', 'Турция',
+					'Италия',
 				],
 			],
-			'filter_headers' => ['filter_manufacturer','filter_country',],
+			'filter_headers' => ['filter_manufacturer','filter_pipe_rad','filter_ppr_type',
+					'filter_fitting_type','filter_country',],
 			'product_list' => $products,
 		];
 		$this->view->render('Каталог - Обжимные Фитинги', $vars);
 	}
 	// Категория: Изоляция для Труб
-	public function pipes_isol($category, $sorted = []){
+	public function Izolyatsiya_dlya_Trub($category, $sorted = []){
 		if(empty($sorted)){
 			$products = $this->model->getProducts($category);
 		}else{
@@ -709,23 +665,22 @@ class Catalog_Controller extends Controller{
 		}
 		$vars = [
 			'title' => 'Изоляция для Труб',
-			'data_title'=>'pipes_isol',
+			'data_title'=>'Izolyatsiya_dlya_Trub',
 			'filter_data' => [
 				'Производитель' => [
-					'Baxi', 'Bosch', 'E.C.A', 'Immergas', 'Italtherm', 'Navien', 'Roctem',
-					 'Roda', 'Saunier Duval', 'Termet', 'Tiberis', 'Valliant',
+					'Master Therm','NMC','Teploizol',
 				],
-				'Страна Производителя' => [
-					'Италия', 'Китай', 'Корея', 'Польша', 'Словакия', 'Турция',
+				'Диаметр, мм' => [
+					'18','22','28','35',
 				],
 			],
-			'filter_headers' => ['filter_manufacturer','filter_country',],
+			'filter_headers' => ['filter_manufacturer','filter_pipe_rad',],
 			'product_list' => $products,
 		];
 		$this->view->render('Каталог - Изоляция для Труб', $vars);
 	}
 	// Категория: Металопластиковые Трубы
-	public function metal_pipes($category, $sorted = []){
+	public function Metaloplastikovie_Trubi($category, $sorted = []){
 		if(empty($sorted)){
 			$products = $this->model->getProducts($category);
 		}else{
@@ -733,23 +688,25 @@ class Catalog_Controller extends Controller{
 		}
 		$vars = [
 			'title' => 'Металопластиковые Трубы',
-			'data_title'=>'metal_pipes',
+			'data_title'=>'Metaloplastikovie_Trubi',
 			'filter_data' => [
 				'Производитель' => [
-					'Baxi', 'Bosch', 'E.C.A', 'Immergas', 'Italtherm', 'Navien', 'Roctem',
-					 'Roda', 'Saunier Duval', 'Termet', 'Tiberis', 'Valliant',
+					'Fado','Valsir','VALTEC'
 				],
 				'Страна Производителя' => [
-					'Италия', 'Китай', 'Корея', 'Польша', 'Словакия', 'Турция',
+					'16','20','26','32',
+				],
+				'Страна Производителя' => [
+					'Италия',
 				],
 			],
-			'filter_headers' => ['filter_manufacturer','filter_country',],
+			'filter_headers' => ['filter_manufacturer','filter_pipe_rad','filter_country',],
 			'product_list' => $products,
 		];
 		$this->view->render('Каталог - Металопластиковые Трубы', $vars);
 	}
 	// Категория: Внутрення Канализация
-	public function instock($category, $sorted = []){
+	public function Vnutrennyaya_Kanalizatsiya($category, $sorted = []){
 		if(empty($sorted)){
 			$products = $this->model->getProducts($category);
 		}else{
@@ -757,23 +714,27 @@ class Catalog_Controller extends Controller{
 		}
 		$vars = [
 			'title' => 'Внутрення Канализация',
-			'data_title'=>'instock',
+			'data_title'=>'Vnutrennyaya_Kanalizatsiya',
 			'filter_data' => [
 				'Производитель' => [
-					'Baxi', 'Bosch', 'E.C.A', 'Immergas', 'Italtherm', 'Navien', 'Roctem',
-					 'Roda', 'Saunier Duval', 'Termet', 'Tiberis', 'Valliant',
+					'Aquer','Ostendorf','Armakan'
+				],
+				'Тип Фитинга Канализации' => [
+					'Труба','Заглушка','Муфта','Колено','Тройник','Редукция','Ревизия',
+					'Компенсатор','Крестовина','Адаптер чугун-пластик','Колено Универсальное',
+					'Колено WC','Трап Сточный','Хомут Крепежный','Силикон',
 				],
 				'Страна Производителя' => [
-					'Италия', 'Китай', 'Корея', 'Польша', 'Словакия', 'Турция',
+					'Германия','Польша','Турция'
 				],
 			],
-			'filter_headers' => ['filter_manufacturer','filter_country',],
+			'filter_headers' => ['filter_manufacturer','filter_stockfit_type','filter_country',],
 			'product_list' => $products,
 		];
 		$this->view->render('Каталог - Внутрення Канализация', $vars);
 	}
 	// Категория: Наружная Канализация
-	public function outstock($category, $sorted = []){
+	public function Naruzhnaya_Kanalizatsiya($category, $sorted = []){
 		if(empty($sorted)){
 			$products = $this->model->getProducts($category);
 		}else{
@@ -781,23 +742,29 @@ class Catalog_Controller extends Controller{
 		}
 		$vars = [
 			'title' => 'Наружная Канализация',
-			'data_title'=>'outstock',
+			'data_title'=>'Naruzhnaya_Kanalizatsiya',
 			'filter_data' => [
 				'Производитель' => [
-					'Baxi', 'Bosch', 'E.C.A', 'Immergas', 'Italtherm', 'Navien', 'Roctem',
-					 'Roda', 'Saunier Duval', 'Termet', 'Tiberis', 'Valliant',
+					'Ostendorf'
+				],
+				'Тип Фитинга Канализации' => [
+					'Труба','Муфта','Колено','Тройник','Редукция','Ревизия',
+				],
+				'Диаметр Канализации' => [
+					'110мм','160мм','200мм','250мм','315мм','400мм','500мм'
 				],
 				'Страна Производителя' => [
-					'Италия', 'Китай', 'Корея', 'Польша', 'Словакия', 'Турция',
+					'Германия','Румыния'
 				],
 			],
-			'filter_headers' => ['filter_manufacturer','filter_country',],
+			'filter_headers' => ['filter_manufacturer','filter_stockfit_type',
+				'filter_stock_rad','filter_country',],
 			'product_list' => $products,
 		];
 		$this->view->render('Каталог - Наружная Канализация', $vars);
 	}
 	// Категория: Бесшумная Канализация
-	public function quitstock($category, $sorted = []){
+	public function Besshumnaya_Kanalizatsiya($category, $sorted = []){
 		if(empty($sorted)){
 			$products = $this->model->getProducts($category);
 		}else{
@@ -805,23 +772,26 @@ class Catalog_Controller extends Controller{
 		}
 		$vars = [
 			'title' => 'Бесшумная Канализация',
-			'data_title'=>'quitstock',
+			'data_title'=>'Besshumnaya_Kanalizatsiya',
 			'filter_data' => [
 				'Производитель' => [
-					'Baxi', 'Bosch', 'E.C.A', 'Immergas', 'Italtherm', 'Navien', 'Roctem',
-					 'Roda', 'Saunier Duval', 'Termet', 'Tiberis', 'Valliant',
+					'Ostendorf','Rehau'
+				],
+				'Тип Фитинга Канализации' => [
+					'Труба','Заглушка','Муфта','Колено','Тройник','Редукция','Ревизия',
+					'Компенсатор','Крестовина','Колено WC','Манжет',
 				],
 				'Страна Производителя' => [
-					'Италия', 'Китай', 'Корея', 'Польша', 'Словакия', 'Турция',
+					'Германия',
 				],
 			],
-			'filter_headers' => ['filter_manufacturer','filter_country',],
+			'filter_headers' => ['filter_manufacturer','filter_','filter_country',],
 			'product_list' => $products,
 		];
 		$this->view->render('Каталог - Бесшумная Канализация', $vars);
 	}
 	// Категория: Кандиционеры Настенного Типа
-	public function wall_cond($category, $sorted = []){
+	public function Konditsioneri_Nastennogo_Tipa($category, $sorted = []){
 		if(empty($sorted)){
 			$products = $this->model->getProducts($category);
 		}else{
@@ -829,23 +799,41 @@ class Catalog_Controller extends Controller{
 		}
 		$vars = [
 			'title' => 'Кандиционеры Настенного Типа',
-			'data_title'=>'wall_cond',
+			'data_title'=>'Konditsioneri_Nastennogo_Tipa',
 			'filter_data' => [
 				'Производитель' => [
-					'Baxi', 'Bosch', 'E.C.A', 'Immergas', 'Italtherm', 'Navien', 'Roctem',
-					 'Roda', 'Saunier Duval', 'Termet', 'Tiberis', 'Valliant',
+					'CHIGO','Cooper&hunter','DAIKIN','DEKKER','EWT','GREE','IDEA','LG','LUBERG',
+					'Midea','Mitsubishi Electric','Mitsubishi HEAVY','NEOCLIMA','OLMO','OSAKA',
+					'Panasonic','Samsung','TOSHIBA','TOSOT',
+				],
+				'Обогрев Зимой' => [
+					'-5°С', '-7°С', '-10°С', '-15°С', '-20°С', '-23°С','-25°С','-30°С',
+				],
+				'Инверторная Технология' => [
+					'Нет','Да'
+				],
+				'Мощность, БТЕ/час' => [
+					'05','07','09','12','18','24','30','36',
+				],
+				'Площадь охлаждения, м2' => [
+					'до 15 м2','до 20 м2','до 30 м2','до 40 м2','до 60 м2','до 80 м2',
+					'до 100 м2','до 120 м2',
+				],
+				'Тип хладагента:' => [
+					'r-32','r-410a','r-410',
 				],
 				'Страна Производителя' => [
 					'Италия', 'Китай', 'Корея', 'Польша', 'Словакия', 'Турция',
 				],
 			],
-			'filter_headers' => ['filter_manufacturer','filter_country',],
+			'filter_headers' => ['filter_manufacturer','filter_wheating','filter_invert',
+					'filter_bpower','filter_csquare','filter_ctype','filter_country',],
 			'product_list' => $products,
 		];
 		$this->view->render('Каталог - Кандиционеры Настенного Типа', $vars);
 	}
 	// Категория: Мобильные Кондиционеры
-	public function mobile_cond($category, $sorted = []){
+	public function Mobilynie_Konditsioneri($category, $sorted = []){
 		if(empty($sorted)){
 			$products = $this->model->getProducts($category);
 		}else{
@@ -853,23 +841,56 @@ class Catalog_Controller extends Controller{
 		}
 		$vars = [
 			'title' => 'Мобильные Кондиционеры',
-			'data_title'=>'mobile_cond',
+			'data_title'=>'Mobilynie_Konditsioneri',
 			'filter_data' => [
 				'Производитель' => [
-					'Baxi', 'Bosch', 'E.C.A', 'Immergas', 'Italtherm', 'Navien', 'Roctem',
-					 'Roda', 'Saunier Duval', 'Termet', 'Tiberis', 'Valliant',
+					'BALLU','CHIGO','ELECTROLUX','NEOCLIMA',
+				],
+				'Мощность, БТЕ/час' => [
+					'07','09','11','12','13','15',
+				],
+				'Площадь охлаждения, м2' => [
+					'до 15 м2','до 20 м2','до 30 м2','30 м2','35 м2','до 40 м2','40 м2',
+					'до 60 м2','до 80 м2','до 100 м2','до 120 м2',
+				],
+				'Тип хладагента:' => [
+					'r-410a','r-410',
 				],
 				'Страна Производителя' => [
-					'Италия', 'Китай', 'Корея', 'Польша', 'Словакия', 'Турция',
+					'Китай',
 				],
 			],
-			'filter_headers' => ['filter_manufacturer','filter_country',],
+			'filter_headers' => ['filter_manufacturer','filter_bpower','filter_csquare',
+				'filter_ctype','filter_country',],
+			'product_list' => $products,
+		];
+		$this->view->render('Каталог - Мобильные Кондиционеры', $vars);
+	}
+	// Категория: Увлажнители Воздуха
+	public function Uvlazhniteli_Vozduha($category, $sorted = []){
+		if(empty($sorted)){
+			$products = $this->model->getProducts($category);
+		}else{
+			$products = $sorted;
+		}
+		$vars = [
+			'title' => 'Мобильные Кондиционеры',
+			'data_title'=>'Uvlazhniteli_Vozduha',
+			'filter_data' => [
+				'Производитель' => [
+					'BONECO',
+				],
+				'Площадь Увлажнения, м2' => [
+					'до 40 м2',
+				],
+			],
+			'filter_headers' => ['filter_manufacturer','filter_csquare','filter_country',],
 			'product_list' => $products,
 		];
 		$this->view->render('Каталог - Мобильные Кондиционеры', $vars);
 	}
 	// Категория: Циркулярные Насосы
-	public function circ_pump($category, $sorted = []){
+	public function Tsirkulyarnie_Nasosi($category, $sorted = []){
 		if(empty($sorted)){
 			$products = $this->model->getProducts($category);
 		}else{
@@ -877,23 +898,40 @@ class Catalog_Controller extends Controller{
 		}
 		$vars = [
 			'title' => 'Циркулярные Насосы',
-			'data_title'=>'circ_pump',
+			'data_title'=>'Tsirkulyarnie_Nasosi',
 			'filter_data' => [
 				'Производитель' => [
-					'Baxi', 'Bosch', 'E.C.A', 'Immergas', 'Italtherm', 'Navien', 'Roctem',
-					 'Roda', 'Saunier Duval', 'Termet', 'Tiberis', 'Valliant',
+					'Grundfos','Wilo'
+				],
+				'Напор, м' => [
+					'2 - 3 м','3 - 4 м','4 - 5 м','6 -8 м','8 - 12 м',
+				],
+				'Производтельность, мЗ/час' => [
+					'2 - 4 м3/час','4 - 5 м3/час','5 - 6 м3/час','6 - 8 м3/час',
+					'8 - 10 м3/час','10 - 12 м3/час',
+				],
+				'Монтажная Длина, мм' => [
+					'130мм','180мм',
+				],
+				'Потребляемая Мощность, Вт' => [
+					'20 - 40 Вт','40 - 60 Вт','60 - 80 Вт','80 - 100 Вт','100 - 120 Вт','120 - 150 Вт',
+					'150 - 200 Вт','200 - 250 Вт',
+				],
+				'Электропитания, В' => [
+					'220','380',
 				],
 				'Страна Производителя' => [
-					'Италия', 'Китай', 'Корея', 'Польша', 'Словакия', 'Турция',
+					'Германия','Дания',
 				],
 			],
-			'filter_headers' => ['filter_manufacturer','filter_country',],
+			'filter_headers' => ['filter_manufacturer','filter_napryajenie','filter_napor',
+					'filter_effect','filter_nepower','filter_mlength','filter_country',],
 			'product_list' => $products,
 		];
 		$this->view->render('Каталог - Циркулярные Насосы', $vars);
 	}
 	// Категория: Бойлеры Электрические
-	public function electro_boiler($category, $sorted = []){
+	public function Boyleri_Yalektricheskie($category, $sorted = []){
 		if(empty($sorted)){
 			$products = $this->model->getProducts($category);
 		}else{
@@ -901,23 +939,38 @@ class Catalog_Controller extends Controller{
 		}
 		$vars = [
 			'title' => 'Бойлеры Электрические',
-			'data_title'=>'electro_boiler',
+			'data_title'=>'Boyleri_Yalektricheskie',
 			'filter_data' => [
 				'Производитель' => [
-					'Baxi', 'Bosch', 'E.C.A', 'Immergas', 'Italtherm', 'Navien', 'Roctem',
-					 'Roda', 'Saunier Duval', 'Termet', 'Tiberis', 'Valliant',
+					'ARTI','Ariston','Atlantic','Bosch','Drazice','Eldom','TESY',
+				],
+				'Форма Бойлера' => [
+					'Цилиндрический','Прямоугольный','Slim (тонкий)','Плоский','Компактный',
+				],
+				'Установка Бойлера' => [
+					'Под мойку', 'Над мойкой', 'Настенный', 'Настенный вертикальный',
+					'Настенный горизонтальный', 'Вертикальный/Горизонтальный','Напольный',
+				],
+				'Тип Нагревательного Тэна' => [
+					'"Сухой"', '"Мокрый"',
+				],
+				'Объем Бойлера' => [
+					'5 - 10', '11 - 15', '16 - 30', '31 - 50', '51 - 60', '61 - 80','81 - 100','101 - 120',
+					'121 - 150','151 - 200','201 - 250','251 - 300','300','400','500',
+					'750','800','1000','2000',
 				],
 				'Страна Производителя' => [
 					'Италия', 'Китай', 'Корея', 'Польша', 'Словакия', 'Турция',
 				],
 			],
-			'filter_headers' => ['filter_manufacturer','filter_country',],
+			'filter_headers' => ['filter_manufacturer','filter_bform','filter_bset',
+				'filter_tentype','filter_bsqrt','filter_country',],
 			'product_list' => $products,
 		];
 		$this->view->render('Каталог - Бойлеры Электрические', $vars);
 	}
 	// Категория: Проточные Электрические Водонагреватели
-	public function waterheater($category, $sorted = []){
+	public function Protochnie_Yalektricheskie_Vodonagrevateli($category, $sorted = []){
 		if(empty($sorted)){
 			$products = $this->model->getProducts($category);
 		}else{
@@ -925,23 +978,19 @@ class Catalog_Controller extends Controller{
 		}
 		$vars = [
 			'title' => 'Проточные Электрические Водонагреватели',
-			'data_title'=>'waterheater',
+			'data_title'=>'Protochnie_Yalektricheskie_Vodonagrevateli',
 			'filter_data' => [
 				'Производитель' => [
-					'Baxi', 'Bosch', 'E.C.A', 'Immergas', 'Italtherm', 'Navien', 'Roctem',
-					 'Roda', 'Saunier Duval', 'Termet', 'Tiberis', 'Valliant',
-				],
-				'Страна Производителя' => [
-					'Италия', 'Китай', 'Корея', 'Польша', 'Словакия', 'Турция',
+					'Zanussi',
 				],
 			],
-			'filter_headers' => ['filter_manufacturer','filter_country',],
+			'filter_headers' => ['filter_manufacturer',],
 			'product_list' => $products,
 		];
 		$this->view->render('Каталог - Проточные Электрические Водонагреватели', $vars);
 	}
 	// Категория: Газовые Колонки
-	public function gaz_kolonky($category, $sorted = []){
+	public function Gazovie_Kolonki($category, $sorted = []){
 		if(empty($sorted)){
 			$products = $this->model->getProducts($category);
 		}else{
@@ -949,20 +998,59 @@ class Catalog_Controller extends Controller{
 		}
 		$vars = [
 			'title' => 'Газовые Колонки',
-			'data_title'=>'gaz_kolonky',
+			'data_title'=>'Gazovie_Kolonki',
 			'filter_data' => [
 				'Производитель' => [
-					'Baxi', 'Bosch', 'E.C.A', 'Immergas', 'Italtherm', 'Navien', 'Roctem',
-					 'Roda', 'Saunier Duval', 'Termet', 'Tiberis', 'Valliant',
-				],
-				'Страна Производителя' => [
-					'Италия', 'Китай', 'Корея', 'Польша', 'Словакия', 'Турция',
+					'Ariston','Bosch','Demrad',
 				],
 			],
-			'filter_headers' => ['filter_manufacturer','filter_country',],
+			'filter_headers' => ['filter_manufacturer',],
 			'product_list' => $products,
 		];
 		$this->view->render('Каталог - Газовые Колонки', $vars);
+	}
+	// Категория: Программаторы
+	public function Programmatori($category, $sorted = []){
+		if(empty($sorted)){
+			$products = $this->model->getProducts($category);
+		}else{
+			$products = $sorted;
+		}
+		$vars = [
+			'title' => 'Программаторы',
+			'data_title'=>'Programmatori',
+			'filter_data' => [
+				'Производитель' => [
+					'Computherm','Auraton','Salus',
+				],
+				'Тип Программатора' => [
+					'Проводной','Беспроводной','с Wi-Fi',
+				],
+			],
+			'filter_headers' => ['filter_manufacturer',],
+			'product_list' => $products,
+		];
+		$this->view->render('Каталог - Программаторы', $vars);
+	}
+	// Категория: Стабилизаторы Напряжения
+	public function Stabilizatori_Napryazheniya($category, $sorted = []){
+		if(empty($sorted)){
+			$products = $this->model->getProducts($category);
+		}else{
+			$products = $sorted;
+		}
+		$vars = [
+			'title' => 'Стабилизаторы Напряжения',
+			'data_title'=>'Stabilizatori_Napryazheniya',
+			'filter_data' => [
+				'Производитель' => [
+					'LVT',
+				],
+			],
+			'filter_headers' => ['filter_manufacturer',],
+			'product_list' => $products,
+		];
+		$this->view->render('Каталог - Стабилизаторы Напряжения', $vars);
 	}
 
 }

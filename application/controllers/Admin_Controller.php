@@ -22,23 +22,89 @@ class Admin_Controller extends Controller{
 		}else{
 			echo 0;
 		}
-
 	}
 
 	public function panelAction(){
 		$this->view->layout = 'admin';
-		$this->view->render('Ultraprom - Панель Администратора');
+		$global_category = $this->model->get_global_categoroies();
+		$category = $this->model->get_categoroies();
+		$lower_category = $this->model->get_lower_categoroies();
+		$manufacturer = $this->model->get_manufacturer();
+		$vars = [
+			'global_category' => $global_category,
+			'category' => $category,
+			'lower_category' => $lower_category,
+			'manufacturer' => $manufacturer,
+		];
+		$this->view->render('Ultraprom - Панель Администратора', $vars);
+	}
+
+	public function add_categoryAction(){
+		$category['c_name'] = $_POST['category_name'];
+		$category['eng_name'] = $this->translit($category['c_name']);
+		$category['gc_id'] = $_POST['global_category'];
+		// var_dump($category);
+		$result = $this->model->add_category($category);
+		echo $result;
+	}
+
+	public function add_lower_categoryAction(){
+		$category['lc_name'] = $_POST['lower_category_name'];
+		$category['eng_name'] = $this->translit($category['lc_name']);
+		$category['lc_image'] = $this->add_image('lower_category_image');
+		$category['c_id'] = (int)$_POST['category'];
+		var_dump($category);
+		$result = $this->model->add_lower_category($category);
+		echo $result;
+	}
+
+	public function add_manufacturerAction(){
+		$manufacturer['m_name'] = $_POST['manufacturer_name'];
+		$manufacturer['m_image'] = $this->add_image('manufacturer_image');
+		// var_dump($manufacturer);
+		$result = $this->model->add_manufacturer($manufacturer);
+		echo $result;
+	}
+
+	public function del_manufacturerAction(){
+		$manufacturer['id'] = $_POST['manufacturer_id'];
+		$result = $this->model->del_manufacturer($manufacturer);
+		echo $result;
 	}
 
 	public function productsAction(){
 		$this->view->layout = 'admin';
-		$categories = $this->model->get_categoroies();
+		$lcategories = $this->model->get_lower_categoroies();
+		$manufacturers = $this->model->get_manufacturer();
 		$products = $this->model->get_products();
 		$vars = [
-			'categories' => $categories,
+			'categories' => $lcategories,
 			'products' => $products,
+			'manufacturers' => $manufacturers,
 		];
 		$this->view->render('Ultraprom - Товары', $vars);
+	}
+
+	public function add_image($img_key){
+		// var_dump($_FILES);
+		$target_dir = "/home/newworld/domains/ultraprom.new/public_html/public/media/uploads/";
+		$target_file = $target_dir . basename($_FILES[$img_key]["name"]);
+
+		$name = pathinfo($_FILES[$img_key]['name'], PATHINFO_FILENAME);
+		$extension = pathinfo($_FILES[$img_key]['name'], PATHINFO_EXTENSION);
+		$i = 0;
+		while(file_exists($target_file)){
+			$target_file = $target_dir . $name . $i . '.' . $extension;
+			$i++;
+		}
+		$target_file = $target_dir . $name . $i . '.' . $extension;
+
+		if (move_uploaded_file($_FILES[$img_key]["tmp_name"], $target_file)) {
+			 // echo "Товар ".$vars['title']." успешно загружен";
+			return $name.$i.'.'.$extension;
+		} else {
+			 return 0;
+		}
 	}
 
 	public function create_productAction(){
@@ -46,6 +112,7 @@ class Admin_Controller extends Controller{
 			foreach ($_POST as $key => $value) {
 				$vars[$key] = $value;
 			}
+			var_dump($vars);
 			//Сохраняем фото
 			$target_dir = "/home/newworld/domains/ultraprom.new/public_html/public/media/uploads/";
 			$target_file = $target_dir . basename($_FILES["photo"]["name"]);
@@ -66,6 +133,8 @@ class Admin_Controller extends Controller{
 				 // echo "Sorry, there was an error uploading your file.";
 		 	}
 
+			$vars['eng_name'] = $this->translit($vars['title']);
+
 			//Добавляем доп параметры
 			if($vars['photo'] == ''){
 				$vars['status'] = 0;
@@ -73,19 +142,26 @@ class Admin_Controller extends Controller{
 				$vars['status'] = 1;
 			}
 
-			if($vars['available'] == 'on'){
-				$vars['available'] = 1;
+			if(array_key_exists( 'available' , $vars)){
+				if($vars['available'] == 'on'){
+					$vars['available'] = 1;
+				}
 			}else{
 				$vars['available'] = 0;
 			}
 
-			if($vars['onsale'] == 'on'){
-				$vars['onsale'] = 1;
+			if(array_key_exists( 'onsale' , $vars)){
+				if($vars['onsale'] == 'on'){
+					$vars['onsale'] = 1;
+				}
 			}else{
 				$vars['onsale']	= 0;
 			}
 
 			$vars['manufacturer'] = 1;
+
+			$vars['stat_list'] = trim($vars['param_string'], ';');
+
 
 			// filter_info
 			$filter_info = array_filter(
@@ -108,39 +184,38 @@ class Admin_Controller extends Controller{
 			foreach ($currencies as $curr) {
 				$curr_buy[$curr['id']] = $curr;
 			}
-			$vars['price_uah'] = $vars['price'] * $curr_buy[$vars['currency']]['sale'];
-			// $vars['price_uah'] = 0;
-			// power_id
-			// stat_list
-
+			$vars['price_uah'] = $vars['price'] * $curr_buy[$vars['currency']]['buy'];
 			$result = $this->model->create_product($vars);
-
-			// var_dump($result);
-			echo $vars['filter_info'];
 		}
 	}
 
 	public function product_updateAction(){
 		if($_POST['del'] == 'true'){
 			// Удаляем запись
-			$this->model->product_del($_POST['item_id']);
-			return 0;
+			$result = $this->model->product_del($_POST['item_id']);
+			return $result;
 		}
 		$product = [
-			'id' => $_POST['item_id'],
+			'id' => $_POST['id'],
 			'title' => $_POST['item_title'],
 			'price' => (int)$_POST['item_price'],
 			'currency' => (int)$_POST['item_currency'],
 			'price_uah' => 0,
 			'description' => $_POST['item_description'],
-			'onsale' => 0,
-			'available' => 0,
 		];
-		if($_POST['item_onsale'] == 'true'){
-			$product['onsale'] = 1;
+		if(array_key_exists( 'item_available' , $_POST)){
+			if($_POST['item_available'] == 'on'){
+				$product['available'] = 1;
+			}
+		}else{
+			$product['available'] = 0;
 		}
-		if($_POST['item_available'] == 'true'){
-			$product['available'] = 1;
+		if(array_key_exists( 'item_onsale' , $_POST)){
+			if($_POST['item_onsale'] == 'on'){
+				$product['onsale'] = 1;
+			}
+		}else{
+			$product['onsale']	= 0;
 		}
 		//Обновляем цену по валюте
 		$currencies = $this->model->get_currencies();
@@ -151,8 +226,12 @@ class Admin_Controller extends Controller{
 		$product['price_uah'] = $product['price'] * $curr_buy[$_POST['item_currency']]['sale'];
 
 		$result = $this->model->product_update($product);
-
-		var_dump($product);
+		if(!(empty($_FILES['photo']['name']))){
+			$photo_upd = array();
+			$photo_upd['photo'] = $this->add_image('photo');
+			$photo_upd['id'] = $_POST['id'];
+			$result = $this->model->update_photo($photo_upd);
+		}
 	}
 
 	public function currencyAction(){
