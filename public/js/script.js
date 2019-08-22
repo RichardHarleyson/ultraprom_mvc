@@ -7,7 +7,13 @@ function getCookie(name) {
 }
 
 // Carousels
+
 $(document).ready(function(){
+  $('.carousel-item').first().addClass('active');
+  $('HCarousel').carousel({
+    interval: 3000
+  })
+
 	$('#same_products_carousel').slick({
 		infinite: true,
 		slidesToShow: 5,
@@ -121,6 +127,15 @@ $(document).ready(function(){
 	});
 });
 //====================================================================
+
+// function search(){
+//   $.ajax({
+//     type: 'POST',
+//     url: '/search_page',
+//     data: $('#').val(),
+//     success:
+//   });
+// }
 
 $(document).ready(function(){
 				 //-- Click on detail
@@ -337,19 +352,22 @@ function star_test(){
 
 $(document).ready(function(){
 	$('#reviewform').submit(function(){
-		event.preventDefault();
+		// event.preventDefault();
 		var data = $(this).serialize();
 		var stars = star_test();
 		data += '&rating='+stars+'&product_id='+$(this).data('product_id');
-		$.ajax({
-			type: 'POST',
-			url: '/product/new_review',
-			data: data,
-			success: function(res){
-				console.log(res);
-				$('#review_form_status').html('<h5>Спасибо за Ваш отзыв!</h5>');
-			}
-		})
+    var url = '/product_review/new_review';
+    console.log(url);
+    $.ajax({
+      type: 'POST',
+      url: url,
+      data: data,
+      dataType: 'text',
+      success: function(res){
+        console.log(res);
+        $('#review_form_status').html('<h5>Спасибо за Ваш отзыв!</h5>');
+      }
+    })
 	})
 })
 // ==========================================================
@@ -949,11 +967,12 @@ $(document).ready(function(){
       data: data,
       success: function(res){
         console.log(res);
-        // alert(res);
+        alert('Добавлено');
         // подсветка
       }
     })
   });
+
   $('#add_lower_category').submit(function(){
     event.preventDefault();
     var data = new FormData($('form')[1]);
@@ -964,7 +983,7 @@ $(document).ready(function(){
       processData: false,
       contentType: false,
       success: function(res){
-        console.log(res);
+        console.log('Добавлено');
       }
     })
   });
@@ -979,7 +998,7 @@ $(document).ready(function(){
       processData: false,
       contentType: false,
       success: function(res){
-        console.log(res);
+        console.log('Добавлено');
       }
     })
   });
@@ -993,7 +1012,61 @@ function del_manufacturer(){
     url: '/admin/del_manufacturer',
     data: { manufacturer_id : $('#manufacturer').val()},
     success: function(res){
-      console.log(res);
+      $('#manufacturer').find('option:selected').remove();
+    }
+  })
+}
+
+function del_slide(){
+  event.preventDefault();
+  $.ajax({
+    type: 'POST',
+    url: '/admin/del_slide',
+    data: { slide_id: $('select[name="slides"]').val()},
+    success: function(res){
+      $('select[name="slides"]').find('option:selected').remove();
+    }
+  })
+}
+
+$(document).ready(function(){
+  $('#add_slide').submit(function(){
+    event.preventDefault();
+    var data = new FormData(document.getElementById('add_slide'));
+    $.ajax({
+      type: 'POST',
+      url: '/admin/add_slide',
+      data: data,
+      processData: false,
+      contentType: false,
+      success: function(res){
+        console.log(res);
+        alert('Слайд Добавлен');
+      }
+    })
+  });
+})
+
+function del_review(elem){
+  event.preventDefault();
+  $.ajax({
+    type: 'POST',
+    url: '/admin/upd_reviews',
+    data: {review_id: $(elem).data('r_id'), r_status: 0},
+    success: function(res){
+      $(elem).parent().parent().hide();
+    }
+  })
+}
+
+function set_review(elem){
+  event.preventDefault();
+  $.ajax({
+    type: 'POST',
+    url: '/admin/upd_reviews',
+    data: {review_id: $(elem).data('r_id'), r_status: 1},
+    success: function(res){
+      $(elem).parent().parent().hide();
     }
   })
 }

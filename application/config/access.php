@@ -3,6 +3,7 @@
 		'all' => [
 			// MAIN
 			'index',
+			'search_page',
 			// PRODUCT
 			'page',
 			'new_review',
@@ -43,6 +44,9 @@
 			'add_lower_category',
 			'add_manufacturer',
 			'del_manufacturer',
+			'add_slide',
+			'del_slide',
+			'upd_reviews',
 		]
 	];
  ?>

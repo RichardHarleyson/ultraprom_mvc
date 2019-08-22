@@ -57,6 +57,18 @@ class Admin extends Model{
 		return $result;
 	}
 
+	public function get_slides(){
+		return $this->db->row('SELECT * FROM up_slides');
+	}
+
+	public function get_reviews(){
+		return $this->db->row('SELECT * FROM up_comments WHERE status=0');
+	}
+
+	public function upd_reviews($status){
+		return $this->db->insert_query('UPDATE up_comments SET status=:status WHERE id=:id',$status);
+	}
+
 	public function add_category($category){
 		// $result = $this->db->insert_query('INSERT INTO up_comments(uname, comment, rating, product_id) VALUES (:uname, :review, :rating, :product_id)', $review);
 		$result = $this->db->insert_query('INSERT INTO up_category(c_name, eng_name, gc_id) VALUES (:c_name, :eng_name, :gc_id)', $category);
@@ -74,9 +86,21 @@ class Admin extends Model{
 		return $result;
 	}
 
+	public function add_slide($slide){
+		$result = $this->db->insert_query('INSERT INTO up_slides (s_url, s_image) VALUES (:s_url, :s_image)',$slide);
+	}
+
 	public function del_manufacturer($manufacturer){
-		$result = $this->db->row('DELETE FROM `up_manufacturer` WHERE id=:id',$manufacturer);
+		$result = $this->db->row('DELETE FROM up_manufacturer WHERE id=:id',$manufacturer);
 		return $result;
+	}
+
+	public function del_slide($id){
+		return $this->db->row('DELETE FROM up_slides WHERE id='.$id);
+	}
+
+	public function del_review($id){
+		return $this->db->row('DELETE FROM up_comments WHERE id='.$id);
 	}
 
 	public function product_update($product){

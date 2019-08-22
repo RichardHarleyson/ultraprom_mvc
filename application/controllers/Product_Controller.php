@@ -12,10 +12,11 @@ class Product_Controller extends Controller{
 		// debug(empty($product));
 		if(empty($product)){
 			$this->redirect('');
+			// echo 'Smth went wrong';
 		}
 		$same_products = $this->model->get_same_products($product[0]['category_id']);
 		$reviews = $this->model->get_reviews($product[0]['id']);
-		// var_dump($product);
+		// var_dump($reviews);
 		$lcategory_ename = $this->model->lcategory_ename($product[0]['category_id']);
 		// var_dump($lcategory_ename);
 		$category_ename = $this->model->category_ename($lcategory_ename[0]['c_id']);
@@ -32,6 +33,8 @@ class Product_Controller extends Controller{
 	}
 
 	public function new_reviewAction(){
+		// var_dump($review);
+		var_dump($_POST);
 		$review = [
 			'product_id' => $_POST['product_id'],
 			'uname' => $_POST['uname'],
@@ -45,9 +48,13 @@ class Product_Controller extends Controller{
 		foreach ($get_reviews as $key => $value) {
 			$total_review += $value['rating'];
 		}
-		$new_rating = (int)($total_review / count($get_reviews));
+		$count_reviews = count($get_reviews);
+		if($count_reviews == 0){
+			$count_reviews = 1;
+		}
+		$new_rating = (int)($total_review / $count_reviews);
 		$result = $this->model->update_rating($new_rating, $_POST['product_id']);
-		echo $result;
+		var_dump($result);
 	}
 
 }

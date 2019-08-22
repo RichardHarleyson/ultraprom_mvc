@@ -29,7 +29,7 @@ class Product extends Model{
 	}
 
 	public function get_reviews($id){
-		$result = $this->db->row('SELECT * FROM up_comments WHERE id='.$id);
+		$result = $this->db->row('SELECT * FROM up_comments WHERE product_id='.$id.' AND status=1');
 		return $result;
 	}
 

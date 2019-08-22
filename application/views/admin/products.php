@@ -835,6 +835,23 @@
 						</div>
 
 						<!-- <textarea name="query_list" class="form-control" rows="2">производитель:_;страна-производитель:_;тип-контура:_;мощность:_;</textarea> -->
+						<label>Параметры Товара</label>
+						<div class="my-3 text-center" onclick="add_param(this)">
+							<a class="btn btn-primary text-white">Добавить свойство</a>
+						</div>
+						<div id="product_param_list">
+							<div class="my-2">
+								<span>Параметр</span>
+								<span class="d-inline float-right">Значение</span>
+							</div>
+							<div class="input-group my-2 param_list">
+							  <div class="input-group-prepend">
+								  <input name="params" type="text" class="form-control" placeholder="Высота(см)">
+							  </div>
+								 -
+									<input name="values" type="text" class="form-control" placeholder="150">
+							</div>
+						</div>
 
 						<label>Описание</label>
 						<textarea name="description" class="form-control" rows="3"></textarea>
@@ -855,23 +872,7 @@
 				</form>
 			</div>
 			<div class="col-4">
-				<h4 class="text-danger">Параметры товара</h4>
-				<div class="my-3 text-center" onclick="add_param(this)">
-					<button class="btn btn-primary">Добавить свойство</button>
-				</div>
-				<div id="product_param_list">
-					<div class="my-2">
-						<span>Параметр</span>
-						<span class="d-inline float-right">Значение</span>
-					</div>
-					<div class="input-group my-2 param_list">
-					  <div class="input-group-prepend">
-						  <input name="params" type="text" class="form-control" placeholder="Высота(см)">
-					  </div>
-						 -
-							<input name="values" type="text" class="form-control" placeholder="150">
-					</div>
-				</div>
+
 			</div>
 		</div>
 	</div>

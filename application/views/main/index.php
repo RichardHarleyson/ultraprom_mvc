@@ -3,17 +3,18 @@
 
 <div class='container'>
 	<div id="HCarousel" class="carousel slide border d-none d-md-block" data-ride="carousel">
-		<ul class="carousel-indicators">
-		<li data-target="#HCarousel" data-slide-to="0" class="active"></li>
-		<li data-target="#HCarousel" data-slide-to="1"></li>
-	</ul>
 		<div class="carousel-inner">
-			<div class="carousel-item active">
+			<?php foreach ($slides as $s): ?>
+				<div class="carousel-item">
+					<a href="<?=$s['s_url']; ?>"><img src="/public/media/uploads/<?=$s['s_image'] ?>" class="d-block w-100"></a>
+				</div>
+			<?php endforeach; ?>
+			<!-- <div class="carousel-item active">
 				<a href="/top_menu/central_heating"><img src="/public/media/img/ultraprom_teplo.jpg" class="d-block w-100" alt="slide1"></a>
 			</div>
 			<div class="carousel-item">
 				<a href="/top_menu/services"><img src="/public/media/img/montag.jpg" class="d-block w-100" alt="slide2"></a>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </div>
@@ -156,6 +157,18 @@
 </div>
 
 </div>
+
+<!-- <div class="opros d-none d-lg-block border " id="opros">
+	<div class="opros_in">
+		<form class="">
+			<div class="form-group">
+				<label>Какой вид автономного отопления вы используете?</label>
+				<input type="radio" aria-label="Radio button for following text input">
+				<input type="radio" aria-label="Radio button for following text input">
+			</div>
+		</form>
+	</div>
+</div> -->
 
 <!-- Вывод товаров
 Текстовка -->

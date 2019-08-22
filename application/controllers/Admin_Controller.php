@@ -30,11 +30,15 @@ class Admin_Controller extends Controller{
 		$category = $this->model->get_categoroies();
 		$lower_category = $this->model->get_lower_categoroies();
 		$manufacturer = $this->model->get_manufacturer();
+		$slides = $this->model->get_slides();
+		$reviews = $this->model->get_reviews();
 		$vars = [
 			'global_category' => $global_category,
 			'category' => $category,
 			'lower_category' => $lower_category,
 			'manufacturer' => $manufacturer,
+			'slides' => $slides,
+			'reviews' => $reviews,
 		];
 		$this->view->render('Ultraprom - Панель Администратора', $vars);
 	}
@@ -66,10 +70,32 @@ class Admin_Controller extends Controller{
 		echo $result;
 	}
 
+	public function add_slideAction(){
+		$slide['s_image'] = $this->add_image('slide_image');
+		$slide['s_url'] = $_POST['slide_url'];
+		echo $this->model->add_slide($slide);
+	}
+
+	public function upd_reviewsAction(){
+		var_dump($_POST);
+		if($_POST['r_status'] == 0){
+			echo $this->model->del_review($_POST['review_id']);
+			return 1;
+		}
+		$review['id'] = $_POST['review_id'];
+		$review['status'] = $_POST['r_status'];
+		echo $this->model->upd_reviews($review);
+		return 1;
+	}
+
 	public function del_manufacturerAction(){
 		$manufacturer['id'] = $_POST['manufacturer_id'];
 		$result = $this->model->del_manufacturer($manufacturer);
 		echo $result;
+	}
+
+	public function del_slideAction(){
+		return $this->model->del_slide($_POST['slide_id']);
 	}
 
 	public function productsAction(){

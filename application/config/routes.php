@@ -9,12 +9,16 @@ return [
 		'controller' => 'main',
 		'action' => 'index',
 	],
+	'search_page' => [
+		'controller' => 'main',
+		'action' => 'search_page',
+	],
 	// PRODUCT
 	'product/{id:\w+}' => [
 		'controller' => 'product',
 		'action' => 'page',
 	],
-	'product/new_review' => [
+	'product_review/new_review' => [
 		'controller' => 'product',
 		'action' => 'new_review',
 	],
@@ -147,6 +151,18 @@ return [
 	'admin/del_manufacturer' =>[
 		'controller' => 'admin',
 		'action' => 'del_manufacturer',
+	],
+	'admin/add_slide' =>[
+		'controller' => 'admin',
+		'action' => 'add_slide',
+	],
+	'admin/del_slide' =>[
+		'controller' => 'admin',
+		'action' => 'del_slide',
+	],
+	'admin/upd_reviews' =>[
+		'controller' => 'admin',
+		'action' => 'upd_reviews',
 	],
 
 

@@ -47,12 +47,12 @@ class Router {
                     $controller->$action();
                 } else {
 										echo 'No Method<br>';
-                    debug($path);
+                    // debug($path);
                     View::errorCode(404);
                 }
             } else {
 								echo 'No Class<br>';
-                debug($path);
+                // debug($path);
                 View::errorCode(404);
             }
         } else {

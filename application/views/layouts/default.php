@@ -98,12 +98,14 @@
 				<a href="/"><img class="img-fluid" src="/public/media/img/logo_compressed.jpg"></a>
 			</div>
 			<div class="col-xl-4 col-lg-4 col-md-5 align-self-center">
-				<div class="input-group">
-					<input type="text" class="form-control" placeholder="Поиск Товаров" aria-label="Username" aria-describedby="basic-addon1">
-					<div class="input-group-prepend">
-						<button class="btn btn-primary rounded-right" id="basic-addon1"><i class="fas fa-search"></i></span>
-					</div>
-				</div>
+        <form action="/search_page" method="post">
+          <div class="input-group">
+  					<input type="text" name="query" class="form-control" id="search" placeholder="Поиск Товаров" aria-label="Username" aria-describedby="basic-addon1">
+  					<div class="input-group-prepend">
+  						<button class="btn btn-primary rounded-right" type="submit"><i class="fas fa-search"></i></span>
+  					</div>
+  				</div>
+        </form>
 			</div>
 			<div class="col-xl-4 col-lg-3 col-md-3 col-phone align-self-center text-center">
 				<div class="row">
@@ -144,12 +146,14 @@
 			</div>
 		</div>
 		<div class="container">
-			<div class="input-group">
-				<input type="text" class="form-control" placeholder="Поиск Товаров" aria-label="Username" aria-describedby="basic-addon1">
-				<div class="input-group-prepend">
-					<button class="btn btn-primary rounded-right" id="basic-addon1"><i class="fas fa-search"></i></span>
-				</div>
-			</div>
+      <form action="/search_page" method="post">
+        <div class="input-group">
+          <input type="text" class="form-control" name="query" id="search" placeholder="Поиск Товаров" aria-label="Username" aria-describedby="basic-addon1">
+          <div class="input-group-prepend">
+            <button class="btn btn-primary rounded-right" type="submit"><i class="fas fa-search"></i></span>
+          </div>
+        </div>
+      </form>
 		</div>
 	</div>
 
@@ -308,10 +312,62 @@
 					<img src="/public/media/img/mts.png"><span>+38(050) 881-04-49</span>
 			</div>
 		</div>
+    <div class="row bg-white">
+      <div class="col-3">
+        <a href="https://vk.com/ultraprom" class="-auto">
+          <img class="img-fluid" src="/public/media/uploads/VKontakte.png" alt="">
+        </a>
+      </div>
+      <div class="col-3">
+        <a href="https://twitter.com/ultraprom_ua" class="-auto">
+          <img class="img-fluid" src="/public/media/uploads/twitter.png" alt="">
+        </a>
+      </div>
+      <div class="col-3">
+        <a href="https://www.instagram.com/ultraprom.dnepr" class="-auto">
+          <img class="img-fluid" src="/public/media/uploads/social_instagram.png" alt="">
+        </a>
+      </div>
+      <div class="col-3">
+        <a href="https://www.facebook.com/Ultraprom.dnepr" class="-auto">
+          <img class="img-fluid" src="/public/media/uploads/facebook_ultraprom.png" alt="">
+        </a>
+      </div>
+    </div>
 	</div>
 </div>
 
-
+<div class="d-block d-lg-none">
+  <div class="row m-3">
+    <div class="col-md-3 col-sm-4 col-4 my-auto">
+			<a href="/"><img class="img-fluid" src="/public/media/img/logo.jpg" alt=""></a>
+    </div>
+    <div class="col-md-5 col-sm-8 col-8">
+      <span><h5>График работы</h5></span>
+      <span>Пн-Сб: 8:00-18:00<br></span>
+      <span>Вс: Выходной<br></span>
+      <span><h5>Телефоны</h5></span>
+      <img src="/public/media/img/kyivstar.png"><span>+38(098) 037-77-11</span><br>
+      <img src="/public/media/img/mts.png"><span>+38(050) 881-04-49</span>
+    </div>
+    <div class="col-md-4 d-none d-md-block">
+      <a href="https://vk.com/ultraprom" class="-auto">
+        <img class="img-fluid" src="/public/media/uploads/VKontakte.png" alt="">
+      </a>
+      <a href="https://twitter.com/ultraprom_ua" class="-auto">
+        <img class="img-fluid" src="/public/media/uploads/twitter.png" alt="">
+      </a>
+      <a href="https://www.instagram.com/ultraprom.dnepr" class="-auto">
+        <img class="img-fluid" src="/public/media/uploads/social_instagram.png" alt="">
+      </a>
+      <a href="https://www.facebook.com/Ultraprom.dnepr" class="-auto">
+        <img class="img-fluid" src="/public/media/uploads/facebook_ultraprom.png" alt="">
+      </a>
+    </div>
+  </div>
+</div>
+<div class="share42init" data-top1="350" data-top2="35" data-margin="5"></div>
+<script type="text/javascript" src="/public/vendor/share42/share42.js"></script>
 	<!-- Bootstrap core JavaScript -->
 	<script src="/public/vendor/jquery/jquery.min.js"></script>
 	<script src="/public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
