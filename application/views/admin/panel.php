@@ -150,8 +150,8 @@
 									<tr>
 										<td class="p-1 w-75"><?=$r['comment']; ?></td>
 										<td class="p-1 w-25">
-											<button onclick="del_review(this)" data-r_id="<?=$r['id']; ?>" class="btn btn-danger mx-1">-</button>
-											<button onclick="set_review(this)" data-r_id="<?=$r['id']; ?>" class="btn btn-success mx-1">+</button>
+											<button onclick="del_review(this)" data-r_id="<?=$r['id']; ?>" data-product_id="<?=$r['product_id']; ?>" class="btn btn-danger mx-1">-</button>
+											<button onclick="set_review(this)" data-r_id="<?=$r['id']; ?>" data-product_id="<?=$r['product_id']; ?>" class="btn btn-success mx-1">+</button>
 										</td>
 									</tr>
 								<?php endforeach; ?>

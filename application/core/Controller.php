@@ -53,17 +53,21 @@ abstract class Controller
 	public function translit($string){
 		$cyr  = array('а','б','в','г','д','е','ё','ж','з','и','й','к','л','м','н','о','п','р','с','т','у',
 		            'ф','х','ц','ч','ш','щ','ъ', 'ы','ь', 'э', 'ю','я','А','Б','В','Г','Д','Е','Ж','З','И','Й','К','Л','М','Н','О','П','Р','С','Т','У',
-		            'Ф','Х','Ц','Ч','Ш','Щ','Ъ', 'Ы','Ь', 'Э', 'Ю','Я' );
+		            'Ф','Х','Ц','Ч','Ш','Щ','Ъ', 'Ы','Ь', 'Э', 'Ю','Я');
 		$lat = array( 'a','b','v','g','d','e','io','zh','z','i','y','k','l','m','n','o','p','r','s','t','u',
 		            'f' ,'h' ,'ts' ,'ch','sh' ,'sht' ,'a', 'i', 'y', 'e' ,'yu' ,'ya','A','B','V','G','D','E','Zh',
 		            'Z','I','Y','K','L','M','N','O','P','R','S','T','U',
-		            'F' ,'H' ,'Ts' ,'Ch','Sh' ,'Sht' ,'A' ,'Y' ,'Yu' ,'Ya' );
+		            'F' ,'H' ,'Ts' ,'Ch','Sh' ,'Sht' ,'A' ,'Y' ,'Yu' ,'Ya');
 		// str_replace ( mixed $search , mixed $replace , mixed $subject [, int &$count ] ) : mixed
 		// Эта функция возвращает строку или массив, в котором все вхождения search в subject заменены на replace.
 		// $textcyr = str_replace($cyr, $lat, $textcyr);
 		// $textlat = str_replace($lat, $cyr, $textlat);
 		$string = str_replace($cyr, $lat, $string);
 		$string = str_replace(" ", "_", $string);
+		$string = str_replace("-", "_", $string);
+		$string = str_replace("(", "", $string);
+		$string = str_replace(")", "", $string);
+		$string = str_replace(".", "_", $string);
 		return $string;
 	}
 

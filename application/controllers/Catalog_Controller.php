@@ -37,7 +37,9 @@ class Catalog_Controller extends Controller{
 			'category' => $getcategory,
 			'lcategory' => $lcategory,
 		];
-		$this->view->render('Глобальный Каталог', $vars);
+		$title = $vars['category'][0]['c_name'].' - Каталог';
+		$desc = $vars['category'][0]['c_name'].' купить в интернет-магазине Ultraprom.com.ua. ☎: (098) 037-77-11, (050) 881-04-49. Монтаж, сервис, гарантия, качество.';
+		$this->view->render($title, $vars, $desc);
 	}
 
 	// Определяем категорию товаров
@@ -88,6 +90,7 @@ class Catalog_Controller extends Controller{
 				'filter_contur','filter_burn_cam','filter_country'],
 			'product_list' => $products,
 		];
+		// $desc = ' купить в интернет-магазине Ultraprom.com.ua. ☎: (098) 037-77-11, (050) 881-04-49. Монтаж, сервис, гарантия, качество.';
 		$this->view->render('Каталог - Настенные Газовые Котлы', $vars);
 	}
 
@@ -356,7 +359,7 @@ class Catalog_Controller extends Controller{
 						'Германия','Польша','Украина','Италия','Словакия','Китай'
 					],
 				],
-			'filter_headers' => ['filter_manufacturer','filter_apex','filter_deep_sec','filter_country',],
+			'filter_headers' => ['filter_manufacturer','filter_deep_sec','filter_apex','filter_country',],
 			'product_list' => $products,
 		];
 		$this->view->render('Каталог - Биметаллические Радиаторы', $vars);
@@ -586,6 +589,45 @@ class Catalog_Controller extends Controller{
 		];
 		$this->view->render('Каталог - Коллекторные Шкафы', $vars);
 	}
+
+	// Категория: Электрические Полотенцесушители
+	public function Yalektricheskie_polotentsesushiteli($category, $sorted = []){
+		if(empty($sorted)){
+			$products = $this->model->getProducts($category);
+		}else{
+			$products = $sorted;
+		}
+		$vars = [
+			'title' => 'Электрические Полотенцесушители',
+			'data_title'=>'Yalektricheskie_polotentsesushiteli',
+			'filter_data' => [
+				'Производитель' => [
+					'ELNA','Mario'
+				],
+				'Тип Полотенцесушителя' => [
+					'Водяные','Электрические'
+				],
+				'Форма Полотенцесушителя' => [
+					'Змеевик','Лесенка'
+				],
+				'Подключение' => [
+					'Нижнее','Боковое'
+				],
+				'Цвет Полотенцесушителя' => [
+					'Белый','Сталь','Хром'
+				],
+				'Страна Производителя' => [
+					'Италия', 'Украина'
+				],
+			],
+			'filter_headers' => ['filter_manufacturer','filter_tdryer_type','filter_tdryer_form',
+				'filter_tdryer_connect','filter_tdryer_colour','filter_country'],
+			'product_list' => $products,
+		];
+		// $desc = ' купить в интернет-магазине Ultraprom.com.ua. ☎: (098) 037-77-11, (050) 881-04-49. Монтаж, сервис, гарантия, качество.';
+		$this->view->render('Каталог - Электрические Полотенцесушители', $vars);
+	}
+
 	// Категория: ППР Трубы и Фитинги
 	public function PPR_Trubi_i_Fitingi($category, $sorted = []){
 		if(empty($sorted)){

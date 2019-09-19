@@ -13,10 +13,11 @@
 
 			<div class="collapse d-lg-block" id="filter_collapse" data-filter_headers='<?php echo json_encode($filter_headers);  $filter_header_counter = 0;?>'>
 
-				<div class="btn-group w-100 mt-3" role="group" aria-label="Basic example">
+				<div id="filter_headers_info" data-filter_headers='<?php echo json_encode($filter_headers);?>'></div>
+				<!-- <div class="btn-group w-100 mt-3" role="group" aria-label="Basic example">
 				  <a class="btn btn-primary text-white w-50" onclick='filter_headers(<?php echo json_encode($filter_headers);?>)' data-toggle="collapse" href="#filter_collapse" role="button" aria-expanded="false" aria-controls="filter_collapse">Поиск</a>
 				  <a class="btn btn-danger text-white w-50" onclick="document.location.reload(true);">Сброс</a>
-				</div>
+				</div> -->
 
 				<div class="mt-1 border-bottom">
 					<span class="mb-2 mt-4 font-weight-bold text-primary">Цена</span>
@@ -42,10 +43,10 @@
 					</div>
 				<?php endforeach; ?>
 
-				<div class="btn-group w-100 my-3" role="group" aria-label="Basic example">
+				<!-- <div class="btn-group w-100 my-3" role="group" aria-label="Basic example">
 				  <a class="btn btn-primary text-white w-50" onclick='filter_headers(<?php echo json_encode($filter_headers);?>)' data-toggle="collapse" href="#filter_collapse" role="button" aria-expanded="false" aria-controls="filter_collapse">Поиск</a>
 				  <a class="btn btn-danger text-white w-50" onclick="document.location.reload(true);">Сброс</a>
-				</div>
+				</div> -->
 
 			</div>
 
@@ -80,16 +81,15 @@
 			</div>
 			<div class="gapper"></div>
 
+			<div class="row product_lists">
 			<?php foreach(array_chunk($product_list, 4, true) as $products): ?>
-				<div class="row product_lists">
 					<?php foreach ($products as $product): ?>
-						<div class="col col-12 col-xl col-lg col-md col-sm-12 text-center product_item" data-product_price="<?php echo $product['price_uah']; ?>" <?php $filter_info = explode(';', $product['filter_info']); foreach ($filter_info as $item){ $attr = explode(':', $item); echo 'data-'.$attr[0].'="'.$attr[1].'"';}?> >
+						<div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12  text-center product_item" data-product_price="<?php echo $product['price_uah']; ?>" <?php $filter_info = explode(';', $product['filter_info']); foreach ($filter_info as $item){ $attr = explode(':', $item); echo 'data-'.$attr[0].'="'.$attr[1].'"';}?> >
 							<div class="card text-center mx-auto">
 									<?php if($product['onsale'] == 1){echo "<div class='card-badge bg-danger'>АКЦИЯ!</div>";} ?>
 									<a href="/product/<?php echo $product['eng_name']; ?>">
 										<img src="/public/media/uploads/<?php echo $product['image'];?>" class="mx-auto d-block" alt="Product Thumbnail"  data-toggle="tooltip" data-placement="top" title="<?php echo $product['title'] ?>">
 									</a>
-							<!-- <img src="https://via.placeholder.com/250" class="img-fluid" alt="Product Thumbnail"> -->
 								<div class="card-body">
 									<div class="card-title align-self-center my-0">
 										<a href="/product/<?php echo $product['eng_name']; ?>" class=""><span class="font-title"><?php echo $product['title']; ?></span></a>
@@ -107,10 +107,9 @@
 							</div>
 						</div>
 				<?php endforeach; ?>
-				</div>
-
-			<div class="gapper"><hr></div>
+			<!-- <div class="gapper"><hr></div> -->
 		<?php endforeach; ?>
+		</div>
 
 		</div>
 	</div>

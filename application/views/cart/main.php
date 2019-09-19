@@ -145,12 +145,12 @@
 					</form>
 				</div>
       </div>
-      <div class="modal-footer text-center">
-        <button class="btn btn-primary" onclick="cart_order()">Оформить Заказ</button>
-      </div>
-			<div class="my-2 text-center" id="cart_order_status">
+			<div class="my-3 text-center" id="cart_order_status">
 
 			</div>
+      <div class="modal-footer text-center">
+        <button class="btn btn-primary mx-auto" onclick="cart_order()">Оформить Заказ</button>
+      </div>
     </div>
   </div>
 </div>

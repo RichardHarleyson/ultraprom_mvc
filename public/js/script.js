@@ -188,6 +188,11 @@ $(document).ready(function(){
 				 	$('.menu_items_13').show();
 				 });
 
+         $('#14').hover(function() {
+          $('.to_hide').hide();
+          $('.menu_items_14').show();
+         });
+
 				 $('#21').hover(function() {
 				 	$('.to_hide').hide();
 				 	$('.menu_items_21').show();
@@ -387,7 +392,7 @@ function add_item(element){
 	$.ajax({
 		type: "POST",
 		url: '/cart/add_item',
-		data: {id: $(element).data('id'), title: $(element).data('title'), price_uah: $(element).data('price')},
+		data: {id: $(element).data('id'), title: $(element).data('title'), price_uah: $(element).data('price'), eng_name: $(element).data('eng_name')},
 		success:function(res){
 			if(res==true){
 				setTimeout(function () {
@@ -459,6 +464,10 @@ $(".cart_quantity").change(function(){
 	count_item_total(($(this).data('index')));
 });
 
+function hide_all_cart(){
+  $('tr').hide();
+}
+
 function cart_order(){
 	event.preventDefault();
 	var data = $('#cart_order_form').serialize();
@@ -468,8 +477,21 @@ function cart_order(){
 		url: '/cart/cart_order',
 		data: data,
 		success(res){
-			$('#cart_order_status').html('Заказ отправлен в обработку');
-			setTimeout(function(){$('#cart_order').modal('hide');}, 2000);
+			$('#cart_order_status').html('<h3 class="text-primary">Заказ отправлен в обработку</h3><h4 class="text-primary">Возвращаемся на Главную...</h4>');
+			// setTimeout(function(){$('#cart_order').modal('hide');}, 2000);
+      setTimeout(function(){
+        $.ajax({
+          type: "POST",
+          url: '/cart/empty_cart',
+          success:function(res){
+            if(res==true){
+              location.href='/';
+            }else{
+              alert('Что то пошло не так');
+            }
+          }
+        });
+      }, 4000);
 		}
 	});
 }
@@ -547,25 +569,54 @@ function admin_log_in(){
 }
 
 $(document).ready(function(){
-	$('select[name="list_category"]').change(function(){
-		$('.list_item').hide();
-		$('tr[data-product_type="'+$(this).val()+'"]').show();
-	});
-  $('select[name="manufacturers"]').change(function(){
-    $('.list_item').hide();
-    if($('select[name="list_category"]').val() == '0'){
-      $('tr[data-product_manufacturer="'+$(this).val()+'"]').show();
-    }else if ($('select[name="list_category"]').val() != '0') {
-        $('tr[data-product_type="'+$('select[name="list_category"]').val()+'"][data-product_manufacturer="'+$(this).val()+'"]').show();
+	$('#create_product').submit(function(){
+		event.preventDefault();
+		var data = new FormData($('form')[0]);
+    var params = $('#product_param_list input[name="params"]').map(function(){
+      if(this.value != '')
+        return this.value
+    }).get();
+    var values = $('#product_param_list input[name="values"]').map(function(){
+      return this.value
+    }).get();
+    var param_string = '';
+    for(let i=0; i<params.length; i++){
+      param_string += params[i] + '@' + values[i] + ';';
     }
-  });
-})
+    data.append('param_string', param_string);
+    data.append('m_id', $('select[name="filter_manufacturer"]').find('option:selected').data('m_id'));
+		$.ajax({
+			type: 'POST',
+			url: '/admin/create_product',
+			data: data,
+			processData: false,
+			contentType: false,
+			success:function(res){
+        console.log(res);
+				alert('Товар Успешно Добавлен');
+        document.location.reload();
+			}
+		});
+	});
+});
 
 function product_upd(elem){
   event.preventDefault();
 	var omg_parent = $(elem).parent().parent().parent();
   var curform = document.getElementById('form_'+$(elem).data('product_id'));
   var data = new FormData(curform);
+  var params = $('#param_modal_inside input[name="params"]').map(function(){
+    if(this.value != '')
+      return this.value
+  }).get();
+  var values = $('#param_modal_inside input[name="values"]').map(function(){
+    return this.value
+  }).get();
+  var param_string = '';
+  for(let i=0; i<params.length; i++){
+    param_string += params[i] + '@' + values[i] + ';';
+  }
+  data.append('param_string', param_string);
   data.append('del','false');
   data.append('id', $(elem).data('product_id'));
   $.ajax({
@@ -614,7 +665,7 @@ function product_del(elem){
 		success: function(res){
       console.log(res);
 			omg_parent.css('background', 'red');
-			setTimeout(function(){ omg_parent.css('background', 'white') }, 2000);
+			setTimeout(function(){ omg_parent.hide(); }, 2000);
 		}
 	})
 }
@@ -628,10 +679,195 @@ $(document).ready(function(){
   })
 })
 
+//Параметры товара
 function add_param(elem){
-  // var param_list = $('#product_param_list').html();
-  var param_list = '<div class="input-group my-2"><div class="input-group-prepend"><input name="params" type="text" class="form-control" placeholder="Высота(см)"></div>-<input name="values" type="text" class="form-control" placeholder="150"></div>';
+  var param_list = '<div class="input-group my-2"><div class="input-group-prepend w-50"><input name="params" type="text" class="form-control" placeholder="Высота(см)"></div>-<input name="values" type="text" class="form-control" placeholder="150"></div>';
   $('#product_param_list').append(param_list);
+}
+
+function item_params(elem){
+  event.preventDefault();
+  $('#param_modal_inside').html('');
+  $('#save_params_btn').attr('data-product_id', $(elem).data('product_id'));
+  var params = $(elem).data('item_params');
+  params = params.split(';');
+  console.log(params);
+  params.forEach(set_param_modal);
+}
+
+function set_param_modal(item){
+  var data = item.split('@');
+  var param_list = '<div class="input-group my-2"><div class="input-group-prepend w-50"><input name="params" type="text" class="form-control" placeholder="Высота(см)" value="'+data[0]+'"></div>-<input name="values" type="text" class="form-control  w-25" placeholder="150" value="'+data[1]+'"></div>';
+  $('#param_modal_inside').append(param_list);
+}
+
+function save_params(elem){
+  var data = new FormData();
+  var params = $('#param_modal_inside input[name="params"]').map(function(){
+    if(this.value != '')
+      return this.value
+  }).get();
+  var values = $('#param_modal_inside input[name="values"]').map(function(){
+    return this.value
+  }).get();
+  var param_string = '';
+  for(let i=0; i<params.length; i++){
+    param_string += params[i] + '@' + values[i] + ';';
+  }
+  data.append('param_string', param_string);
+  data.append('product_id', $(elem).data('product_id'));
+  $.ajax({
+		type: 'POST',
+		url: '/admin/upd_params',
+		data: data,
+    contentType : false,
+    processData : false,
+		success: function(res){
+			console.log(res);
+      alert('Сохранено');
+		}
+	})
+}
+
+function add_param_modal(elem){
+  var param_list = '<div class="input-group my-2"><div class="input-group-prepend w-50"><input name="params" type="text" class="form-control" placeholder="Высота(см)"></div>-<input name="values" type="text" class="form-control" placeholder="150"></div>';
+  $('#param_modal_inside').append(param_list);
+}
+/////////////////////////////////////////
+// Фильтр
+function item_filter(elem){
+  event.preventDefault();
+  $("#modal_filter_info div[class='input-group']").hide();
+	$("#modal_filter_info div[class='input-group'] select").prop("disabled", true);
+  $('#save_filter_btn').attr('data-product_id', $(elem).data('product_id'));
+  var params = $(elem).data('item_filter');
+  params = params.split(';');
+  params.forEach(set_filter_modal);
+}
+
+function set_filter_modal(item){
+  var data = item.split(':');
+  console.log(data);
+  $('#modal_'+data[0]).show();
+  $('#modal_'+data[0]+' select').prop('disabled', false);
+  $('#modal_'+data[0]+' select option[value="'+data[1]+'"]').attr('selected', 'selected');
+}
+
+function save_filter(elem){
+  event.preventDefault();
+  var modal_form = document.getElementById('modal_filter_form');
+  var data = new FormData(modal_form);
+  data.append('product_id', $(elem).data('product_id'));
+  data.append('manufacturer_id', $('#modal_filter_form select[name="filter_manufacturer"]').find('option:selected').data('m_id'));
+  $.ajax({
+    type: 'POST',
+    url: '/admin/update_filter',
+    data: data,
+    contentType : false,
+    processData : false,
+    success: function(res){
+      console.log(res);
+    }
+  })
+}
+
+$(document).ready(function(){
+
+  // $('select[name="list_category"]')
+  // $('select[name="manufacturers"]')
+  $('.product_filter').change(function(){
+    $('tr[class="list_item"]').hide();
+    if($('select[name="list_category"]').val() != 0){
+      // for all
+      //   visible a
+      // console.log($('tr[data-product_type="'+$('select[name="list_category"]').val()+'"]').length);
+      $('tr[data-product_type="'+$('select[name="list_category"]').val()+'"]').show();
+    } else {
+      // for all
+      //   visible all
+      $('tr[class="list_item"]').show();
+    }
+    if($('select[name="manufacturers"]').val() != 0){
+      // for visible
+      //   visible b
+      // console.log($('tr[data-product_manufacturer="'+$('select[name="manufacturers"]').val()+'"]:visible').length);
+      $('tr[class="list_item"]').each(function(){
+        if($(this).data('product_manufacturer') != $('select[name="manufacturers"]').val()){
+          $(this).hide();
+        }
+      })
+    } else {
+      // for visible
+      //   visible all
+      // $('tr[class="list_item"] visible').show(); //pass
+    }
+  });
+
+});
+
+
+$(document).ready(function(){
+  try{
+    if(localStorage.getItem('product_category_filter') && localStorage.getItem('product_manufacturer_filter')){
+      console.log(localStorage.getItem('product_category_filter'));
+      console.log(localStorage.getItem('product_manufacturer_filter'));
+      $('#product_category_filter option[value="'+localStorage.getItem('product_category_filter')+'"]').attr('selected', 'selected');
+      $('#product_manufacturer_filter option[value="'+localStorage.getItem('product_manufacturer_filter')+'"]').attr('selected', 'selected');
+      $('.product_filter').trigger('change');
+    }
+  }
+  catch (e){
+    console.log('Не удалось установить Фильтр');
+    logMyErrors(e);
+  }
+  $('.product_filter').change(function(){
+    // console.log('Новое значение фильтра категорий');
+    localStorage.setItem('product_category_filter', $('select[name="list_category"]').val());
+    // console.log('Новое значение фильтра производителей');
+    localStorage.setItem('product_manufacturer_filter', $('select[name="manufacturers"]').val());
+  })
+})
+
+////////////////////////////////////////
+function copy_item(elem){
+  event.preventDefault();
+  $.ajax({
+    type: 'POST',
+    url: '/admin/copy_item',
+    data: {product_id: $(elem).data('product_id')},
+    success: function(res){
+      $('#product_list').collapse('hide');
+      $('#add_product').collapse('show');
+      ///////////////////////////////////
+      var copy_item = $.parseJSON(res);
+      console.log(copy_item);
+      $('#create_product input[name="title"]').val(copy_item.title);
+      // $('#create_product input[name="photo"]').val(copy_item.image);
+      $('#create_product input[name="price"]').val(copy_item.price);
+      $('#create_product select[name="currency"] option[value="'+copy_item.currency+'"]').attr('selected', 'selected');
+      $('#create_product select[name="rating"] option[value="'+copy_item.rating+'"]').attr('selected', 'selected');
+      $('#create_product select[name="category"] option[value="'+copy_item.category_id+'"]').attr('selected', 'selected');
+      $('#create_product select[name="category"]').trigger('change');
+      //////////////////
+      var filter_data = copy_item.filter_info.split(';');
+      console.log(filter_data);
+      filter_data.forEach(function(item){
+        var pair = item.split(':');
+        $('select[name="'+pair[0]+'"] option[value="'+pair[1]+'"]').attr('selected', 'selected');
+      });
+      //////////////////
+      var stat_data = copy_item.stat_list.split(';');
+      $('#product_param_list').html('');
+      stat_data.forEach(function(item){
+        var pair = item.split('@');
+        var param_list = '<div class="input-group my-2"><div class="input-group-prepend w-50"><input name="params" type="text" class="form-control" placeholder="Высота(см)" value="'+pair[0]+'"></div>-<input name="values" type="text" class="form-control" placeholder="150" value="'+pair[1]+'"></div>';
+        $('#product_param_list').append(param_list);
+      });
+      //////////////////
+      $('#product_description').val(copy_item.description);
+      // $('#create_product textarea[name="description"]').val(copy_item.description);
+    }
+  });
 }
 
 $(document).ready(function(){
@@ -923,38 +1159,18 @@ $("select[name='category']").change(function(){
     $('#filter_country').hide();
     $('#filter_country select').prop('disabled', true);
   }
+  else if($(this).val() == '37'){
+    // Стабидизаторы Напряжения
+    $('#filter_tdryer_type').show();
+    $('#filter_tdryer_type select').prop('disabled', false);
+    $('#filter_tdryer_form').show();
+    $('#filter_tdryer_form select').prop('disabled', false);
+    $('#filter_tdryer_connect').show();
+    $('#filter_tdryer_connect select').prop('disabled', false);
+    $('#filter_tdryer_colour').show();
+    $('#filter_tdryer_colour select').prop('disabled', false);
+  }
 
-});
-
-$(document).ready(function(){
-	$('#create_product').submit(function(){
-		event.preventDefault();
-		var data = new FormData($('form')[0]);
-    var params = $('#product_param_list input[name="params"]').map(function(){
-      if(this.value != '')
-        return this.value
-    }).get();
-    var values = $('#product_param_list input[name="values"]').map(function(){
-      return this.value
-    }).get();
-    var param_string = '';
-    for(let i=0; i<params.length; i++){
-      param_string += params[i] + ':' + values[i] + ';';
-    }
-    data.append('param_string', param_string);
-    data.append('m_id', $('select[name="filter_manufacturer"]').find('option:selected').data('m_id'));
-		$.ajax({
-			type: 'POST',
-			url: '/admin/create_product',
-			data: data,
-			processData: false,
-			contentType: false,
-			success:function(res){
-        // console.log(res);
-				alert('Товар Добавлен');
-			}
-		});
-	});
 });
 
 $(document).ready(function(){
@@ -1064,8 +1280,9 @@ function set_review(elem){
   $.ajax({
     type: 'POST',
     url: '/admin/upd_reviews',
-    data: {review_id: $(elem).data('r_id'), r_status: 1},
+    data: {review_id: $(elem).data('r_id'), product_id:$(elem).data('product_id') , r_status: 1},
     success: function(res){
+      console.log(res);
       $(elem).parent().parent().hide();
     }
   })
@@ -1091,62 +1308,138 @@ $(document).ready(function(){
 
 // ====================================================================
 // CATALOG
-function filter_headers(filter_headers){
-	var product_list = document.querySelectorAll(".product_item");
-	var checkboxes_state = [];
-	var current_request = {};
-	var checkboxes_on = {};
-	// Минимальная и максимальная цена товаров для полей воода цены
-	var min_price = Number($('#price_start').val());
-	var max_price = Number($('#price_end').val());
+$(document).ready(function(){
+	if($('#PageType').is(".PageType_Catalog")){
+    var filter_headers = $('#filter_headers_info').data('filter_headers');
+		$("input[type='checkbox']").change(function () {
+    	var product_list = document.querySelectorAll(".product_item");
+    	var checkboxes_state = [];
+    	var current_request = {};
+    	var checkboxes_on = {};
+    	// Минимальная и максимальная цена товаров для полей воода цены
+    	var min_price = Number($('#price_start').val());
+    	var max_price = Number($('#price_end').val());
 
-	for( key in filter_headers){
-		//Собираем состояние всех чекбоксов по всем заголовкам
-		checkboxes_state[key] = document.querySelectorAll("[data-filter_key="+filter_headers[key]+"] input");
-		//Выделяем зажатые чекбоксы
-		for(let i = 0; i < checkboxes_state[key].length; i++){
-			if(checkboxes_state[key][i].checked){
-				// console.log('checked');
-				checkboxes_on[checkboxes_state[key][i].getAttribute('value')] = 1;
-				current_request[filter_headers[key]] = 1;
-			}else{
-				continue;
-			}
-		}
-	}
-	if(isEmpty(checkboxes_on)){
-		$('.product_item').show();
-		for(let i = 0; i < product_list.length; i++){
-			if(!(product_list[i].getAttribute("data-product_price") >= min_price && product_list[i].getAttribute("data-product_price") <= max_price)){
-				product_list[i].style.display = "none";
-				continue;
-			}
-		}
-		how_many(filter_headers)
-		return true;
-	}
-	//Перебираем товары их свойство по текущему заголовку
-	for(let i = 0; i < product_list.length; i++){
-		if(!(product_list[i].getAttribute("data-product_price") >= min_price && product_list[i].getAttribute("data-product_price") <= max_price)){
-			product_list[i].style.display = "none";
-			continue;
-		}
-		for(key in filter_headers){
-			if(!(filter_headers[key] in current_request) ){
-				continue;
-			}
-			var curr_attr = product_list[i].getAttribute("data-"+filter_headers[key]);
-			if(curr_attr in checkboxes_on){
-				product_list[i].style.display = "block";
-			}else{
-				product_list[i].style.display = "none";
-				break;
-			}
-		}
-	}
-	// Пересчитываем кол-во доступных товаров по текущей настройке фильтра
-	how_many(filter_headers);
-}
+    	for( key in filter_headers){
+    		//Собираем состояние всех чекбоксов по всем заголовкам
+    		checkboxes_state[key] = document.querySelectorAll("[data-filter_key="+filter_headers[key]+"] input");
+    		//Выделяем зажатые чекбоксы
+    		for(let i = 0; i < checkboxes_state[key].length; i++){
+    			if(checkboxes_state[key][i].checked){
+    				// console.log('checked');
+    				checkboxes_on[checkboxes_state[key][i].getAttribute('value')] = 1;
+    				current_request[filter_headers[key]] = 1;
+    			}else{
+    				continue;
+    			}
+    		}
+    	}
+    	if(isEmpty(checkboxes_on)){
+    		$('.product_item').show();
+    		for(let i = 0; i < product_list.length; i++){
+    			if(!(product_list[i].getAttribute("data-product_price") >= min_price && product_list[i].getAttribute("data-product_price") <= max_price)){
+    				product_list[i].style.display = "none";
+    				continue;
+    			}
+    		}
+    		how_many(filter_headers)
+    		return true;
+    	}
+    	//Перебираем товары их свойство по текущему заголовку
+    	for(let i = 0; i < product_list.length; i++){
+    		if(!(product_list[i].getAttribute("data-product_price") >= min_price && product_list[i].getAttribute("data-product_price") <= max_price)){
+    			product_list[i].style.display = "none";
+    			continue;
+    		}
+    		for(key in filter_headers){
+    			if(!(filter_headers[key] in current_request) ){
+    				continue;
+    			}
+    			var curr_attr = product_list[i].getAttribute("data-"+filter_headers[key]);
+    			if(curr_attr in checkboxes_on){
+    				product_list[i].style.display = "block";
+    			}else{
+    				product_list[i].style.display = "none";
+    				break;
+    			}
+    		}
+    	}
+    	// Пересчитываем кол-во доступных товаров по текущей настройке фильтра
+    	how_many(filter_headers);
+    });
+		get_min_max();
+		how_many(filter_headers);
+		$("input[type='checkbox']").click(function () {
+			how_many(filter_headers);
+		});
+		var sort_type = $('#sorting').val();
+		var url = window.location.pathname.split("/").pop();
+		$('option:selected', 'select[name="sorting"]').removeAttr('selected');
+		$("select option[value="+url).attr("selected","selected");
+		$('select[name="sorting"]').on('change', function() {
+			window.location.href = "/catalog/"+$('#title').data('title')+"/sort/"+this.value;
+		});
+	};
+});
+
+// function filter_headers(filter_headers){
+//   alert('Filter_Headers Called!');
+//   // var filter_headers = $('#filter_headers_info').data('filter_headers');
+// 	var product_list = document.querySelectorAll(".product_item");
+// 	var checkboxes_state = [];
+// 	var current_request = {};
+// 	var checkboxes_on = {};
+// 	// Минимальная и максимальная цена товаров для полей воода цены
+// 	var min_price = Number($('#price_start').val());
+// 	var max_price = Number($('#price_end').val());
+//
+// 	for( key in filter_headers){
+// 		//Собираем состояние всех чекбоксов по всем заголовкам
+// 		checkboxes_state[key] = document.querySelectorAll("[data-filter_key="+filter_headers[key]+"] input");
+// 		//Выделяем зажатые чекбоксы
+// 		for(let i = 0; i < checkboxes_state[key].length; i++){
+// 			if(checkboxes_state[key][i].checked){
+// 				// console.log('checked');
+// 				checkboxes_on[checkboxes_state[key][i].getAttribute('value')] = 1;
+// 				current_request[filter_headers[key]] = 1;
+// 			}else{
+// 				continue;
+// 			}
+// 		}
+// 	}
+// 	if(isEmpty(checkboxes_on)){
+// 		$('.product_item').show();
+// 		for(let i = 0; i < product_list.length; i++){
+// 			if(!(product_list[i].getAttribute("data-product_price") >= min_price && product_list[i].getAttribute("data-product_price") <= max_price)){
+// 				product_list[i].style.display = "none";
+// 				continue;
+// 			}
+// 		}
+// 		how_many(filter_headers)
+// 		return true;
+// 	}
+// 	//Перебираем товары их свойство по текущему заголовку
+// 	for(let i = 0; i < product_list.length; i++){
+// 		if(!(product_list[i].getAttribute("data-product_price") >= min_price && product_list[i].getAttribute("data-product_price") <= max_price)){
+// 			product_list[i].style.display = "none";
+// 			continue;
+// 		}
+// 		for(key in filter_headers){
+// 			if(!(filter_headers[key] in current_request) ){
+// 				continue;
+// 			}
+// 			var curr_attr = product_list[i].getAttribute("data-"+filter_headers[key]);
+// 			if(curr_attr in checkboxes_on){
+// 				product_list[i].style.display = "block";
+// 			}else{
+// 				product_list[i].style.display = "none";
+// 				break;
+// 			}
+// 		}
+// 	}
+// 	// Пересчитываем кол-во доступных товаров по текущей настройке фильтра
+// 	how_many(filter_headers);
+// }
 
 function isEmpty(obj) {
 		for (var key in obj) {
@@ -1170,9 +1463,14 @@ function how_many(filter_headers){
 			var curr_attr = labels[key][i].getAttribute("data-info");
 			// Прогоняемся по списку товаров для подсчета
 			for(let j = 0; j < product_list.length; j++){
-				if(product_list[j].getAttribute("data-"+filter_headers[key]) == curr_attr && !( product_list[j].style.display == 'none')){
-					attr_counter++;
-				}
+        // console.log(filter_headers[key]);
+        if(filter_headers[key] != 'filter_manufacturer'){
+  				if(product_list[j].getAttribute("data-"+filter_headers[key]) == curr_attr && !( product_list[j].style.display == 'none')){
+  					attr_counter++;
+  				}
+        }else if (product_list[j].getAttribute("data-"+filter_headers[key]) == curr_attr) {
+          attr_counter++;
+        }
 			}
 			// Устанавливаем кол-во элементов доступных при данных настройках фильтра
 			labels[key][i].innerHTML = curr_attr + ' ('+attr_counter+')';
@@ -1202,23 +1500,6 @@ function get_min_max(){
 	$('#price_end').val(max_price);
 }
 
-$(document).ready(function(){
-	if($('#PageType').is(".PageType_Catalog")){
-		get_min_max();
-		var filter_headers = $('#filter_collapse').data('filter_headers');
-		how_many(filter_headers);
-		$("input[type='checkbox']").click(function () {
-			how_many(filter_headers);
-		});
-		var sort_type = $('#sorting').val();
-		var url = window.location.pathname.split("/").pop();
-		$('option:selected', 'select[name="sorting"]').removeAttr('selected');
-		$("select option[value="+url).attr("selected","selected");
-		$('select[name="sorting"]').on('change', function() {
-			window.location.href = "/catalog/"+$('#title').data('title')+"/sort/"+this.value;
-		});
-	}
-});
 
 
 

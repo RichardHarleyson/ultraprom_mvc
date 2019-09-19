@@ -15,12 +15,21 @@ class Main extends Model{
 		return $result;
 	}
 
+	public function getProducts_popular(){
+		$result = $this->db->row('SELECT * FROM up_product WHERE available=1 AND popular=1 LIMIT 10');
+		return $result;
+	}
+
 	public function getSlides(){
 		return $this->db->row('SELECT * FROM up_slides');
 	}
 
 	public function get_search($search){
 		return $this->db->row('SELECT * FROM up_product WHERE title LIKE "%'.$search.'%" AND available=1');
+	}
+
+	public function brand_search($search){
+		return $this->db->row('SELECT * FROM up_product WHERE manufacturer_id=:manufacturer_id AND available=1', $search);
 	}
 }
 

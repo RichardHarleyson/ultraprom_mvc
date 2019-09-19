@@ -85,6 +85,21 @@ class Admin_Controller extends Controller{
 		$review['id'] = $_POST['review_id'];
 		$review['status'] = $_POST['r_status'];
 		echo $this->model->upd_reviews($review);
+		$get_reviews = $this->model->get_reviews_2($_POST['product_id']);
+		var_dump($get_reviews);
+		$total_review = 0;
+		foreach ($get_reviews as $key => $value) {
+			$total_review += $value['rating'];
+		}
+		var_dump($total_review);
+		$count_reviews = count($get_reviews);
+		if($count_reviews == 0){
+			$count_reviews = 1;
+		}
+		$new_rating = (int)($total_review / $count_reviews);
+		var_dump($new_rating);
+		$result = $this->model->update_rating($new_rating, $_POST['product_id']);
+		var_dump($result);
 		return 1;
 	}
 
@@ -129,7 +144,7 @@ class Admin_Controller extends Controller{
 			 // echo "Товар ".$vars['title']." успешно загружен";
 			return $name.$i.'.'.$extension;
 		} else {
-			 return 0;
+			 echo 'Установите Фото';
 		}
 	}
 
@@ -138,34 +153,30 @@ class Admin_Controller extends Controller{
 			foreach ($_POST as $key => $value) {
 				$vars[$key] = $value;
 			}
-			var_dump($vars);
-			//Сохраняем фото
-			$target_dir = "/home/newworld/domains/ultraprom.new/public_html/public/media/uploads/";
-			$target_file = $target_dir . basename($_FILES["photo"]["name"]);
-
-			$name = pathinfo($_FILES['photo']['name'], PATHINFO_FILENAME);
-			$extension = pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION);
-			$i = 0;
-			while(file_exists($target_file)){
-				$target_file = $target_dir . $name . $i . '.' . $extension;
-				$i++;
+			// var_dump($vars);
+			if(array_key_exists( 'photo' , $vars)){
+				if($vars['photo'] == ''){
+					echo 'Не Найдено Фото Товара';
+				}
+			}else{
+				$vars['photo'] = $this->add_image('photo');
+				$vars['status'] = 1;
 			}
-			$target_file = $target_dir . $name . $i . '.' . $extension;
-
-			if (move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file)) {
-				 // echo "Товар ".$vars['title']." успешно загружен";
-	 			$vars['photo'] = $name.$i.'.'.$extension;
-		 	} else {
-				 // echo "Sorry, there was an error uploading your file.";
-		 	}
 
 			$vars['eng_name'] = $this->translit($vars['title']);
-
-			//Добавляем доп параметры
-			if($vars['photo'] == ''){
-				$vars['status'] = 0;
-			}else{
-				$vars['status'] = 1;
+			//Проверяем есть ли товар с такой ссылкой
+			$i = 0;
+			$product_exist['eng_name'] = $vars['eng_name'];
+			// echo $this->model->product_exist($product_exist);
+			// exit();
+			while(!(empty($this->model->product_exist($product_exist)))){
+				$vars['eng_name'] = $vars['eng_name'].'_';
+				$product_exist['eng_name'] = $vars['eng_name'];
+				$i++;
+				if($i==3){
+					echo 'Товары с таким именем уже есть';
+					exit();
+				}
 			}
 
 			if(array_key_exists( 'available' , $vars)){
@@ -184,10 +195,17 @@ class Admin_Controller extends Controller{
 				$vars['onsale']	= 0;
 			}
 
+			if(array_key_exists( 'popular' , $vars)){
+				if($vars['popular'] == 'on'){
+					$vars['popular'] = 1;
+				}
+			}else{
+				$vars['popular']	= 0;
+			}
+
 			$vars['manufacturer'] = 1;
 
 			$vars['stat_list'] = trim($vars['param_string'], ';');
-
 
 			// filter_info
 			$filter_info = array_filter(
@@ -210,8 +228,10 @@ class Admin_Controller extends Controller{
 			foreach ($currencies as $curr) {
 				$curr_buy[$curr['id']] = $curr;
 			}
-			$vars['price_uah'] = $vars['price'] * $curr_buy[$vars['currency']]['buy'];
+			$vars['price_uah'] = $vars['price'] * $curr_buy[$vars['currency']]['sale'];
 			$result = $this->model->create_product($vars);
+			var_dump($vars);
+			// echo 'Товар Успешно Добавлен';
 		}
 	}
 
@@ -224,11 +244,14 @@ class Admin_Controller extends Controller{
 		$product = [
 			'id' => $_POST['id'],
 			'title' => $_POST['item_title'],
-			'price' => (int)$_POST['item_price'],
+			'price' => (float)$_POST['item_price'],
 			'currency' => (int)$_POST['item_currency'],
 			'price_uah' => 0,
+			// 'stat_list' => $_POST['param_string'],
 			'description' => $_POST['item_description'],
 		];
+		// $product['stat_list'] = trim($product['stat_list'], ';');
+
 		if(array_key_exists( 'item_available' , $_POST)){
 			if($_POST['item_available'] == 'on'){
 				$product['available'] = 1;
@@ -242,6 +265,13 @@ class Admin_Controller extends Controller{
 			}
 		}else{
 			$product['onsale']	= 0;
+		}
+		if(array_key_exists( 'item_popular' , $_POST)){
+			if($_POST['item_popular'] == 'on'){
+				$product['popular'] = 1;
+			}
+		}else{
+			$product['popular']	= 0;
 		}
 		//Обновляем цену по валюте
 		$currencies = $this->model->get_currencies();
@@ -258,6 +288,19 @@ class Admin_Controller extends Controller{
 			$photo_upd['id'] = $_POST['id'];
 			$result = $this->model->update_photo($photo_upd);
 		}
+	}
+
+	public function upd_paramsAction(){
+		$vars['id'] = $_POST['product_id'];
+		$vars['stat_list'] = $_POST['param_string'];
+		$vars['stat_list'] = trim($vars['stat_list'], ';');
+		$result = $this->model->update_params($vars);
+		echo $result;
+	}
+
+	public function copy_itemAction(){
+		$vars['id'] = $_POST['product_id'];
+		echo json_encode(($this->model->get_copy_item($vars))[0]);
 	}
 
 	public function currencyAction(){
@@ -280,6 +323,28 @@ class Admin_Controller extends Controller{
 		//обновляем ценники в соответствии с курсом
 		$this->model->update_prices();
 		echo 1;
+	}
+
+	public function update_filterAction(){
+		$filter_info = array_filter(
+			$_POST,
+			function($key){
+				return(strpos($key, 'filter_') !== false);
+			},
+			ARRAY_FILTER_USE_KEY
+		);
+		$filter_info_str = '';
+		foreach ($filter_info as $key => $value) {
+			$filter_info_str .= $key.':'.ucwords($value).';';
+		};
+		$filter_info_str = trim($filter_info_str, ';');
+		$vars['filter_info'] = $filter_info_str;
+		$vars['product_id'] = $_POST['product_id'];
+		$product['id'] = $_POST['product_id'];
+		$product['m_id'] = $_POST['manufacturer_id'];
+		var_dump($this->model->upd_product_manufacturer($product));
+		$result = $this->model->update_filter($vars);
+		var_dump($result);
 	}
 
 }

@@ -4,6 +4,7 @@
 			// MAIN
 			'index',
 			'search_page',
+			'brand_search',
 			// PRODUCT
 			'page',
 			'new_review',
@@ -47,6 +48,9 @@
 			'add_slide',
 			'del_slide',
 			'upd_reviews',
+			'upd_params',
+			'copy_item',
+			'update_filter',
 		]
 	];
  ?>

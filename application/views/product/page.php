@@ -53,7 +53,7 @@
 						<p class="price_tablet_solo border rounded mx-auto"><b><?php echo number_format($product[0]['price_uah'], 0, ',', ' '); ?> грн</b></p>
 					</div>
 					<div class="col col-12 col-lg-6 col-xl-6 text-center my-2">
-						<a class="btn btn-lg btn-danger" style="width: 155px; color: white" onclick="add_item(this)" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Добавлено в Корзину" data-id="<?php echo $product[0]['id']; ?>" data-title="<?php echo $product[0]['title']; ?>" data-price="<?php echo $product[0]['price_uah']; ?>" >В корзину <i  class="fa fa-shopping-cart"></i> </a>
+						<a class="btn btn-lg btn-danger" style="width: 155px; color: white" onclick="add_item(this)" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Добавлено в Корзину" data-id="<?php echo $product[0]['id']; ?>" data-title="<?php echo $product[0]['title']; ?>" data-eng_name="<?php echo $product[0]['eng_name'];?>" data-price="<?php echo $product[0]['price_uah']; ?>" >В корзину <i  class="fa fa-shopping-cart"></i> </a>
 					</div>
 				</div>
 				<div class="gapper"></div>
@@ -109,7 +109,7 @@
 	<div class="tab-content border border-top-0 px-4 py-3" id="pills-tabContent">
 	  <div class="tab-pane fade show active" id="info_section" role="tabpanel" aria-labelledby="pills-home-tab">
 			<div class="tab_height">
-					<h5 class="text-primary">Описание <?php echo $product[0]['title'] ?></h5>
+					<h5 class="text-primary">Описание "<?php echo $product[0]['title'] ?>"</h5>
 					<hr class="w-50">
 					<div class="text-justify">
 						<span>
@@ -120,18 +120,22 @@
 		</div>
 	  <div class="tab-pane fade" id="param_section" role="tabpanel" aria-labelledby="pills-profile-tab">
 			<div class="tab_height">
-				<h5 class="text-primary">Характеристики <?php echo $product[0]['title']?></h5>
+				<h5 class="text-primary">Характеристики "<?php echo $product[0]['title']?>"</h5>
 				<div class="">
 					<table class="table">
 					  <tbody>
-							<?php $stat_list = explode(';', $product[0]['stat_list']);
-								foreach ($stat_list as $item){
-									$stat = explode(':', $item);
-									echo
-									'<tr>
-										<td>'.$stat[0].'</td>
-										<td>'.$stat[1].'</td>
-									</tr>';
+							<?php
+							 	if(!(empty($product[0]['stat_list']))){
+									$stat_list = explode(';', $product[0]['stat_list']);
+									foreach ($stat_list as $item){
+										$stat = explode('@', $item);
+										// var_dump($stat);
+										echo
+										'<tr>
+											<td><b>'.$stat[0].'</b></td>
+											<td>'.$stat[1].'</td>
+										</tr>';
+									}
 								}
 							?>
 					  </tbody>
@@ -142,12 +146,12 @@
 
 		<div class="tab-pane fade" id="comment_section" role="tabpanel" aria-labelledby="pills-profile-tab">
 			<div class="tab_height">
-				<h5 class="text-primary">Отзывы о <?php echo $product[0]['title'] ?></h5>
+				<h5 class="text-primary">Отзывы о "<?php echo $product[0]['title'] ?>"</h5>
 				<hr class="w-50">
 				<div class="comments">
 					<?php {
 						if(empty($reviews)){
-							echo '<div class="text-center my-3"><h6>Данный товар пока не иммеет отзывов. Вы можете оставить свой отзыв о товаре.</h6></div>';
+							echo '<div class="text-center my-3"><h6>Данный товар пока не имеет отзывов. Вы можете оставить свой отзыв о товаре.</h6></div>';
 						}else{
 							foreach ($reviews as $review) {
 								echo '
@@ -216,7 +220,7 @@
 									<p class="border rounded price_tablet"><b><?php echo number_format($sproduct['price_uah'], 0, ',', ' '); ?> грн</b></p>
 								</div>
 								<div class="col col-3">
-									<button class="btn btn-danger" type="submit" onclick="add_item(this)" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Добавлено в Корзину" data-id="<?php echo $product['id']; ?>" data-title="<?php echo $product['title']; ?>" data-price="<?php echo $product['price_uah']; ?>"><i  class="fa fa-shopping-cart"></i></button>
+									<button class="btn btn-danger" type="submit" onclick="add_item(this)" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Добавлено в Корзину" data-id="<?php echo $product['id']; ?>" data-title="<?php echo $product['title']; ?>" data-eng_name="<?php echo $product['eng_name'];?>" data-price="<?php echo $product['price_uah']; ?>"><i  class="fa fa-shopping-cart"></i></button>
 								</div>
 							</div>
 						</div>

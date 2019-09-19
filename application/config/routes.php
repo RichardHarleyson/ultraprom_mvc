@@ -13,6 +13,10 @@ return [
 		'controller' => 'main',
 		'action' => 'search_page',
 	],
+	'brand_search/{brand:\w+}' => [
+		'controller' => 'main',
+		'action' => 'brand_search',
+	],
 	// PRODUCT
 	'product/{id:\w+}' => [
 		'controller' => 'product',
@@ -163,6 +167,18 @@ return [
 	'admin/upd_reviews' =>[
 		'controller' => 'admin',
 		'action' => 'upd_reviews',
+	],
+	'admin/upd_params' =>[
+		'controller' => 'admin',
+		'action' => 'upd_params',
+	],
+	'admin/copy_item' =>[
+		'controller' => 'admin',
+		'action' => 'copy_item',
+	],
+	'admin/update_filter' =>[
+		'controller' => 'admin',
+		'action' => 'update_filter',
 	],
 
 

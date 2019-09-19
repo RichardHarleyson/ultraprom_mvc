@@ -12,8 +12,9 @@ class Admin extends Model{
 			$vars['photo'],
 			(float)$vars['price'],
 			(int)$vars['currency'],
-			(int)$vars['price_uah'],
+			(float)$vars['price_uah'],
 			(int)$vars['onsale'],
+			(int)$vars['popular'],
 			$vars['description'],
 			(int)$vars['rating'],
 			(int)$vars['category'],
@@ -26,9 +27,8 @@ class Admin extends Model{
 		];
 
 		$result = $this->db->insert_query("INSERT INTO up_product(`title`,`eng_name`, `image`, `price`, `currency`, `price_uah`,
-			`onsale`,`description`, `rating`, `category_id`, `manufacturer_id`, `power_id`, `stat_list`, `filter_info`,
-			`available`, `status`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", $data);
-
+			`onsale`, `popular`, `description`, `rating`, `category_id`, `manufacturer_id`, `power_id`, `stat_list`, `filter_info`,
+			`available`, `status`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", $data);
 		return $data;
 	}
 
@@ -99,22 +99,53 @@ class Admin extends Model{
 		return $this->db->row('DELETE FROM up_slides WHERE id='.$id);
 	}
 
+	public function update_rating($rating, $id){
+		$result = $this->db->insert_query('UPDATE up_product SET rating='.$rating.' WHERE id='.$id);
+		return $result;
+	}
+
+	public function get_reviews_2($id){
+		$result = $this->db->row('SELECT rating FROM up_comments WHERE product_id='.$id.' AND status=1');
+		return $result;
+	}
+
 	public function del_review($id){
 		return $this->db->row('DELETE FROM up_comments WHERE id='.$id);
 	}
 
+	public function product_exist($product){
+		return $this->db->row('SELECT id FROM up_product WHERE eng_name=:eng_name',$product);
+	}
+
 	public function product_update($product){
 		$result = $this->db->insert_query("UPDATE up_product SET title=:title, price=:price, currency=:currency, price_uah=:price_uah, description=:description,
-		onsale=:onsale, available=:available WHERE id=:id", $product);
+		onsale=:onsale, available=:available, popular=:popular WHERE id=:id", $product);
 		return $result;
+	}
+
+	public function upd_product_manufacturer($product){
+		return $this->db->insert_query("UPDATE up_product SET manufacturer_id=:m_id WHERE id=:id", $product);
 	}
 
 	public function update_photo($product){
 		$result = $this->db->insert_query("UPDATE up_product SET image=:photo WHERE id=:id", $product);
+		return $result;
+	}
+
+	public function update_params($params){
+		return $this->db->insert_query("UPDATE up_product SET stat_list=:stat_list WHERE id=:id", $params);
+	}
+
+	public function update_filter($params){
+		return $this->db->insert_query("UPDATE up_product SET filter_info=:filter_info WHERE id=:product_id", $params);
+	}
+
+	public function get_copy_item($vars){
+		return $this->db->row("SELECT * FROM up_product WHERE id=:id", $vars);
 	}
 
 	public function product_del($id){
-		$result = $this->db->insert_query("UPDATE up_product SET status=0, available=0 WHERE id=".$id);
+		$result = $this->db->insert_query("DELETE FROM up_product WHERE id=".$id);
 		return $result;
 	}
 
@@ -135,7 +166,7 @@ class Admin extends Model{
 			$cur_buy[$curr['id']] = $curr;
 		}
 		foreach ($products as $product) {
-			$new_price = $product['price'] * $cur_buy[$product['currency']]['buy'];
+			$new_price = $product['price'] * $cur_buy[$product['currency']]['sale'];
 			$this->db->row('UPDATE up_product SET price_uah='.(int)$new_price.' WHERE id='.$product['id']);
 		}
 	}

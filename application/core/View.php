@@ -14,7 +14,7 @@ class View{
 		$this->path = $this->route['controller'].'/'.$this->route['action'];
 	}
 
-	public function render($title, $vars = []){
+	public function render($title, $vars = [], $desc = ''){
 		// собираем меню
 		$this->new_db = new Menu();
 		$menu = array();

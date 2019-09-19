@@ -5,7 +5,7 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
+  <meta name="description" content="<?=$desc; ?>">
   <meta name="author" content="">
 
   <title><?php echo $title; ?></title>
@@ -145,7 +145,7 @@
 				<a class="btn" href="/cart"><i class="text-danger fas fa-cart-arrow-down"></i></a>
 			</div>
 		</div>
-		<div class="container">
+		<div class="container my-2">
       <form action="/search_page" method="post">
         <div class="input-group">
           <input type="text" class="form-control" name="query" id="search" placeholder="Поиск Товаров" aria-label="Username" aria-describedby="basic-addon1">
@@ -276,9 +276,11 @@
 	<?php echo $content; ?>
 </div>
 
-<div class="gapper"></div>
+<!-- <div class="gapper"></div> -->
+<hr class="w-50">
 
-<div class="container-fluid bg-primary d-none d-lg-block">
+
+<div class="container-fluid d-none d-lg-block">
 	<div class="container">
 		<div class="row bg-white py-3">
 			<div class="col-lg-2 col-xl-2">
@@ -294,7 +296,7 @@
 						<span><a href="/top_menu/contacts">Контакты<br></a></span>
 					</div>
 					<div class="col-6">
-						<span><h5>Асортимент</h5></span>
+						<span><h5>Ассортимент</h5></span>
 						<span><a href="/top_menu/catalog">Бренды<br></a></span>
 						<span><a href="/">Акции<br></a></span>
 						<span><a href="/">Популярное<br></a></span>
@@ -312,26 +314,37 @@
 					<img src="/public/media/img/mts.png"><span>+38(050) 881-04-49</span>
 			</div>
 		</div>
-    <div class="row bg-white">
-      <div class="col-3">
-        <a href="https://vk.com/ultraprom" class="-auto">
-          <img class="img-fluid" src="/public/media/uploads/VKontakte.png" alt="">
-        </a>
+    <div class="row bg-white pb-3">
+      <div class="col-4 text-right">
+        <h4 class="text-primary">Мы в Соцсетях, Присоединяйтесь!</h4>
       </div>
-      <div class="col-3">
-        <a href="https://twitter.com/ultraprom_ua" class="-auto">
-          <img class="img-fluid" src="/public/media/uploads/twitter.png" alt="">
-        </a>
+      <div class="col-1">
+        <div style="max-height: 70px; max-width: 70px;">
+          <a href="https://vk.com/ultraprom" class="-auto">
+            <img class="img-fluid" src="/public/media/uploads/vk.png" alt="">
+          </a>
+        </div>
       </div>
-      <div class="col-3">
-        <a href="https://www.instagram.com/ultraprom.dnepr" class="-auto">
-          <img class="img-fluid" src="/public/media/uploads/social_instagram.png" alt="">
-        </a>
+      <div class="col-1">
+        <div style="max-height: 70px; max-width: 70px;">
+          <a href="https://twitter.com/ultraprom_ua" class="-auto">
+            <img class="img-fluid" src="/public/media/uploads/tw.jpeg" alt="">
+          </a>
+        </div>
       </div>
-      <div class="col-3">
-        <a href="https://www.facebook.com/Ultraprom.dnepr" class="-auto">
-          <img class="img-fluid" src="/public/media/uploads/facebook_ultraprom.png" alt="">
-        </a>
+      <div class="col-1">
+        <div style="max-height: 70px; max-width: 70px;">
+          <a href="https://www.instagram.com/ultraprom.dnepr" class="-auto">
+            <img class="img-fluid" src="/public/media/uploads/ig.jpeg" alt="">
+          </a>
+        </div>
+      </div>
+      <div class="col-1">
+        <div style="max-height: 70px; max-width: 70px;">
+          <a href="https://www.facebook.com/Ultraprom.dnepr" class="-auto">
+            <img class="img-fluid" src="/public/media/uploads/fb.png" alt="">
+          </a>
+        </div>
       </div>
     </div>
 	</div>
@@ -350,23 +363,82 @@
       <img src="/public/media/img/kyivstar.png"><span>+38(098) 037-77-11</span><br>
       <img src="/public/media/img/mts.png"><span>+38(050) 881-04-49</span>
     </div>
+    <!-- MD -->
     <div class="col-md-4 d-none d-md-block">
-      <a href="https://vk.com/ultraprom" class="-auto">
-        <img class="img-fluid" src="/public/media/uploads/VKontakte.png" alt="">
-      </a>
-      <a href="https://twitter.com/ultraprom_ua" class="-auto">
-        <img class="img-fluid" src="/public/media/uploads/twitter.png" alt="">
-      </a>
-      <a href="https://www.instagram.com/ultraprom.dnepr" class="-auto">
-        <img class="img-fluid" src="/public/media/uploads/social_instagram.png" alt="">
-      </a>
-      <a href="https://www.facebook.com/Ultraprom.dnepr" class="-auto">
-        <img class="img-fluid" src="/public/media/uploads/facebook_ultraprom.png" alt="">
-      </a>
+      <div class="my-auto text-center">
+        <h4 class="text-primary">Мы в Соцсетях, Присоединяйтесь!</h4>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div style="max-height:70px; max-width:70px;">
+            <a href="https://twitter.com/ultraprom_ua" class="-auto">
+              <img class="img-fluid" src="/public/media/uploads/tw.jpeg" alt="">
+            </a>
+          </div>
+        </div>
+        <div class="col-6">
+          <div style="max-height:70px; max-width:70px;">
+            <a href="https://www.instagram.com/ultraprom.dnepr" class="-auto">
+              <img class="img-fluid" src="/public/media/uploads/ig.jpeg" alt="">
+            </a>
+          </div>
+        </div>
+        <div class="col-6">
+          <div style="max-height:70px; max-width:70px;">
+            <a href="https://www.facebook.com/Ultraprom.dnepr" class="-auto">
+              <img class="img-fluid" src="/public/media/uploads/fb.png" alt="">
+            </a>
+          </div>
+        </div>
+        <div class="col-6">
+          <div style="max-height:70px; max-width:70px;">
+            <a href="https://www.facebook.com/Ultraprom.dnepr" class="-auto">
+              <img class="img-fluid" src="/public/media/uploads/vk.png" alt="">
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- SM -->
+    <div class="col-12 my-3 d-block d-md-none">
+      <div class="my-2 text-center">
+        <h4 class="text-primary">Мы в Соцсетях, Присоединяйтесь!</h4>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div style="max-height:60px; max-width:60px;">
+            <a href="https://www.instagram.com/ultraprom.dnepr" class="-auto">
+              <img class="img-fluid" src="/public/media/uploads/ig.jpeg" alt="">
+            </a>
+          </div>
+        </div>
+        <div class="col">
+          <div style="max-height:60px; max-width:60px;">
+            <a href="https://twitter.com/ultraprom_ua" class="-auto">
+              <img class="img-fluid" src="/public/media/uploads/tw.jpeg" alt="">
+            </a>
+          </div>
+        </div>
+        <div class="col">
+          <div style="max-height:60px; max-width:60px;">
+            <a href="https://vk.com/ultraprom" class="-auto">
+              <img class="img-fluid" src="/public/media/uploads/vk.png" alt="">
+            </a>
+          </div>
+        </div>
+        <div class="col">
+          <div style="max-height:60px; max-width:60px;">
+            <a href="https://vk.com/ultraprom" class="-auto">
+              <img class="img-fluid" src="/public/media/uploads/fb.png" alt="">
+            </a>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
-<div class="share42init" data-top1="350" data-top2="35" data-margin="5"></div>
+<div class="share42init" data-top1="350" data-top2="5" data-margin="5"></div>
 <script type="text/javascript" src="/public/vendor/share42/share42.js"></script>
 	<!-- Bootstrap core JavaScript -->
 	<script src="/public/vendor/jquery/jquery.min.js"></script>

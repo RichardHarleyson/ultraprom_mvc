@@ -9,12 +9,6 @@
 					<a href="<?=$s['s_url']; ?>"><img src="/public/media/uploads/<?=$s['s_image'] ?>" class="d-block w-100"></a>
 				</div>
 			<?php endforeach; ?>
-			<!-- <div class="carousel-item active">
-				<a href="/top_menu/central_heating"><img src="/public/media/img/ultraprom_teplo.jpg" class="d-block w-100" alt="slide1"></a>
-			</div>
-			<div class="carousel-item">
-				<a href="/top_menu/services"><img src="/public/media/img/montag.jpg" class="d-block w-100" alt="slide2"></a>
-			</div> -->
 		</div>
 	</div>
 </div>
@@ -26,7 +20,7 @@
 		<h2><span class="text-danger">УЛЬТРА</span><span class="text-primary">ПРОМ</span> - Добро пожаловать в мир инжереных сетей</h2>
 	</div>
 	<p>Предприятие Ультрапром - современная, динамично развивающаяся компания, которая оказывает весь комплекс услуг по монтажу внутренних и внешних инженерных коммуникаций и систем, начиная от квартир, частных домов, магазинов и офисных помещений до крупных промышленных объектов.</p>
-	<div class="text-center py-3 px-4" style="background: #E6E6FA"><span class="font-weight-bold">Одним из основных и приоритетных направлений деятельности предприятия является оформление и монтаж <a href="http://ultraprom.com.ua/services.php"><strong><span style="color:#0000CD">АВТОНОМНОГО ОТОПЛЕНИЯ В ДНЕПРЕ</span></strong></a>.</span></div>
+	<div class="text-center py-3 px-4" style="background: #E6E6FA"><span class="font-weight-bold">Одним из основных и приоритетных направлений деятельности предприятия является оформление и монтаж <a href=""><strong><span style="color:#0000CD">АВТОНОМНОГО ОТОПЛЕНИЯ В ДНЕПРЕ</span></strong></a>.</span></div>
 	<div class="text-center mt-3">
 		<p>
 			<span class="text-danger"><strong>ИНТЕРЕСУЕТ АВТОНОМНОЕ ОТОПЛЕНИЕ, НО НЕ ЗНАЕТЕ, С ЧЕГО НАЧАТЬ?</strong></span>
@@ -54,7 +48,7 @@
 			</div>
 		</div>
 		<div class="" id="pop_products_carousel">
-			<?php foreach ($products as $product): ?>
+			<?php foreach ($popular as $product): ?>
 				<div class="col col-12 col-xl col-lg-3 col-md-4 col-sm-12 text-center mt-4">
 					<div class="card text-center mx-auto">
 						<?php if($product['onsale'] == 1){echo "<div class='card-badge bg-danger'>АКЦИЯ!</div>";} ?>
@@ -63,7 +57,7 @@
 						</a>
 					<!-- <img src="https://via.placeholder.com/250" class="img-fluid" alt="Product Thumbnail"> -->
 						<div class="card-body">
-							<div class="card-title align-self-center my-0" data-toggle="tooltip" data-placement="top" title="<?=$product[0]['title'] ?>">
+							<div class="card-title align-self-center my-0" data-toggle="tooltip" data-placement="top" title="<?=$product['title'] ?>">
 								<a href="/product/<?php echo $product['eng_name']; ?>" class=""><span class="font-title"><?php echo $product['title']; ?></span></a>
 							</div>
 							<p class="card-text border-top text-warning rating" rating="<?php echo $product['rating']; ?>" style="font-size: 20px;"></p>
@@ -72,7 +66,7 @@
 									<p class="border rounded price_tablet"><b><?php echo number_format($product['price_uah'], 0, ',', ' '); ?> грн</b></p>
 								</div>
 								<div class="col col-3">
-									<button class="btn btn-danger" type="submit" onclick="add_item(this)" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Добавлено в Корзину" data-id="<?php echo $product['id']; ?>" data-title="<?php echo $product['title']; ?>" data-price="<?php echo $product['price_uah']; ?>"><i  class="fa fa-shopping-cart"></i></button>
+									<button class="btn btn-danger" type="submit" onclick="add_item(this)" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Добавлено в Корзину" data-id="<?php echo $product['id']; ?>" data-title="<?php echo $product['title']; ?>" data-eng_name="<?php echo $product['eng_name'];?>" data-price="<?php echo $product['price_uah']; ?>"><i  class="fa fa-shopping-cart"></i></button>
 								</div>
 							</div>
 						</div>
@@ -107,7 +101,7 @@
 						</a>
 					<!-- <img src="https://via.placeholder.com/250" class="img-fluid" alt="Product Thumbnail"> -->
 						<div class="card-body">
-							<div class="card-title align-self-center my-0" data-toggle="tooltip" data-placement="top" title="<?=$product[0]['title'] ?>">
+							<div class="card-title align-self-center my-0" data-toggle="tooltip" data-placement="top" title="<?=$product['title'] ?>">
 								<a href="/product/<?php echo $product['eng_name']; ?>" class=""><span class="font-title"><?php echo $product['title']; ?></span></a>
 							</div>
 							<p class="card-text border-top text-warning rating" rating="<?php echo $product['rating']; ?>" style="font-size: 20px;"></p>
@@ -116,7 +110,7 @@
 									<p class="border rounded price_tablet"><b><?php echo number_format($product['price_uah'], 0, ',', ' '); ?> грн</b></p>
 								</div>
 								<div class="col col-3">
-									<button class="btn btn-danger" type="submit" onclick="add_item(this)" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Добавлено в Корзину" data-id="<?php echo $product['id']; ?>" data-title="<?php echo $product['title']; ?>" data-price="<?php echo $product['price_uah']; ?>"><i  class="fa fa-shopping-cart"></i></button>
+									<button class="btn btn-danger" type="submit" onclick="add_item(this)" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Добавлено в Корзину" data-id="<?php echo $product['id']; ?>" data-title="<?php echo $product['title']; ?>" data-eng_name="<?php echo $product['eng_name'];?>" data-price="<?php echo $product['price_uah']; ?>"><i  class="fa fa-shopping-cart"></i></button>
 								</div>
 							</div>
 						</div>

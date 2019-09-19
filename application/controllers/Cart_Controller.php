@@ -24,6 +24,7 @@ class Cart_Controller extends Controller{
 			'id' => $_POST['id'],
 			'title' => $_POST['title'],
 			'price_uah' => $_POST['price_uah'],
+			'eng_name' => $_POST['eng_name'],
 			'quantity' => 1
 		];
 		array_push($_SESSION['cart'], $items);

@@ -9,7 +9,7 @@ class Product_Controller extends Controller{
 
 	public function pageAction(){
 		$product = $this->model->getProduct($this->route['id']);
-		// debug(empty($product));
+		// debug($product);
 		if(empty($product)){
 			$this->redirect('');
 			// echo 'Smth went wrong';
@@ -29,7 +29,8 @@ class Product_Controller extends Controller{
 			'reviews' => $reviews,
 		];
 		$title = $product[0]['title'].' - Лучшая цена '.number_format($product[0]['price_uah'], 0, ',', ' ').' грн';
-		$this->view->render($title, $vars);
+		$desc = 'Купить '.$product[0]['title'].' в Днепре. Лучшая цена '.number_format($product[0]['price_uah'], 0, ',', ' ').' грн. Сервис, гарантия, качество. Доставка. ☎: (098) 037-77-11, (050) 881-04-49.';
+		$this->view->render($title, $vars, $desc);
 	}
 
 	public function new_reviewAction(){
@@ -43,18 +44,6 @@ class Product_Controller extends Controller{
 		];
 		$result = $this->model->new_review($review);
 		// Обновляем рейтинг товара по отзывам
-		$get_reviews = $this->model->get_reviews($_POST['product_id']);
-		$total_review = 0;
-		foreach ($get_reviews as $key => $value) {
-			$total_review += $value['rating'];
-		}
-		$count_reviews = count($get_reviews);
-		if($count_reviews == 0){
-			$count_reviews = 1;
-		}
-		$new_rating = (int)($total_review / $count_reviews);
-		$result = $this->model->update_rating($new_rating, $_POST['product_id']);
-		var_dump($result);
 	}
 
 }

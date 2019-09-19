@@ -38,12 +38,6 @@ class Product extends Model{
 		return $result;
 	}
 
-	public function update_rating($rating, $id){
-		$result = $this->db->insert_query('UPDATE up_product SET rating='.$rating.' WHERE id='.$id);
-		return $result;
-	}
-
-
 
 }
 

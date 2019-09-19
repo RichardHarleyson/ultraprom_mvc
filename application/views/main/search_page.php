@@ -9,15 +9,14 @@
     <div class="row">
       <?php if(empty($result)){ echo '<h5>Нет результатов по данному запросу</h5>' ;} ?>
       <?php foreach ($result as $r): ?>
-        <div class="col-xl col-lg-4 col-md-3 col-sm-10 col-10 mx-auto my-3">
+        <div class="col col-12 col-xl col-lg-3 col-md-4 col-sm-12 text-center mt-4" style="min-width: 230px;">
           <div class="card text-center mx-auto">
 						<?php if($r['onsale'] == 1){echo "<div class='card-badge bg-danger'>АКЦИЯ!</div>";} ?>
 						<a href="product/<?php echo $r['eng_name']; ?>">
 							<img src="/public/media/uploads/<?php echo $r['image']; ?>" class="mx-auto d-block" alt="Product Thumbnail">
 						</a>
-					<!-- <img src="https://via.placeholder.com/250" class="img-fluid" alt="Product Thumbnail"> -->
 						<div class="card-body">
-							<div class="card-title align-self-center my-0" data-toggle="tooltip" data-placement="top" title="<?=$r[0]['title'] ?>">
+							<div class="card-title align-self-center my-0" data-toggle="tooltip" data-placement="top" title="<?=$r['title'] ?>">
 								<a href="/product/<?php echo $r['eng_name']; ?>" class=""><span class="font-title"><?php echo $r['title']; ?></span></a>
 							</div>
 							<p class="card-text border-top text-warning rating" rating="<?php echo $r['rating']; ?>" style="font-size: 20px;"></p>
